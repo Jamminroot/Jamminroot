@@ -6,6 +6,5 @@
 - Fun fact: The term ‘robot’ comes from the Czech word ‘Robota’, that means ‘Drudgery’ or ‘hard work’ and ‘forced labor’ 🤖
 
 [![Jamminroot's GitHub stats](https://github-readme-stats.vercel.app/api?username=jamminroot&count_private=true&show_icons=true&theme=tokyonight)](#)
-[![Jamminroot's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Jamminroot&theme=tokyonight)](#)
 
 [![Jamminroot's Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jamminroot&theme=tokyonight&count_private=true)](#)

@@ -5,6 +5,8 @@
 - tg:jamminrooot, linkedin.com/in/dchichuk, skype:pilot.gagarin, instagram:dchichuk
 - Fun fact: The term ‘robot’ comes from the Czech word ‘Robota’, that means ‘Drudgery’ or ‘hard work’ and ‘forced labor’ 🤖
 
-[![Jamminroot's GitHub stats](https://github-readme-stats.vercel.app/api?username=jamminroot&count_private=true&show_icons=true&theme=tokyonight)](#)
+[![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/0-profile-details.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards)
 
-[![Jamminroot's Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jamminroot&theme=tokyonight&count_private=true)](#)
+[![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/1-repos-per-language.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/2-most-commit-language.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards)
+
+[![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/3-stats.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/4-productive-time.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards)

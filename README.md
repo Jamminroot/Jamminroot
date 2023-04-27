@@ -2,8 +2,8 @@
 
 - .NET SDE, Deeplay.io.
 - Unity, C++, Flutter enthusiast
-- tg:jamminroot, linkedin.com/in/dchichuk, skype:pilot.gagarin, instagram:jamminroot
-- Fun fact: The term ‘robot’ comes from the Czech word ‘Robota’, that means ‘Drudgery’ or ‘hard work’ and ‘forced labor’ 🤖
+- t.me/jamminroot, linkedin.com/in/dchichuk, skype:pilot.gagarin, instagram:jamminroot
+- Make sure to check out my pinned projects below! They are nice and handy
 
 [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/monokai/0-profile-details.svg)](https://github.com/jamminroot)
 

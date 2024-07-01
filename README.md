@@ -1,8 +1,8 @@
 ### Hi there 👋
 
 - .NET SDE, Deeplay.io.
-- Unity, C++, Flutter enthusiast
-- t.me/jamminroot, linkedin.com/in/dchichuk, skype:pilot.gagarin, instagram:jamminroot
+- Unity, C++, Flutter, python enthusiast
+- t.me/jamminroot, linkedin.com/in/dchichuk
 - Make sure to check out my pinned projects below! They are nice and handy
 
 |Total|

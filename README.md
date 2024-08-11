@@ -2,7 +2,7 @@
 
 #### Unity, C++, Flutter, python enthusiast
 
-#### [@jamminroot (telegram)](t.me/jamminroot), [Dmitrii Chichuk (LinkedIn)](linkedin.com/in/dchichuk)
+#### [@jamminroot (telegram)](https://t.me/jamminroot), [Dmitrii Chichuk (LinkedIn)](https://linkedin.com/in/dchichuk)
 
 Make sure to check out my pinned projects, they are are quite handy and free.
 

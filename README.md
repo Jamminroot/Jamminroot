@@ -1,6 +1,6 @@
-### .NET SDE, Deeplay.io.
+### .NET TL, Deeplay.io.
 
-#### Unity, C++, Flutter, python enthusiast
+#### C++, Flutter, Python enthusiast
 
 #### [@jamminroot (telegram)](https://t.me/jamminroot), [Dmitrii Chichuk (LinkedIn)](https://linkedin.com/in/dchichuk)
 

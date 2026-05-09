@@ -6,8 +6,15 @@
 
 Make sure to check out my pinned projects, they are are quite handy and free.
 
-[![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/github/0-profile-details.svg)](https://github.com/jamminroot) 
-
-
- [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/github/4-productive-time.svg)](https://github.com/jamminroot) [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/github/2-most-commit-language.svg)](https://github.com/jamminroot)
-[![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/github/3-stats.svg)](https://github.com/jamminroot) [![](https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/profile-summary-card-output/github/1-repos-per-language.svg)](https://github.com/jamminroot) 
+<table>
+  <tr>
+    <td valign="top">
+      <img src="https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/cards/cv.svg" alt="Recent activity">
+    </td>
+    <td valign="top" width="280">
+      <img src="https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/cards/languages.svg" alt="Top languages by commit"><br>
+      <img src="https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/cards/hours.svg" alt="Commits by hour"><br>
+      <img src="https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/cards/monthly.svg" alt="Monthly contributions">
+    </td>
+  </tr>
+</table>

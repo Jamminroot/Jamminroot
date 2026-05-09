@@ -15,8 +15,42 @@ export type RepoData = {
   description: string | null;
   language: { name: string; color: string } | null;
   totalCommits: number;
+  weight: number;
   recentCommits: CommitInfo[];
 };
+
+type WeightFn = "linear" | "sqrt" | "log";
+type WeightsConfig = { fn: WeightFn; weights: Record<string, number> };
+
+function parseWeightsConfig(): WeightsConfig {
+  const raw = process.env.REPO_WEIGHTS?.trim();
+  if (!raw) return { fn: "sqrt", weights: {} };
+  try {
+    const parsed = JSON.parse(raw) as { fn?: WeightFn; weights?: Record<string, number> };
+    return { fn: parsed.fn ?? "sqrt", weights: parsed.weights ?? {} };
+  } catch (err) {
+    console.warn(`REPO_WEIGHTS is not valid JSON; ignoring: ${err}`);
+    return { fn: "sqrt", weights: {} };
+  }
+}
+
+function applyWeightFn(count: number, fn: WeightFn): number {
+  if (count <= 0) return 0;
+  switch (fn) {
+    case "linear":
+      return count;
+    case "sqrt":
+      return Math.sqrt(count);
+    case "log":
+      return Math.log(count + 1);
+  }
+}
+
+function computeWeight(nameWithOwner: string, count: number, cfg: WeightsConfig): number {
+  const base = applyWeightFn(count, cfg.fn);
+  const mult = cfg.weights[nameWithOwner] ?? 1.0;
+  return base * mult;
+}
 
 export type ProfileData = {
   login: string;
@@ -233,6 +267,7 @@ export async function fetchProfile(
 
   const excludePattern = process.env.EXCLUDED_REPOS_REGEX?.trim();
   const excludeRegex = excludePattern ? new RegExp(excludePattern) : null;
+  const weightsConfig = parseWeightsConfig();
   const sinceISO = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();
 
   // Public repos with known commit counts from contributionsCollection.
@@ -267,15 +302,19 @@ export async function fetchProfile(
     const [owner, name] = r.nameWithOwner.split("/");
     const recentCommits = await fetchRepoCommits(owner, name, user.id, sinceISO);
     if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
+    const totalCommits = r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length;
+    const weight = computeWeight(r.nameWithOwner, totalCommits, weightsConfig);
+    if (weight <= 0) continue; // weight 0 = effective exclude
     repos.push({
       nameWithOwner: r.nameWithOwner,
       description: r.description,
       language: r.language,
-      totalCommits: r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length,
+      totalCommits,
+      weight,
       recentCommits,
     });
   }
-  repos.sort((a, b) => b.totalCommits - a.totalCommits);
+  repos.sort((a, b) => b.weight - a.weight);
 
   const contributionDays: ContributionDay[] = cc.contributionCalendar.weeks.flatMap((w) =>
     w.contributionDays.map((d) => ({ date: d.date, count: d.contributionCount })),

@@ -89,24 +89,28 @@ function sectionTitle(text: string, width: number): string {
 
 // ---------- Languages block ----------
 
-function aggregateLanguages(repos: RepoData[]): { name: string; color: string; count: number }[] {
-  const map = new Map<string, { color: string; count: number }>();
+function aggregateLanguages(
+  repos: RepoData[],
+): { name: string; color: string; weight: number; commits: number }[] {
+  const map = new Map<string, { color: string; weight: number; commits: number }>();
   for (const r of repos) {
     if (!r.language) continue;
-    const cur = map.get(r.language.name) ?? { color: r.language.color || "#0969da", count: 0 };
-    cur.count += r.totalCommits;
+    const cur =
+      map.get(r.language.name) ?? { color: r.language.color || "#0969da", weight: 0, commits: 0 };
+    cur.weight += r.weight;
+    cur.commits += r.totalCommits;
     map.set(r.language.name, cur);
   }
   return [...map.entries()]
-    .map(([name, v]) => ({ name, color: v.color, count: v.count }))
-    .sort((a, b) => b.count - a.count);
+    .map(([name, v]) => ({ name, color: v.color, weight: v.weight, commits: v.commits }))
+    .sort((a, b) => b.weight - a.weight);
 }
 
 const SIDEBAR_W = 280;
 
 function languagesBlock(p: ProfileData): Block {
   const langs = aggregateLanguages(p.repos).slice(0, 6);
-  const total = langs.reduce((s, l) => s + l.count, 0) || 1;
+  const totalWeight = langs.reduce((s, l) => s + l.weight, 0) || 1;
   const headerH = 24;
   const rowH = 28;
   const height = headerH + langs.length * rowH;
@@ -114,11 +118,11 @@ function languagesBlock(p: ProfileData): Block {
   const out: string[] = [sectionTitle("languages by commit", SIDEBAR_W)];
   langs.forEach((l, i) => {
     const y = headerH + i * rowH;
-    const pct = ((l.count / total) * 100).toFixed(0);
-    const barW = (l.count / total) * SIDEBAR_W;
+    const pct = ((l.weight / totalWeight) * 100).toFixed(0);
+    const barW = (l.weight / totalWeight) * SIDEBAR_W;
     out.push(
       `<text class="fg" x="0" y="${y + 12}" font-size="11">${esc(trunc(l.name, 18))}</text>`,
-      `<text class="muted" x="${SIDEBAR_W}" y="${y + 12}" font-size="10" text-anchor="end">${l.count} · ${pct}%</text>`,
+      `<text class="muted" x="${SIDEBAR_W}" y="${y + 12}" font-size="10" text-anchor="end">${l.commits} · ${pct}%</text>`,
       `<rect class="panel" x="0" y="${y + 16}" width="${SIDEBAR_W}" height="6" rx="3" ry="3"/>`,
       `<rect x="0" y="${y + 16}" width="${barW}" height="6" rx="3" ry="3" fill="${l.color}"/>`,
     );

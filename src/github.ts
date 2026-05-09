@@ -161,6 +161,9 @@ export async function fetchProfile(
   const user = data.user;
   const cc = user.contributionsCollection;
 
+  const excludePattern = process.env.EXCLUDED_REPOS_REGEX?.trim();
+  const excludeRegex = excludePattern ? new RegExp(excludePattern) : null;
+
   const reposBare = cc.commitContributionsByRepository
     .map((entry) => ({
       nameWithOwner: entry.repository.nameWithOwner,
@@ -168,6 +171,7 @@ export async function fetchProfile(
       language: entry.repository.primaryLanguage,
       totalCommits: entry.contributions.totalCount,
     }))
+    .filter((r) => !excludeRegex || !excludeRegex.test(r.nameWithOwner))
     .sort((a, b) => b.totalCommits - a.totalCommits);
 
   const since = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();

@@ -23,6 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           USERNAME: ${{ github.repository_owner }}
+          EXCLUDED_REPOS_REGEX: ${{ vars.EXCLUDED_REPOS_REGEX }}
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"

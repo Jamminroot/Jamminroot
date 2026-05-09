@@ -171,7 +171,7 @@ export async function summarizeTimeline(p: ProfileData): Promise<Timeline> {
       { role: "user", content: payload },
     ],
     response_format: { type: "json_object" },
-    max_tokens: 4000,
+    max_tokens: 16000,
     temperature: 0.3,
   };
   const response = await fetch(ENDPOINT, {

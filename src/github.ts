@@ -113,6 +113,43 @@ const PROFILE_QUERY = `
   }
 `;
 
+const ACCESSIBLE_REPOS_QUERY = `
+  query AccessibleRepos($cursor: String) {
+    viewer {
+      repositories(
+        first: 100,
+        after: $cursor,
+        ownerAffiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER],
+        orderBy: { field: PUSHED_AT, direction: DESC }
+      ) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          nameWithOwner
+          description
+          isPrivate
+          pushedAt
+          primaryLanguage { name color }
+        }
+      }
+    }
+  }
+`;
+
+type AccessibleReposQuery = {
+  viewer: {
+    repositories: {
+      pageInfo: { hasNextPage: boolean; endCursor: string | null };
+      nodes: {
+        nameWithOwner: string;
+        description: string | null;
+        isPrivate: boolean;
+        pushedAt: string | null;
+        primaryLanguage: { name: string; color: string } | null;
+      }[];
+    };
+  };
+};
+
 const COMMITS_QUERY = `
   query RepoCommits($owner: String!, $name: String!, $authorId: ID!, $since: GitTimestamp!, $cursor: String) {
     repository(owner: $owner, name: $name) {
@@ -152,9 +189,42 @@ async function fetchRepoCommits(
   return out;
 }
 
+type RepoBare = {
+  nameWithOwner: string;
+  description: string | null;
+  language: { name: string; color: string } | null;
+  publicCommitCount: number;
+};
+
+async function fetchAccessibleRepos(sinceISO: string): Promise<RepoBare[]> {
+  const out: RepoBare[] = [];
+  let cursor: string | null = null;
+  while (true) {
+    const data: AccessibleReposQuery = await gql(ACCESSIBLE_REPOS_QUERY, { cursor });
+    const page = data.viewer.repositories;
+    let stop = false;
+    for (const node of page.nodes) {
+      // Stop walking once repos are older than our window — list is sorted by pushed_at desc.
+      if (node.pushedAt && node.pushedAt < sinceISO) {
+        stop = true;
+        break;
+      }
+      out.push({
+        nameWithOwner: node.nameWithOwner,
+        description: node.description,
+        language: node.primaryLanguage,
+        publicCommitCount: 0,
+      });
+    }
+    if (stop || !page.pageInfo.hasNextPage) break;
+    cursor = page.pageInfo.endCursor;
+  }
+  return out;
+}
+
 export async function fetchProfile(
   login: string,
-  topN = 15,
+  _topN = 15,
   sinceDays = 365,
 ): Promise<ProfileData> {
   const data: ProfileQuery = await gql(PROFILE_QUERY, { login });
@@ -163,29 +233,49 @@ export async function fetchProfile(
 
   const excludePattern = process.env.EXCLUDED_REPOS_REGEX?.trim();
   const excludeRegex = excludePattern ? new RegExp(excludePattern) : null;
+  const sinceISO = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();
 
-  const reposBare = cc.commitContributionsByRepository
-    .map((entry) => ({
-      nameWithOwner: entry.repository.nameWithOwner,
-      description: entry.repository.description,
-      language: entry.repository.primaryLanguage,
-      totalCommits: entry.contributions.totalCount,
-    }))
-    .filter((r) => !excludeRegex || !excludeRegex.test(r.nameWithOwner))
-    .sort((a, b) => b.totalCommits - a.totalCommits);
+  // Public repos with known commit counts from contributionsCollection.
+  const publicBare: RepoBare[] = cc.commitContributionsByRepository.map((entry) => ({
+    nameWithOwner: entry.repository.nameWithOwner,
+    description: entry.repository.description,
+    language: entry.repository.primaryLanguage,
+    publicCommitCount: entry.contributions.totalCount,
+  }));
 
-  const since = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();
-  const repos: RepoData[] = [];
-  for (let i = 0; i < reposBare.length; i++) {
-    const r = reposBare[i];
-    if (i < topN) {
-      const [owner, name] = r.nameWithOwner.split("/");
-      const recentCommits = await fetchRepoCommits(owner, name, user.id, since);
-      repos.push({ ...r, recentCommits });
-    } else {
-      repos.push({ ...r, recentCommits: [] });
+  // Accessible repos (public + private) discovered via viewer.repositories, ordered by pushed_at.
+  const accessible = await fetchAccessibleRepos(sinceISO);
+
+  // Merge — public bare wins (carries the official count) when both sources include the same repo.
+  const seen = new Set(publicBare.map((r) => r.nameWithOwner));
+  const merged: RepoBare[] = [...publicBare];
+  for (const r of accessible) {
+    if (!seen.has(r.nameWithOwner)) {
+      merged.push(r);
+      seen.add(r.nameWithOwner);
     }
   }
+
+  const filtered = excludeRegex
+    ? merged.filter((r) => !excludeRegex.test(r.nameWithOwner))
+    : merged;
+
+  // For each candidate, fetch the user's commits in the window.
+  // Skip repos with zero user commits — covers private repos viewer can see but hasn't committed to.
+  const repos: RepoData[] = [];
+  for (const r of filtered) {
+    const [owner, name] = r.nameWithOwner.split("/");
+    const recentCommits = await fetchRepoCommits(owner, name, user.id, sinceISO);
+    if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
+    repos.push({
+      nameWithOwner: r.nameWithOwner,
+      description: r.description,
+      language: r.language,
+      totalCommits: r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length,
+      recentCommits,
+    });
+  }
+  repos.sort((a, b) => b.totalCommits - a.totalCommits);
 
   const contributionDays: ContributionDay[] = cc.contributionCalendar.weeks.flatMap((w) =>
     w.contributionDays.map((d) => ({ date: d.date, count: d.contributionCount })),

@@ -23,11 +23,29 @@ type WeightFn = "linear" | "sqrt" | "log";
 type WeightRule = { regex: RegExp; pattern: string; weight: number };
 type WeightsConfig = { fn: WeightFn; rules: WeightRule[] };
 
+function parseRelaxedJson(raw: string): unknown {
+  let s = raw.trim();
+  // Strip trailing commas before } or ]
+  const stripped = s.replace(/,(\s*[}\]])/g, "$1");
+  if (stripped !== s) console.warn("REPO_WEIGHTS: stripped trailing comma(s) before parsing");
+  s = stripped;
+  // Balance any missing closing braces / brackets at the end
+  const openBraces = (s.match(/\{/g) || []).length;
+  const closeBraces = (s.match(/\}/g) || []).length;
+  const openBrackets = (s.match(/\[/g) || []).length;
+  const closeBrackets = (s.match(/\]/g) || []).length;
+  if (openBraces > closeBraces || openBrackets > closeBrackets) {
+    s += "]".repeat(openBrackets - closeBrackets) + "}".repeat(openBraces - closeBraces);
+    console.warn("REPO_WEIGHTS: appended missing closing brace(s) before parsing");
+  }
+  return JSON.parse(s);
+}
+
 function parseWeightsConfig(): WeightsConfig {
   const raw = process.env.REPO_WEIGHTS?.trim();
   if (!raw) return { fn: "sqrt", rules: [] };
   try {
-    const parsed = JSON.parse(raw) as { fn?: WeightFn; weights?: Record<string, number> };
+    const parsed = parseRelaxedJson(raw) as { fn?: WeightFn; weights?: Record<string, number> };
     const rules: WeightRule[] = [];
     for (const [pattern, weight] of Object.entries(parsed.weights ?? {})) {
       try {
@@ -36,6 +54,7 @@ function parseWeightsConfig(): WeightsConfig {
         console.warn(`REPO_WEIGHTS: skipping invalid regex "${pattern}": ${e}`);
       }
     }
+    console.log(`REPO_WEIGHTS: fn=${parsed.fn ?? "sqrt"}, ${rules.length} rule(s) loaded`);
     return { fn: parsed.fn ?? "sqrt", rules };
   } catch (err) {
     console.warn(`REPO_WEIGHTS is not valid JSON; ignoring: ${err}`);

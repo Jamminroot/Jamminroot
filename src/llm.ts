@@ -11,11 +11,16 @@ const SYSTEM = `You produce a CV-style activity timeline for a software engineer
 
 # Period structure (strict)
 
-Use this exact ordering:
-1. The 3-6 most recent calendar months as individual periods, labelled "YYYY MMM" (e.g., "2026 May", "2026 Apr", "2026 Mar"). Most recent first.
-2. After the months, the previous TWO full years as additional period entries, labelled just "YYYY" (e.g., "2025", "2024").
+The user's payload includes "today's date" — use it to derive the period labels. NEVER produce older calendar months as standalone period entries.
 
-Skip a month or year entirely if there is no meaningful commit activity for it. Months always come before years in the output. Example output sequence: ["2026 May", "2026 Apr", "2026 Mar", "2026 Feb", "2025", "2024"].
+1. ONLY the 3-6 most recent calendar months relative to today's date, as individual periods labelled "YYYY MMM". For today = 2026 May, valid month labels are exactly: "2026 May", "2026 Apr", "2026 Mar", "2026 Feb", "2026 Jan", "2025 Dec". Anything older folds into the year, never into a month entry like "2025 Sep".
+2. After the recent months, the previous TWO full years as additional period entries, labelled just "YYYY" (e.g., "2025", "2024"). Activity from any month not in (1) belongs to its corresponding year.
+
+Skip a month or year entirely if there is no meaningful commit activity for it. Months always come before years in the output. Example output sequence for today = 2026 May: ["2026 May", "2026 Apr", "2026 Mar", "2026 Feb", "2025", "2024"].
+
+# Coverage rule (strict)
+
+Repos in the user's payload are sorted by importance, with a "weight" shown for each. You MUST cover the top 10 most-weighted repos that have commits in the window. Skipping a high-weight repo because it has no description, no recognisable theme, or uninformative commit messages is FORBIDDEN. For such repos, write a generic project-level description from the repo name + language alone (e.g., "Worked on the personal C++ project named MEMU3" — acceptable). Repos with weight 0 are NOT in the payload (already excluded).
 
 # Detail level (strict — HIGH-LEVEL ONLY, no implementation details)
 
@@ -102,18 +107,21 @@ Output a SINGLE JSON object. No markdown fences. No commentary. Schema:
 
 function formatPayload(p: ProfileData): string {
   const lines: string[] = [];
+  lines.push(`Today's date: ${new Date().toISOString().slice(0, 10)}`);
   lines.push(`User: @${p.login}`);
   lines.push(
     `Last 12 months: ${p.totals.contributions} total contributions, ${p.totals.commits} commits attributed to public repos, across ${p.repos.length} repositories.`,
   );
   lines.push("");
-  lines.push("Repositories with recent commits (highest activity first):");
+  lines.push("Repositories with recent commits (sorted by importance weight — see Coverage rule):");
   lines.push("");
 
   const reposWithCommits = p.repos.filter((r) => r.recentCommits.length > 0);
   for (const repo of reposWithCommits) {
     const lang = repo.language?.name ?? "—";
-    lines.push(`### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits`);
+    lines.push(
+      `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, weight ${repo.weight.toFixed(2)}`,
+    );
     if (repo.description) lines.push(`Description: ${repo.description}`);
     const sorted = [...repo.recentCommits].sort((a, b) => b.date.localeCompare(a.date));
     const sample = sorted.slice(0, 40);

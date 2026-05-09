@@ -1,19 +1,19 @@
 {
   "generatedAt": "2026-05-09",
-  "summary": "Focused on maintaining a Telegram n8n integration fork, developing a Windows file tagging utility, and building custom GitHub profile cards with a CV timeline generator. Also started a lightweight YOLO labeling tool and iterated on a personal Neovim configuration.",
+  "summary": "Worked on Telegram automation via an n8n node fork, and built tools for GitHub profile generation. Developed a Windows file-tagging application and a personal image labeler, while maintaining a Neovim setup and a Clash proxy fork.",
   "periods": [
     {
       "period": "2026 May",
       "items": [
         {
-          "title": "GitHub profile customisation and CV timeline builder",
+          "title": "GitHub profile automation scripts",
           "repo": "Jamminroot/Jamminroot",
-          "description": "Iterated on generating profile cards and an LLM-driven CV timeline for the personal GitHub profile."
+          "description": "Developed scripts to generate custom profile cards and a CV timeline for the GitHub profile."
         },
         {
-          "title": "Profile card generator workflow",
+          "title": "Profile card generator",
           "repo": "Jamminroot/jamminroot_profile_cards",
-          "description": "Refined the custom profile card generator, adding scheduling, a combined SVG, and theme adaptation."
+          "description": "Built a tool that produces sidebar cards and a CV timeline SVG for the GitHub profile, with light/dark theme support."
         }
       ]
     },
@@ -21,9 +21,9 @@
       "period": "2026 Apr",
       "items": [
         {
-          "title": "Clash.Meta proxy fork maintenance",
+          "title": "Clash proxy fork for FlClash client",
           "repo": "Jamminroot/Clash.Meta",
-          "description": "Worked on exposing APIs for proxy list management in the FlClash fork of Mihomo."
+          "description": "Maintained a fork of Clash.Meta to expose APIs needed by the FlClash client."
         }
       ]
     },
@@ -31,29 +31,24 @@
       "period": "2026 Feb",
       "items": [
         {
-          "title": "Telegram n8n node integration fork maintenance",
+          "title": "Telegram n8n node fork",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Continuously improved the n8n TelePilot2 node fork, focusing on authentication reliability and deployment pipeline stability."
+          "description": "Iterated on a Telegram integration n8n node fork, focusing on CI stability and new trigger support."
         },
         {
-          "title": "Windows Explorer file-tagging tool release preparations",
+          "title": "Windows file-tagging utility",
           "repo": "Jamminroot/intag",
-          "description": "Polished documentation and added a changelog in preparation for a new release of the file-tagging utility."
+          "description": "Polished the file-tagging tool for Windows Explorer with README and release updates."
         },
         {
-          "title": "Neovim development environment maintenance",
+          "title": "Neovim IDE configuration",
           "repo": "Jamminroot/.dotfiles",
-          "description": "Updated personal Neovim configuration for newer APIs, improved remote session support, and added a pre-commit hook."
+          "description": "Set up a complete Neovim IDE with treesitter, LSP, and clipboard for remote sessions."
         },
         {
-          "title": "GitHub profile update",
-          "repo": "Jamminroot/Jamminroot",
-          "description": "Made a minor refresh to the personal GitHub profile README."
-        },
-        {
-          "title": "Lightweight YOLO image labeler creation",
+          "title": "Image labeling tool",
           "repo": "Jamminroot/yolo-labeler",
-          "description": "Started building a minimal, fast on-host labeling tool for personal machine learning projects."
+          "description": "Developed a lightweight on-host YOLO labeler for personal use."
         }
       ]
     },
@@ -61,14 +56,14 @@
       "period": "2026 Jan",
       "items": [
         {
-          "title": "Telegram n8n node fork session and auth fixes",
+          "title": "Telegram n8n node fork",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Addressed session storage paths and restored required authentication parameters in the TelePilot2 fork."
+          "description": "Maintained the Telegram n8n node fork with version bumps and session storage improvements."
         },
         {
-          "title": "Released v2.0 of Windows file-tagging utility",
+          "title": "Windows file-tagging utility",
           "repo": "Jamminroot/intag",
-          "description": "Added metadata property support and prepared a Microsoft Store submission for the Explorer tagging tool."
+          "description": "Worked on v2.0 release of the file-tagging tool, targeting Microsoft Store and extending metadata support."
         }
       ]
     },
@@ -76,14 +71,9 @@
       "period": "2025",
       "items": [
         {
-          "title": "Started TelePilot2 fork with Docker support",
+          "title": "Telegram n8n node fork",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Launched the n8n TelePilot node fork, adding containerized deployment and early authentication work."
-        },
-        {
-          "title": "GitHub profile update",
-          "repo": "Jamminroot/Jamminroot",
-          "description": "Performed a small update to the personal GitHub profile README."
+          "description": "Started the TelePilot n8n node fork, adding Docker deployment and initial feature work."
         }
       ]
     },
@@ -91,14 +81,9 @@
       "period": "2024",
       "items": [
         {
-          "title": "Early Windows file-tagging utility development",
+          "title": "Windows file-tagging utility",
           "repo": "Jamminroot/intag",
-          "description": "Worked on a Windows Explorer extension for assigning tags to files, focusing on CLI and basic functionality."
-        },
-        {
-          "title": "GitHub profile updates",
-          "repo": "Jamminroot/Jamminroot",
-          "description": "Made occasional adjustments to the personal README profile."
+          "description": "Started development of the file-tagging tool for Windows Explorer, building core functionality."
         }
       ]
     }

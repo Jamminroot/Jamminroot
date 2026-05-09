@@ -346,6 +346,13 @@ export async function fetchProfile(
   }
   repos.sort((a, b) => b.weight - a.weight);
 
+  console.log(`fetched ${repos.length} repos (sorted by weight):`);
+  for (const r of repos) {
+    console.log(
+      `  ${r.nameWithOwner.padEnd(56)} ${(r.language?.name ?? "—").padEnd(12)} commits=${String(r.totalCommits).padStart(4)} fetched=${String(r.recentCommits.length).padStart(4)} weight=${r.weight.toFixed(2)}`,
+    );
+  }
+
   const contributionDays: ContributionDay[] = cc.contributionCalendar.weeks.flatMap((w) =>
     w.contributionDays.map((d) => ({ date: d.date, count: d.contributionCount })),
   );

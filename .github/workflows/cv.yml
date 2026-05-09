@@ -23,7 +23,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           USERNAME: ${{ github.repository_owner }}
-          EXCLUDED_REPOS_REGEX: ${{ vars.EXCLUDED_REPOS_REGEX }}
           REPO_WEIGHTS: ${{ vars.REPO_WEIGHTS }}
       - name: Commit
         run: |

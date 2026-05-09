@@ -20,17 +20,26 @@ export type RepoData = {
 };
 
 type WeightFn = "linear" | "sqrt" | "log";
-type WeightsConfig = { fn: WeightFn; weights: Record<string, number> };
+type WeightRule = { regex: RegExp; pattern: string; weight: number };
+type WeightsConfig = { fn: WeightFn; rules: WeightRule[] };
 
 function parseWeightsConfig(): WeightsConfig {
   const raw = process.env.REPO_WEIGHTS?.trim();
-  if (!raw) return { fn: "sqrt", weights: {} };
+  if (!raw) return { fn: "sqrt", rules: [] };
   try {
     const parsed = JSON.parse(raw) as { fn?: WeightFn; weights?: Record<string, number> };
-    return { fn: parsed.fn ?? "sqrt", weights: parsed.weights ?? {} };
+    const rules: WeightRule[] = [];
+    for (const [pattern, weight] of Object.entries(parsed.weights ?? {})) {
+      try {
+        rules.push({ regex: new RegExp(pattern), pattern, weight });
+      } catch (e) {
+        console.warn(`REPO_WEIGHTS: skipping invalid regex "${pattern}": ${e}`);
+      }
+    }
+    return { fn: parsed.fn ?? "sqrt", rules };
   } catch (err) {
     console.warn(`REPO_WEIGHTS is not valid JSON; ignoring: ${err}`);
-    return { fn: "sqrt", weights: {} };
+    return { fn: "sqrt", rules: [] };
   }
 }
 
@@ -46,10 +55,15 @@ function applyWeightFn(count: number, fn: WeightFn): number {
   }
 }
 
-function computeWeight(nameWithOwner: string, count: number, cfg: WeightsConfig): number {
-  const base = applyWeightFn(count, cfg.fn);
-  const mult = cfg.weights[nameWithOwner] ?? 1.0;
-  return base * mult;
+// Most-specific (longest pattern string) match wins. Default 1.0 if no rule matches.
+function multiplierFor(nameWithOwner: string, rules: WeightRule[]): number {
+  let best: WeightRule | null = null;
+  for (const r of rules) {
+    if (r.regex.test(nameWithOwner)) {
+      if (!best || r.pattern.length > best.pattern.length) best = r;
+    }
+  }
+  return best?.weight ?? 1.0;
 }
 
 export type ProfileData = {
@@ -265,8 +279,6 @@ export async function fetchProfile(
   const user = data.user;
   const cc = user.contributionsCollection;
 
-  const excludePattern = process.env.EXCLUDED_REPOS_REGEX?.trim();
-  const excludeRegex = excludePattern ? new RegExp(excludePattern) : null;
   const weightsConfig = parseWeightsConfig();
   const sinceISO = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();
 
@@ -291,20 +303,19 @@ export async function fetchProfile(
     }
   }
 
-  const filtered = excludeRegex
-    ? merged.filter((r) => !excludeRegex.test(r.nameWithOwner))
-    : merged;
-
-  // For each candidate, fetch the user's commits in the window.
-  // Skip repos with zero user commits — covers private repos viewer can see but hasn't committed to.
+  // For each candidate, check the multiplier from REPO_WEIGHTS first — skip excluded repos
+  // (multiplier <= 0) BEFORE paying API cost for commit history. Then fetch and skip repos
+  // with no actual user commits in the window.
   const repos: RepoData[] = [];
-  for (const r of filtered) {
+  for (const r of merged) {
+    const mult = multiplierFor(r.nameWithOwner, weightsConfig.rules);
+    if (mult <= 0) continue;
     const [owner, name] = r.nameWithOwner.split("/");
     const recentCommits = await fetchRepoCommits(owner, name, user.id, sinceISO);
     if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
     const totalCommits = r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length;
-    const weight = computeWeight(r.nameWithOwner, totalCommits, weightsConfig);
-    if (weight <= 0) continue; // weight 0 = effective exclude
+    const weight = applyWeightFn(totalCommits, weightsConfig.fn) * mult;
+    if (weight <= 0) continue;
     repos.push({
       nameWithOwner: r.nameWithOwner,
       description: r.description,

@@ -182,14 +182,29 @@ export async function summarizeTimeline(p: ProfileData): Promise<Timeline> {
   }
   const json = (await response.json()) as {
     choices?: { message?: { content?: string } }[];
+    model?: string;
     error?: { message?: string };
   };
   if (json.error) throw new Error(`OpenRouter error: ${json.error.message}`);
+  if (json.model) console.log(`OpenRouter served by model: ${json.model}`);
   const content = json.choices?.[0]?.message?.content;
   if (!content) throw new Error(`OpenRouter returned no content: ${JSON.stringify(json).slice(0, 500)}`);
   const raw = JSON.parse(extractJson(content));
-  return TimelineSchema.parse({
+  const result = TimelineSchema.parse({
     generatedAt: new Date().toISOString().slice(0, 10),
     ...raw,
   });
+  // Audit: warn if the model skipped any mandatory repos.
+  const mentioned = new Set(
+    result.periods.flatMap((per) => per.items.map((i) => i.repo).filter((r): r is string => !!r)),
+  );
+  const mandatory = p.repos.filter((r) => r.recentCommits.length > 0).slice(0, 10);
+  const missing = mandatory.filter((r) => !mentioned.has(r.nameWithOwner));
+  if (missing.length > 0) {
+    console.warn(`WARN: model skipped ${missing.length} of ${mandatory.length} mandatory repos:`);
+    for (const r of missing) console.warn(`  - ${r.nameWithOwner} (weight ${r.weight.toFixed(2)})`);
+  } else {
+    console.log("All mandatory repos covered.");
+  }
+  return result;
 }

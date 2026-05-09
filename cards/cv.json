@@ -1,19 +1,19 @@
 {
   "generatedAt": "2026-05-09",
-  "summary": "Focused on building a custom GitHub profile with auto-generated CV cards, maintaining a Telegram automation node for n8n, and shipping a major update to a Windows file-tagging utility.",
+  "summary": "Focused on personal and open-source projects including an n8n Telegram integration, a Windows file-tagging utility, automated profile card generation, and a Neovim IDE setup. Also built an image labeling tool and maintained a Clash proxy fork.",
   "periods": [
     {
       "period": "2026 May",
       "items": [
         {
-          "title": "Automated GitHub profile and CV generation",
+          "title": "Profile card and CV generator",
           "repo": "Jamminroot/Jamminroot",
-          "description": "Iterated on a workflow that generates a dynamic profile README with an LLM-powered CV timeline and sidebar cards."
+          "description": "Developed an automated GitHub profile card and CV timeline generator."
         },
         {
-          "title": "Profile card generator and CV timeline",
+          "title": "Profile cards rendering",
           "repo": "Jamminroot/jamminroot_profile_cards",
-          "description": "Built and refined a custom card generator that produces a combined profile SVG with a CV timeline."
+          "description": "Worked on combining sidebar cards and CV timeline into a single profile SVG."
         }
       ]
     },
@@ -21,9 +21,9 @@
       "period": "2026 Apr",
       "items": [
         {
-          "title": "Proxy API patch for Clash.Meta fork",
+          "title": "Clash proxy fork maintenance",
           "repo": "Jamminroot/Clash.Meta",
-          "description": "Re-exposed proxy listing APIs in a Mihomo fork to support FlClash integration."
+          "description": "Maintained a Clash proxy fork with XHTTP support for FlClash compatibility."
         }
       ]
     },
@@ -31,24 +31,24 @@
       "period": "2026 Feb",
       "items": [
         {
-          "title": "Telegram automation node for n8n",
+          "title": "Telegram n8n node maintenance",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Stabilised the node package with CI fixes, auth handling improvements, and a new album trigger."
+          "description": "Iterated on a Telegram integration node for n8n, adding triggers and stabilizing CI."
         },
         {
-          "title": "Windows Explorer file-tagging utility",
+          "title": "Windows file-tagging utility",
           "repo": "Jamminroot/intag",
-          "description": "Prepared and documented the v2 release of a tool that adds tag support to Windows Explorer."
+          "description": "Refined a Windows Explorer file-tagging tool with version 2 features and store release."
         },
         {
-          "title": "Personal Neovim development environment",
+          "title": "Neovim development environment",
           "repo": "Jamminroot/.dotfiles",
-          "description": "Maintained a full Neovim IDE setup, migrating to newer APIs and improving remote session support."
+          "description": "Set up and maintained a personal Neovim configuration with LSP and treesitter support."
         },
         {
-          "title": "On-host YOLO labelling tool",
+          "title": "On-host image labeling tool",
           "repo": "Jamminroot/yolo-labeler",
-          "description": "Started a minimalistic, fast labelling tool for personal computer vision projects."
+          "description": "Built a minimal, fast YOLO image labeling tool for personal use."
         }
       ]
     },
@@ -56,14 +56,14 @@
       "period": "2026 Jan",
       "items": [
         {
-          "title": "Telegram automation node for n8n",
+          "title": "n8n Telegram node improvements",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Worked on session storage stability and version bumps for the n8n community node."
+          "description": "Continued stability improvements on the Telegram n8n node."
         },
         {
-          "title": "Windows Explorer file-tagging utility",
+          "title": "intag metadata and store preparation",
           "repo": "Jamminroot/intag",
-          "description": "Finalised the v2 release with Microsoft Store listing and extended metadata support."
+          "description": "Extended file-tagging utility with extra metadata support and prepared for Microsoft Store submission."
         }
       ]
     },
@@ -71,9 +71,29 @@
       "period": "2025",
       "items": [
         {
-          "title": "Telegram automation node for n8n",
+          "title": "Telegram n8n node development",
           "repo": "Jamminroot/n8n-nodes-telepilot-2",
-          "description": "Launched the fork with Docker deployment support and initial auth fixes."
+          "description": "Built initial version of a Telegram integration node for n8n with Docker and Alpine support."
+        },
+        {
+          "title": "Personal repository updates",
+          "repo": "Jamminroot/Jamminroot",
+          "description": "Maintained personal repository with documentation updates."
+        }
+      ]
+    },
+    {
+      "period": "2024",
+      "items": [
+        {
+          "title": "Personal repository maintenance",
+          "repo": "Jamminroot/Jamminroot",
+          "description": "Updated personal repository documentation."
+        },
+        {
+          "title": "Windows file-tagging tool early work",
+          "repo": "Jamminroot/intag",
+          "description": "Started development of a Windows Explorer file-tagging utility with CLI capabilities."
         }
       ]
     }

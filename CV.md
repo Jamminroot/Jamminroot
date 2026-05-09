@@ -2,32 +2,38 @@
 
 > Updated 2026-05-09
 
-Focused on building a custom GitHub profile with auto-generated CV cards, maintaining a Telegram automation node for n8n, and shipping a major update to a Windows file-tagging utility.
+Focused on personal and open-source projects including an n8n Telegram integration, a Windows file-tagging utility, automated profile card generation, and a Neovim IDE setup. Also built an image labeling tool and maintained a Clash proxy fork.
 
 ## 2026 May
 
-- **Automated GitHub profile and CV generation** *(Jamminroot/Jamminroot)* — Iterated on a workflow that generates a dynamic profile README with an LLM-powered CV timeline and sidebar cards.
-- **Profile card generator and CV timeline** *(Jamminroot/jamminroot_profile_cards)* — Built and refined a custom card generator that produces a combined profile SVG with a CV timeline.
+- **Profile card and CV generator** *(Jamminroot/Jamminroot)* — Developed an automated GitHub profile card and CV timeline generator.
+- **Profile cards rendering** *(Jamminroot/jamminroot_profile_cards)* — Worked on combining sidebar cards and CV timeline into a single profile SVG.
 
 ## 2026 Apr
 
-- **Proxy API patch for Clash.Meta fork** *(Jamminroot/Clash.Meta)* — Re-exposed proxy listing APIs in a Mihomo fork to support FlClash integration.
+- **Clash proxy fork maintenance** *(Jamminroot/Clash.Meta)* — Maintained a Clash proxy fork with XHTTP support for FlClash compatibility.
 
 ## 2026 Feb
 
-- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Stabilised the node package with CI fixes, auth handling improvements, and a new album trigger.
-- **Windows Explorer file-tagging utility** *(Jamminroot/intag)* — Prepared and documented the v2 release of a tool that adds tag support to Windows Explorer.
-- **Personal Neovim development environment** *(Jamminroot/.dotfiles)* — Maintained a full Neovim IDE setup, migrating to newer APIs and improving remote session support.
-- **On-host YOLO labelling tool** *(Jamminroot/yolo-labeler)* — Started a minimalistic, fast labelling tool for personal computer vision projects.
+- **Telegram n8n node maintenance** *(Jamminroot/n8n-nodes-telepilot-2)* — Iterated on a Telegram integration node for n8n, adding triggers and stabilizing CI.
+- **Windows file-tagging utility** *(Jamminroot/intag)* — Refined a Windows Explorer file-tagging tool with version 2 features and store release.
+- **Neovim development environment** *(Jamminroot/.dotfiles)* — Set up and maintained a personal Neovim configuration with LSP and treesitter support.
+- **On-host image labeling tool** *(Jamminroot/yolo-labeler)* — Built a minimal, fast YOLO image labeling tool for personal use.
 
 ## 2026 Jan
 
-- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Worked on session storage stability and version bumps for the n8n community node.
-- **Windows Explorer file-tagging utility** *(Jamminroot/intag)* — Finalised the v2 release with Microsoft Store listing and extended metadata support.
+- **n8n Telegram node improvements** *(Jamminroot/n8n-nodes-telepilot-2)* — Continued stability improvements on the Telegram n8n node.
+- **intag metadata and store preparation** *(Jamminroot/intag)* — Extended file-tagging utility with extra metadata support and prepared for Microsoft Store submission.
 
 ## 2025
 
-- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Launched the fork with Docker deployment support and initial auth fixes.
+- **Telegram n8n node development** *(Jamminroot/n8n-nodes-telepilot-2)* — Built initial version of a Telegram integration node for n8n with Docker and Alpine support.
+- **Personal repository updates** *(Jamminroot/Jamminroot)* — Maintained personal repository with documentation updates.
+
+## 2024
+
+- **Personal repository maintenance** *(Jamminroot/Jamminroot)* — Updated personal repository documentation.
+- **Windows file-tagging tool early work** *(Jamminroot/intag)* — Started development of a Windows Explorer file-tagging utility with CLI capabilities.
 
 ---
 *Generated from public commit data + LLM summary.*

@@ -115,34 +115,41 @@ function formatPayload(p: ProfileData): string {
     `Last 12 months: ${p.totals.contributions} total contributions, ${p.totals.commits} commits attributed to public repos, across ${p.repos.length} repositories.`,
   );
   lines.push("");
-  lines.push("Repositories with recent commits (sorted by importance weight — see Coverage rule):");
+  lines.push("Repositories with activity in the window (sorted by importance weight — see Coverage rule):");
   lines.push("");
 
-  const reposWithCommits = p.repos.filter((r) => r.recentCommits.length > 0);
-  for (const repo of reposWithCommits) {
+  for (const repo of p.repos) {
     const lang = repo.language?.name ?? "—";
     lines.push(
       `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, weight ${repo.weight.toFixed(2)}`,
     );
     if (repo.description) lines.push(`Description: ${repo.description}`);
-    const sorted = [...repo.recentCommits].sort((a, b) => b.date.localeCompare(a.date));
-    const sample = sorted.slice(0, 40);
-    lines.push(`Commit messages (most recent first, ${sample.length} of ${repo.recentCommits.length}):`);
-    for (const c of sample) {
-      lines.push(`- ${c.date.slice(0, 10)}: ${c.headline}`);
+    if (repo.recentCommits.length > 0) {
+      const sorted = [...repo.recentCommits].sort((a, b) => b.date.localeCompare(a.date));
+      const sample = sorted.slice(0, 40);
+      lines.push(
+        `Commit messages (most recent first, ${sample.length} of ${repo.recentCommits.length}):`,
+      );
+      for (const c of sample) {
+        lines.push(`- ${c.date.slice(0, 10)}: ${c.headline}`);
+      }
+    } else {
+      lines.push(
+        `Commit details: not accessible (private repo, token lacks contents:read for it). Use the repo name + language to infer a generic project description.`,
+      );
     }
     lines.push("");
   }
 
   // Mandatory coverage section — explicit list the LLM must mention.
-  const mandatory = reposWithCommits.slice(0, 10);
+  const mandatory = p.repos.slice(0, 10);
   if (mandatory.length > 0) {
     lines.push("========================================");
     lines.push("MANDATORY COVERAGE — output JSON MUST include at least one item with a matching `repo` field for EACH of these:");
     for (const r of mandatory) {
       lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, weight ${r.weight.toFixed(2)})`);
     }
-    lines.push("If a repo has no description and uninformative commit messages, infer the project type from its name + language and write a brief generic item like 'Worked on the personal C++ project named X.' Do not omit any of these from the output.");
+    lines.push("If a repo has no description and uninformative or absent commit messages, infer the project type from its name + language and write a brief generic item like 'Worked on the personal C++ project named X.' Do not omit any of these from the output.");
     lines.push("========================================");
   }
 
@@ -198,7 +205,7 @@ export async function summarizeTimeline(p: ProfileData): Promise<Timeline> {
   const mentioned = new Set(
     result.periods.flatMap((per) => per.items.map((i) => i.repo).filter((r): r is string => !!r)),
   );
-  const mandatory = p.repos.filter((r) => r.recentCommits.length > 0).slice(0, 10);
+  const mandatory = p.repos.slice(0, 10);
   const missing = mandatory.filter((r) => !mentioned.has(r.nameWithOwner));
   if (missing.length > 0) {
     console.warn(`WARN: model skipped ${missing.length} of ${mandatory.length} mandatory repos:`);

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 952 1248" width="952" height="1248" role="img" aria-label="Jamminroot profile card">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 952 1108" width="952" height="1108" role="img" aria-label="Jamminroot profile card">
   <style>
   text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
   .bg { fill: #ffffff; }
@@ -18,93 +18,82 @@
     .accent2 { fill: #3fb950; }
   }
 </style>
-  <rect class="bg" x="0" y="0" width="952" height="1248" rx="8" ry="8"/>
+  <rect class="bg" x="0" y="0" width="952" height="1108" rx="8" ry="8"/>
   <g transform="translate(24, 24)"><text class="fg" x="0" y="14" font-size="16" font-weight="700">Recent activity</text>
 <text class="muted" x="600" y="14" font-size="10" text-anchor="end">updated 2026-05-09</text>
-<text class="muted" x="0" y="32" font-size="12">Over the past year, built a Telegram automation node for n8n, polished a</text>
-<text class="muted" x="0" y="50" font-size="12">Windows Explorer file-tagging utility, developed a personal CV/profile</text>
-<text class="muted" x="0" y="68" font-size="12">card generator, maintained Neovim dotfiles, and created a YOLO labeling</text>
-<text class="muted" x="0" y="86" font-size="12">tool.</text>
+<text class="muted" x="0" y="32" font-size="12">Over the past year, the engineer focused heavily on building and</text>
+<text class="muted" x="0" y="50" font-size="12">maintaining a Telegram automation integration for n8n, developing a</text>
+<text class="muted" x="0" y="68" font-size="12">Windows file-tagging utility, and creating a custom GitHub profile CV</text>
+<text class="muted" x="0" y="86" font-size="12">generator.</text>
 <text class="accent" x="0" y="134" font-size="11" font-weight="600">2026 May</text>
 <circle class="accent" cx="70" cy="130" r="4"/>
-<text class="fg" x="86" y="154" font-size="13" font-weight="600">Profile card generator</text>
+<text class="fg" x="86" y="154" font-size="13" font-weight="600">GitHub profile CV generator</text>
 <text class="muted" x="600" y="154" font-size="10" text-anchor="end">Jamminroot/Jamminroot</text>
-<text class="muted" x="86" y="170" font-size="11">Developed a custom GitHub profile card generator with commit</text>
-<text class="muted" x="86" y="186" font-size="11">weighting and private repo discovery.</text>
-<text class="fg" x="86" y="214" font-size="13" font-weight="600">Profile cards and CV workflow</text>
+<text class="muted" x="86" y="170" font-size="11">Built a custom profile card system that generates a CV timeline</text>
+<text class="muted" x="86" y="186" font-size="11">and sidebar cards from repository activity.</text>
+<text class="fg" x="86" y="214" font-size="13" font-weight="600">Profile card workflow and rendering</text>
 <text class="muted" x="600" y="214" font-size="10" text-anchor="end">Jamminroot/jamminroot_profile_cards</text>
-<text class="muted" x="86" y="230" font-size="11">Set up automated CV timeline generation and light/dark theme</text>
-<text class="muted" x="86" y="246" font-size="11">adaptation for profile cards.</text>
+<text class="muted" x="86" y="230" font-size="11">Developed the automated workflow and card generator that</text>
+<text class="muted" x="86" y="246" font-size="11">produces the combined profile SVG and CV data.</text>
 <line class="border" x1="70" y1="134" x2="70" y2="258" stroke-width="1"/>
 <text class="accent" x="0" y="286" font-size="11" font-weight="600">2026 Apr</text>
 <circle class="accent" cx="70" cy="282" r="4"/>
-<text class="fg" x="86" y="306" font-size="13" font-weight="600">Mihomo fork proxy tuning</text>
+<text class="fg" x="86" y="306" font-size="13" font-weight="600">Proxy client fork maintenance</text>
 <text class="muted" x="600" y="306" font-size="10" text-anchor="end">Jamminroot/Clash.Meta</text>
-<text class="muted" x="86" y="322" font-size="11">Re-exposed proxy APIs on a Clash.Meta fork to support FlClash</text>
-<text class="muted" x="86" y="338" font-size="11">integration.</text>
+<text class="muted" x="86" y="322" font-size="11">Re-exposed internal API methods for a specific proxy client</text>
+<text class="muted" x="86" y="338" font-size="11">fork.</text>
 <line class="border" x1="70" y1="286" x2="70" y2="350" stroke-width="1"/>
 <text class="accent" x="0" y="378" font-size="11" font-weight="600">2026 Feb</text>
 <circle class="accent" cx="70" cy="374" r="4"/>
-<text class="fg" x="86" y="398" font-size="13" font-weight="600">Telegram n8n node fork</text>
+<text class="fg" x="86" y="398" font-size="13" font-weight="600">Telegram automation node for n8n</text>
 <text class="muted" x="600" y="398" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
-<text class="muted" x="86" y="414" font-size="11">Iterated on CI fixes, authentication stability, and an album</text>
-<text class="muted" x="86" y="430" font-size="11">trigger feature for the TelePilot Telegram node.</text>
-<text class="fg" x="86" y="458" font-size="13" font-weight="600">File-tagging utility release prep</text>
+<text class="muted" x="86" y="414" font-size="11">Iterated on CI reliability, authentication handling, and package</text>
+<text class="muted" x="86" y="430" font-size="11">publishing for the forked n8n Telegram integration.</text>
+<text class="fg" x="86" y="458" font-size="13" font-weight="600">Windows Explorer file-tagging utility</text>
 <text class="muted" x="600" y="458" font-size="10" text-anchor="end">Jamminroot/intag</text>
-<text class="muted" x="86" y="474" font-size="11">Prepared documentation, changelog, and Microsoft Store listing</text>
-<text class="muted" x="86" y="490" font-size="11">for the Intag Windows Explorer tagger.</text>
-<text class="fg" x="86" y="518" font-size="13" font-weight="600">Neovim config refinements</text>
+<text class="muted" x="86" y="474" font-size="11">Polished the v2 release with documentation, a changelog, and</text>
+<text class="muted" x="86" y="490" font-size="11">store listing materials.</text>
+<text class="fg" x="86" y="518" font-size="13" font-weight="600">Personal Neovim configuration</text>
 <text class="muted" x="600" y="518" font-size="10" text-anchor="end">Jamminroot/.dotfiles</text>
-<text class="muted" x="86" y="534" font-size="11">Fixed treesitter, LSP, and clipboard issues in personal Neovim</text>
-<text class="muted" x="86" y="550" font-size="11">setup, added secret detection hooks.</text>
-<text class="fg" x="86" y="578" font-size="13" font-weight="600">YOLO labeling tool development</text>
+<text class="muted" x="86" y="534" font-size="11">Maintained a full IDE setup, migrating to newer Neovim APIs and</text>
+<text class="muted" x="86" y="550" font-size="11">adding remote session support.</text>
+<text class="fg" x="86" y="578" font-size="13" font-weight="600">On-host YOLO labeling tool</text>
 <text class="muted" x="600" y="578" font-size="10" text-anchor="end">Jamminroot/yolo-labeler</text>
-<text class="muted" x="86" y="594" font-size="11">Built a fast on-host image labeling tool with multi-select mark</text>
-<text class="muted" x="86" y="610" font-size="11">mode and batch operations.</text>
+<text class="muted" x="86" y="594" font-size="11">Started a minimalistic, fast labeling tool with batch operations</text>
+<text class="muted" x="86" y="610" font-size="11">and flexible data resolution.</text>
 <line class="border" x1="70" y1="378" x2="70" y2="622" stroke-width="1"/>
 <text class="accent" x="0" y="650" font-size="11" font-weight="600">2026 Jan</text>
 <circle class="accent" cx="70" cy="646" r="4"/>
-<text class="fg" x="86" y="670" font-size="13" font-weight="600">Telegram node session fix</text>
+<text class="fg" x="86" y="670" font-size="13" font-weight="600">Telegram automation node for n8n</text>
 <text class="muted" x="600" y="670" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
-<text class="muted" x="86" y="686" font-size="11">Resolved TDLib session storage issues and released version bumps</text>
-<text class="muted" x="86" y="702" font-size="11">for the n8n TelePilot node.</text>
-<text class="fg" x="86" y="730" font-size="13" font-weight="600">Explorer tagger v2 release</text>
+<text class="muted" x="86" y="686" font-size="11">Addressed session storage and client parameter issues in the</text>
+<text class="muted" x="86" y="702" font-size="11">Telegram integration.</text>
+<text class="fg" x="86" y="730" font-size="13" font-weight="600">Windows Explorer file-tagging utility</text>
 <text class="muted" x="600" y="730" font-size="10" text-anchor="end">Jamminroot/intag</text>
-<text class="muted" x="86" y="746" font-size="11">Launched v2 of the Windows file-tagging utility, adding metadata</text>
-<text class="muted" x="86" y="762" font-size="11">support and a Microsoft Store link.</text>
+<text class="muted" x="86" y="746" font-size="11">Prepared the v2.0 release with metadata support and a privacy</text>
+<text class="muted" x="86" y="762" font-size="11">policy for store submission.</text>
 <line class="border" x1="70" y1="650" x2="70" y2="774" stroke-width="1"/>
-<text class="accent" x="0" y="802" font-size="11" font-weight="600">2025 Sep</text>
+<text class="accent" x="0" y="802" font-size="11" font-weight="600">2025</text>
 <circle class="accent" cx="70" cy="798" r="4"/>
-<text class="fg" x="86" y="822" font-size="13" font-weight="600">Telegram node auth work</text>
+<text class="fg" x="86" y="822" font-size="13" font-weight="600">Telegram automation node for n8n</text>
 <text class="muted" x="600" y="822" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
-<text class="muted" x="86" y="838" font-size="11">Started working on authentication improvements for the Telegram</text>
-<text class="muted" x="86" y="854" font-size="11">automation node.</text>
-<line class="border" x1="70" y1="802" x2="70" y2="866" stroke-width="1"/>
-<text class="accent" x="0" y="894" font-size="11" font-weight="600">2025 Aug</text>
-<circle class="accent" cx="70" cy="890" r="4"/>
-<text class="fg" x="86" y="914" font-size="13" font-weight="600">Telegram node deployment and docs</text>
-<text class="muted" x="600" y="914" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
-<text class="muted" x="86" y="930" font-size="11">Added Docker deployment support and updated README with fork</text>
-<text class="muted" x="86" y="946" font-size="11">features for the TelePilot node.</text>
-<line class="border" x1="70" y1="894" x2="70" y2="958" stroke-width="1"/>
-<text class="accent" x="0" y="986" font-size="11" font-weight="600">2025</text>
-<circle class="accent" cx="70" cy="982" r="4"/>
-<text class="fg" x="86" y="1006" font-size="13" font-weight="600">Telegram automation node foundation</text>
-<text class="muted" x="600" y="1006" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
-<text class="muted" x="86" y="1022" font-size="11">Started the TelePilot Telegram node fork, laying ground-work</text>
-<text class="muted" x="86" y="1038" font-size="11">with Docker support, Alpine builds, and initial CI.</text>
-<line class="border" x1="70" y1="986" x2="70" y2="1050" stroke-width="1"/>
-<text class="accent" x="0" y="1078" font-size="11" font-weight="600">2024</text>
-<circle class="accent" cx="70" cy="1074" r="4"/>
-<text class="fg" x="86" y="1098" font-size="13" font-weight="600">Windows Explorer file tagging tool</text>
-<text class="muted" x="600" y="1098" font-size="10" text-anchor="end">Jamminroot/intag</text>
-<text class="muted" x="86" y="1114" font-size="11">Developed Intag, a file-tagging utility for Windows Explorer,</text>
-<text class="muted" x="86" y="1130" font-size="11">adding CLI support, logging, and packaging.</text>
-<text class="fg" x="86" y="1158" font-size="13" font-weight="600">Personal profile notes updates</text>
-<text class="muted" x="600" y="1158" font-size="10" text-anchor="end">Jamminroot/Jamminroot</text>
-<text class="muted" x="86" y="1174" font-size="11">Made minor README updates to personal GitHub notes.</text>
-<line class="border" x1="70" y1="1078" x2="70" y2="1186" stroke-width="1"/></g>
+<text class="muted" x="86" y="838" font-size="11">Laid the foundation for the forked integration, adding Docker</text>
+<text class="muted" x="86" y="854" font-size="11">deployment support and initial authentication work.</text>
+<text class="fg" x="86" y="882" font-size="13" font-weight="600">GitHub profile CV generator</text>
+<text class="muted" x="600" y="882" font-size="10" text-anchor="end">Jamminroot/Jamminroot</text>
+<text class="muted" x="86" y="898" font-size="11">Updated the profile repository with initial customizations.</text>
+<line class="border" x1="70" y1="802" x2="70" y2="910" stroke-width="1"/>
+<text class="accent" x="0" y="938" font-size="11" font-weight="600">2024</text>
+<circle class="accent" cx="70" cy="934" r="4"/>
+<text class="fg" x="86" y="958" font-size="13" font-weight="600">Windows Explorer file-tagging utility</text>
+<text class="muted" x="600" y="958" font-size="10" text-anchor="end">Jamminroot/intag</text>
+<text class="muted" x="86" y="974" font-size="11">Worked on the initial CLI, logging, and UI polish for the</text>
+<text class="muted" x="86" y="990" font-size="11">file-tagging project.</text>
+<text class="fg" x="86" y="1018" font-size="13" font-weight="600">GitHub profile CV generator</text>
+<text class="muted" x="600" y="1018" font-size="10" text-anchor="end">Jamminroot/Jamminroot</text>
+<text class="muted" x="86" y="1034" font-size="11">Made early updates to the profile repository.</text>
+<line class="border" x1="70" y1="938" x2="70" y2="1046" stroke-width="1"/></g>
   <g transform="translate(648, 24)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">LANGUAGES BY COMMIT</text><text class="fg" x="0" y="36" font-size="11">C#</text><text class="muted" x="280" y="36" font-size="10" text-anchor="end">1083 · 37%</text><rect class="panel" x="0" y="40" width="280" height="6" rx="3" ry="3"/><rect x="0" y="40" width="104.92226666594907" height="6" rx="3" ry="3" fill="#178600"/><text class="fg" x="0" y="64" font-size="11">Python</text><text class="muted" x="280" y="64" font-size="10" text-anchor="end">279 · 22%</text><rect class="panel" x="0" y="68" width="280" height="6" rx="3" ry="3"/><rect x="0" y="68" width="61.97648759263014" height="6" rx="3" ry="3" fill="#3572A5"/><text class="fg" x="0" y="92" font-size="11">C++</text><text class="muted" x="280" y="92" font-size="10" text-anchor="end">171 · 15%</text><rect class="panel" x="0" y="96" width="280" height="6" rx="3" ry="3"/><rect x="0" y="96" width="42.89418294981445" height="6" rx="3" ry="3" fill="#f34b7d"/><text class="fg" x="0" y="120" font-size="11">TypeScript</text><text class="muted" x="280" y="120" font-size="10" text-anchor="end">87 · 13%</text><rect class="panel" x="0" y="124" width="280" height="6" rx="3" ry="3"/><rect x="0" y="124" width="37.768994198571754" height="6" rx="3" ry="3" fill="#3178c6"/><text class="fg" x="0" y="148" font-size="11">Kotlin</text><text class="muted" x="280" y="148" font-size="10" text-anchor="end">75 · 9%</text><rect class="panel" x="0" y="152" width="280" height="6" rx="3" ry="3"/><rect x="0" y="152" width="24.39798659400282" height="6" rx="3" ry="3" fill="#A97BFF"/><text class="fg" x="0" y="176" font-size="11">C</text><text class="muted" x="280" y="176" font-size="10" text-anchor="end">17 · 3%</text><rect class="panel" x="0" y="180" width="280" height="6" rx="3" ry="3"/><rect x="0" y="180" width="8.040081999031782" height="6" rx="3" ry="3" fill="#555555"/></g>
   <g transform="translate(648, 236)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">COMMITS BY HOUR (UTC)</text><text class="muted" x="280" y="14" font-size="9" text-anchor="end">81 commits</text><rect class="accent" x="0" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="11.708333333333334" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="23.416666666666668" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="35.125" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="46.833333333333336" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="58.54166666666667" y="76" width="10.708333333333334" height="48" rx="1.5" ry="1.5" opacity="0.78"/><rect class="accent" x="70.25" y="84" width="10.708333333333334" height="40" rx="1.5" ry="1.5" opacity="0.74"/><rect class="accent" x="81.95833333333334" y="84" width="10.708333333333334" height="40" rx="1.5" ry="1.5" opacity="0.74"/><rect class="accent" x="93.66666666666667" y="68" width="10.708333333333334" height="56" rx="1.5" ry="1.5" opacity="0.81"/><rect class="accent2" x="105.375" y="28" width="10.708333333333334" height="96" rx="1.5" ry="1.5" opacity="1.00"/><rect class="accent" x="117.08333333333334" y="100" width="10.708333333333334" height="24" rx="1.5" ry="1.5" opacity="0.66"/><rect class="accent" x="128.79166666666669" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="140.5" y="92" width="10.708333333333334" height="32" rx="1.5" ry="1.5" opacity="0.70"/><rect class="accent" x="152.20833333333334" y="108" width="10.708333333333334" height="16" rx="1.5" ry="1.5" opacity="0.63"/><rect class="accent" x="163.91666666666669" y="76" width="10.708333333333334" height="48" rx="1.5" ry="1.5" opacity="0.78"/><rect class="accent" x="175.625" y="68" width="10.708333333333334" height="56" rx="1.5" ry="1.5" opacity="0.81"/><rect class="accent" x="187.33333333333334" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="199.04166666666669" y="108" width="10.708333333333334" height="16" rx="1.5" ry="1.5" opacity="0.63"/><rect class="accent" x="210.75" y="68" width="10.708333333333334" height="56" rx="1.5" ry="1.5" opacity="0.81"/><rect class="accent" x="222.45833333333334" y="92" width="10.708333333333334" height="32" rx="1.5" ry="1.5" opacity="0.70"/><rect class="accent" x="234.16666666666669" y="116" width="10.708333333333334" height="8" rx="1.5" ry="1.5" opacity="0.59"/><rect class="accent" x="245.875" y="76" width="10.708333333333334" height="48" rx="1.5" ry="1.5" opacity="0.78"/><rect class="accent" x="257.58333333333337" y="92" width="10.708333333333334" height="32" rx="1.5" ry="1.5" opacity="0.70"/><rect class="accent" x="269.2916666666667" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><text class="muted" x="5.354166666666667" y="136" font-size="9" text-anchor="middle">00</text><text class="muted" x="75.60416666666667" y="136" font-size="9" text-anchor="middle">06</text><text class="muted" x="145.85416666666666" y="136" font-size="9" text-anchor="middle">12</text><text class="muted" x="216.10416666666666" y="136" font-size="9" text-anchor="middle">18</text><text class="muted" x="0" y="152" font-size="10">peak hour</text><text class="fg" x="280" y="152" font-size="11" text-anchor="end" font-weight="600">09:00 UTC</text></g>
-  <g transform="translate(648, 422)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">MONTHLY CONTRIBUTIONS</text><text class="muted" x="280" y="14" font-size="9" text-anchor="end">last 12 months</text><rect class="accent2" x="0" y="113.40914419695193" width="19.666666666666668" height="0.5908558030480657" rx="2" ry="2" opacity="0.55"/><text class="muted" x="9.833333333333334" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="23.666666666666668" y="113.90152403282532" width="19.666666666666668" height="0.0984759671746776" rx="2" ry="2" opacity="0.55"/><text class="muted" x="33.5" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="47.333333333333336" y="113.40914419695193" width="19.666666666666668" height="0.5908558030480657" rx="2" ry="2" opacity="0.55"/><text class="muted" x="57.16666666666667" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="71" y="113.5076201641266" width="19.666666666666668" height="0.49237983587338807" rx="2" ry="2" opacity="0.55"/><text class="muted" x="80.83333333333333" y="126" font-size="8" text-anchor="middle">S</text><rect class="accent2" x="94.66666666666667" y="114" width="19.666666666666668" height="0" rx="2" ry="2" opacity="0.55"/><text class="muted" x="104.5" y="126" font-size="8" text-anchor="middle">O</text><rect class="accent2" x="118.33333333333334" y="113.90152403282532" width="19.666666666666668" height="0.0984759671746776" rx="2" ry="2" opacity="0.55"/><text class="muted" x="128.16666666666669" y="126" font-size="8" text-anchor="middle">N</text><rect class="accent2" x="142" y="102.18288393903869" width="19.666666666666668" height="11.817116060961313" rx="2" ry="2" opacity="0.61"/><text class="muted" x="151.83333333333334" y="126" font-size="8" text-anchor="middle">D</text><rect class="accent2" x="165.66666666666669" y="100.8042203985932" width="19.666666666666668" height="13.1957796014068" rx="2" ry="2" opacity="0.62"/><text class="muted" x="175.50000000000003" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="189.33333333333334" y="65.05744431418523" width="19.666666666666668" height="48.94255568581477" rx="2" ry="2" opacity="0.81"/><text class="muted" x="199.16666666666669" y="126" font-size="8" text-anchor="middle">F</text><rect class="accent2" x="213" y="30" width="19.666666666666668" height="84" rx="2" ry="2" opacity="1.00"/><text class="muted" x="222.83333333333334" y="126" font-size="8" text-anchor="middle">M</text><rect class="accent2" x="236.66666666666669" y="105.53106682297772" width="19.666666666666668" height="8.468933177022274" rx="2" ry="2" opacity="0.60"/><text class="muted" x="246.50000000000003" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="260.33333333333337" y="112.2274325908558" width="19.666666666666668" height="1.772567409144197" rx="2" ry="2" opacity="0.56"/><text class="muted" x="270.1666666666667" y="126" font-size="8" text-anchor="middle">M</text><text class="muted" x="0" y="142" font-size="10">total</text><text class="fg" x="280" y="142" font-size="11" text-anchor="end" font-weight="600">1,727</text></g>
+  <g transform="translate(648, 422)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">MONTHLY CONTRIBUTIONS</text><text class="muted" x="280" y="14" font-size="9" text-anchor="end">last 12 months</text><rect class="accent2" x="0" y="113.40914419695193" width="19.666666666666668" height="0.5908558030480657" rx="2" ry="2" opacity="0.55"/><text class="muted" x="9.833333333333334" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="23.666666666666668" y="113.90152403282532" width="19.666666666666668" height="0.0984759671746776" rx="2" ry="2" opacity="0.55"/><text class="muted" x="33.5" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="47.333333333333336" y="113.40914419695193" width="19.666666666666668" height="0.5908558030480657" rx="2" ry="2" opacity="0.55"/><text class="muted" x="57.16666666666667" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="71" y="113.5076201641266" width="19.666666666666668" height="0.49237983587338807" rx="2" ry="2" opacity="0.55"/><text class="muted" x="80.83333333333333" y="126" font-size="8" text-anchor="middle">S</text><rect class="accent2" x="94.66666666666667" y="114" width="19.666666666666668" height="0" rx="2" ry="2" opacity="0.55"/><text class="muted" x="104.5" y="126" font-size="8" text-anchor="middle">O</text><rect class="accent2" x="118.33333333333334" y="113.90152403282532" width="19.666666666666668" height="0.0984759671746776" rx="2" ry="2" opacity="0.55"/><text class="muted" x="128.16666666666669" y="126" font-size="8" text-anchor="middle">N</text><rect class="accent2" x="142" y="102.18288393903869" width="19.666666666666668" height="11.817116060961313" rx="2" ry="2" opacity="0.61"/><text class="muted" x="151.83333333333334" y="126" font-size="8" text-anchor="middle">D</text><rect class="accent2" x="165.66666666666669" y="100.8042203985932" width="19.666666666666668" height="13.1957796014068" rx="2" ry="2" opacity="0.62"/><text class="muted" x="175.50000000000003" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="189.33333333333334" y="65.05744431418523" width="19.666666666666668" height="48.94255568581477" rx="2" ry="2" opacity="0.81"/><text class="muted" x="199.16666666666669" y="126" font-size="8" text-anchor="middle">F</text><rect class="accent2" x="213" y="30" width="19.666666666666668" height="84" rx="2" ry="2" opacity="1.00"/><text class="muted" x="222.83333333333334" y="126" font-size="8" text-anchor="middle">M</text><rect class="accent2" x="236.66666666666669" y="105.53106682297772" width="19.666666666666668" height="8.468933177022274" rx="2" ry="2" opacity="0.60"/><text class="muted" x="246.50000000000003" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="260.33333333333337" y="112.12895662368112" width="19.666666666666668" height="1.8710433763188747" rx="2" ry="2" opacity="0.56"/><text class="muted" x="270.1666666666667" y="126" font-size="8" text-anchor="middle">M</text><text class="muted" x="0" y="142" font-size="10">total</text><text class="fg" x="280" y="142" font-size="11" text-anchor="end" font-weight="600">1,728</text></g>
 </svg>

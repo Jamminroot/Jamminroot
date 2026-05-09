@@ -2,45 +2,38 @@
 
 > Updated 2026-05-09
 
-Over the past year, built a Telegram automation node for n8n, polished a Windows Explorer file-tagging utility, developed a personal CV/profile card generator, maintained Neovim dotfiles, and created a YOLO labeling tool.
+Over the past year, the engineer focused heavily on building and maintaining a Telegram automation integration for n8n, developing a Windows file-tagging utility, and creating a custom GitHub profile CV generator. Additional work included personal Neovim configuration, a YOLO labeling tool, and a small contribution to a proxy client fork.
 
 ## 2026 May
 
-- **Profile card generator** *(Jamminroot/Jamminroot)* — Developed a custom GitHub profile card generator with commit weighting and private repo discovery.
-- **Profile cards and CV workflow** *(Jamminroot/jamminroot_profile_cards)* — Set up automated CV timeline generation and light/dark theme adaptation for profile cards.
+- **GitHub profile CV generator** *(Jamminroot/Jamminroot)* — Built a custom profile card system that generates a CV timeline and sidebar cards from repository activity.
+- **Profile card workflow and rendering** *(Jamminroot/jamminroot_profile_cards)* — Developed the automated workflow and card generator that produces the combined profile SVG and CV data.
 
 ## 2026 Apr
 
-- **Mihomo fork proxy tuning** *(Jamminroot/Clash.Meta)* — Re-exposed proxy APIs on a Clash.Meta fork to support FlClash integration.
+- **Proxy client fork maintenance** *(Jamminroot/Clash.Meta)* — Re-exposed internal API methods for a specific proxy client fork.
 
 ## 2026 Feb
 
-- **Telegram n8n node fork** *(Jamminroot/n8n-nodes-telepilot-2)* — Iterated on CI fixes, authentication stability, and an album trigger feature for the TelePilot Telegram node.
-- **File-tagging utility release prep** *(Jamminroot/intag)* — Prepared documentation, changelog, and Microsoft Store listing for the Intag Windows Explorer tagger.
-- **Neovim config refinements** *(Jamminroot/.dotfiles)* — Fixed treesitter, LSP, and clipboard issues in personal Neovim setup, added secret detection hooks.
-- **YOLO labeling tool development** *(Jamminroot/yolo-labeler)* — Built a fast on-host image labeling tool with multi-select mark mode and batch operations.
+- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Iterated on CI reliability, authentication handling, and package publishing for the forked n8n Telegram integration.
+- **Windows Explorer file-tagging utility** *(Jamminroot/intag)* — Polished the v2 release with documentation, a changelog, and store listing materials.
+- **Personal Neovim configuration** *(Jamminroot/.dotfiles)* — Maintained a full IDE setup, migrating to newer Neovim APIs and adding remote session support.
+- **On-host YOLO labeling tool** *(Jamminroot/yolo-labeler)* — Started a minimalistic, fast labeling tool with batch operations and flexible data resolution.
 
 ## 2026 Jan
 
-- **Telegram node session fix** *(Jamminroot/n8n-nodes-telepilot-2)* — Resolved TDLib session storage issues and released version bumps for the n8n TelePilot node.
-- **Explorer tagger v2 release** *(Jamminroot/intag)* — Launched v2 of the Windows file-tagging utility, adding metadata support and a Microsoft Store link.
-
-## 2025 Sep
-
-- **Telegram node auth work** *(Jamminroot/n8n-nodes-telepilot-2)* — Started working on authentication improvements for the Telegram automation node.
-
-## 2025 Aug
-
-- **Telegram node deployment and docs** *(Jamminroot/n8n-nodes-telepilot-2)* — Added Docker deployment support and updated README with fork features for the TelePilot node.
+- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Addressed session storage and client parameter issues in the Telegram integration.
+- **Windows Explorer file-tagging utility** *(Jamminroot/intag)* — Prepared the v2.0 release with metadata support and a privacy policy for store submission.
 
 ## 2025
 
-- **Telegram automation node foundation** *(Jamminroot/n8n-nodes-telepilot-2)* — Started the TelePilot Telegram node fork, laying ground-work with Docker support, Alpine builds, and initial CI.
+- **Telegram automation node for n8n** *(Jamminroot/n8n-nodes-telepilot-2)* — Laid the foundation for the forked integration, adding Docker deployment support and initial authentication work.
+- **GitHub profile CV generator** *(Jamminroot/Jamminroot)* — Updated the profile repository with initial customizations.
 
 ## 2024
 
-- **Windows Explorer file tagging tool** *(Jamminroot/intag)* — Developed Intag, a file-tagging utility for Windows Explorer, adding CLI support, logging, and packaging.
-- **Personal profile notes updates** *(Jamminroot/Jamminroot)* — Made minor README updates to personal GitHub notes.
+- **Windows Explorer file-tagging utility** *(Jamminroot/intag)* — Worked on the initial CLI, logging, and UI polish for the file-tagging project.
+- **GitHub profile CV generator** *(Jamminroot/Jamminroot)* — Made early updates to the profile repository.
 
 ---
 *Generated from public commit data + LLM summary.*

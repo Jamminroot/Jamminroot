@@ -18,9 +18,11 @@ The user's payload includes "today's date" — use it to derive the period label
 
 Skip a month or year entirely if there is no meaningful commit activity for it. Months always come before years in the output. Example output sequence for today = 2026 May: ["2026 May", "2026 Apr", "2026 Mar", "2026 Feb", "2025", "2024"].
 
-# Coverage rule (strict)
+# Coverage rule (STRICT, NON-NEGOTIABLE)
 
-Repos in the user's payload are sorted by importance, with a "weight" shown for each. You MUST cover the top 10 most-weighted repos that have commits in the window. Skipping a high-weight repo because it has no description, no recognisable theme, or uninformative commit messages is FORBIDDEN. For such repos, write a generic project-level description from the repo name + language alone (e.g., "Worked on the personal C++ project named MEMU3" — acceptable). Repos with weight 0 are NOT in the payload (already excluded).
+The user payload ends with a "MANDATORY COVERAGE" section listing specific repos. Your output JSON MUST contain at least one item with a matching \`repo\` field for EACH listed repo. Repos with no description, no recognisable theme, or uninformative commit messages STILL must be covered — write a generic project-level description from the repo name + language alone (e.g., "Worked on the personal C++ project named MEMU3" is acceptable). Skipping a mandatory repo is a failure of the task.
+
+Non-mandatory repos may be included or omitted at your discretion based on activity level.
 
 # Detail level (strict — HIGH-LEVEL ONLY, no implementation details)
 
@@ -130,6 +132,18 @@ function formatPayload(p: ProfileData): string {
       lines.push(`- ${c.date.slice(0, 10)}: ${c.headline}`);
     }
     lines.push("");
+  }
+
+  // Mandatory coverage section — explicit list the LLM must mention.
+  const mandatory = reposWithCommits.slice(0, 10);
+  if (mandatory.length > 0) {
+    lines.push("========================================");
+    lines.push("MANDATORY COVERAGE — output JSON MUST include at least one item with a matching `repo` field for EACH of these:");
+    for (const r of mandatory) {
+      lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, weight ${r.weight.toFixed(2)})`);
+    }
+    lines.push("If a repo has no description and uninformative commit messages, infer the project type from its name + language and write a brief generic item like 'Worked on the personal C++ project named X.' Do not omit any of these from the output.");
+    lines.push("========================================");
   }
 
   return lines.join("\n");

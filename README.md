@@ -6,4 +6,4 @@
 
 Make sure to check out my pinned projects, they are are quite handy and free.
 
-<img src="https://raw.githubusercontent.com/Jamminroot/jamminroot_profile_cards/master/cards/profile.svg" alt="Recent activity + stats">
+<img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/profile.svg" alt="Recent activity + stats">

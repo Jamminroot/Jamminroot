@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 952 938" width="952" height="938" role="img" aria-label="Jamminroot profile card">
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  .bg { fill: #ffffff; }
+  .panel { fill: #f6f8fa; }
+  .border { stroke: #d0d7de; }
+  .fg { fill: #1f2328; }
+  .muted { fill: #656d76; }
+  .accent { fill: #0969da; }
+  .accent2 { fill: #1f883d; }
+  @media (prefers-color-scheme: dark) {
+    .bg { fill: #0d1117; }
+    .panel { fill: #161b22; }
+    .border { stroke: #30363d; }
+    .fg { fill: #e6edf3; }
+    .muted { fill: #7d8590; }
+    .accent { fill: #58a6ff; }
+    .accent2 { fill: #3fb950; }
+  }
+</style>
+  <rect class="bg" x="0" y="0" width="952" height="938" rx="8" ry="8"/>
+  <g transform="translate(24, 24)"><text class="fg" x="0" y="14" font-size="16" font-weight="700">Recent activity</text>
+<text class="muted" x="600" y="14" font-size="10" text-anchor="end">updated 2026-05-09</text>
+<text class="muted" x="0" y="32" font-size="12">Active across personal Windows productivity tooling, Telegram automation</text>
+<text class="muted" x="0" y="50" font-size="12">for n8n, and a new Android LLM chat assistant. Long-running themes:</text>
+<text class="muted" x="0" y="68" font-size="12">developer tooling, side projects, and personal infrastructure.</text>
+<text class="accent" x="0" y="116" font-size="11" font-weight="600">2026 May</text>
+<circle class="accent" cx="70" cy="112" r="4"/>
+<text class="fg" x="86" y="136" font-size="13" font-weight="600">Custom GitHub profile cards generator</text>
+<text class="muted" x="600" y="136" font-size="10" text-anchor="end">Jamminroot/Jamminroot</text>
+<text class="muted" x="86" y="152" font-size="11">Built a profile-card generator for the GitHub README, replacing</text>
+<text class="muted" x="86" y="168" font-size="11">a third-party action.</text>
+<line class="border" x1="70" y1="116" x2="70" y2="180" stroke-width="1"/>
+<text class="accent" x="0" y="208" font-size="11" font-weight="600">2026 Apr</text>
+<circle class="accent" cx="70" cy="204" r="4"/>
+<text class="fg" x="86" y="228" font-size="13" font-weight="600">Mihomo proxy fork upkeep</text>
+<text class="muted" x="600" y="228" font-size="10" text-anchor="end">Jamminroot/Clash.Meta</text>
+<text class="muted" x="86" y="244" font-size="11">Maintained the Mihomo fork used by FlClash.</text>
+<line class="border" x1="70" y1="208" x2="70" y2="256" stroke-width="1"/>
+<text class="accent" x="0" y="284" font-size="11" font-weight="600">2026 Mar</text>
+<circle class="accent" cx="70" cy="280" r="4"/>
+<text class="fg" x="86" y="304" font-size="13" font-weight="600">Ozwil Android chat assistant</text>
+<text class="muted" x="600" y="304" font-size="10" text-anchor="end">Jamminroot/ozwil-api</text>
+<text class="muted" x="86" y="320" font-size="11">Started a new Android app paired with an ASP.NET Core backend</text>
+<text class="muted" x="86" y="336" font-size="11">for an LLM chat assistant.</text>
+<line class="border" x1="70" y1="284" x2="70" y2="348" stroke-width="1"/>
+<text class="accent" x="0" y="376" font-size="11" font-weight="600">2026 Feb</text>
+<circle class="accent" cx="70" cy="372" r="4"/>
+<text class="fg" x="86" y="396" font-size="13" font-weight="600">Telegram-automation node release</text>
+<text class="muted" x="600" y="396" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
+<text class="muted" x="86" y="412" font-size="11">Iterated on the Telegram automation node for n8n.</text>
+<text class="fg" x="86" y="440" font-size="13" font-weight="600">Windows Explorer file-tagging utility</text>
+<text class="muted" x="600" y="440" font-size="10" text-anchor="end">Jamminroot/intag</text>
+<text class="muted" x="86" y="456" font-size="11">Polished the file-tagging utility through to a Microsoft Store</text>
+<text class="muted" x="86" y="472" font-size="11">release.</text>
+<text class="fg" x="86" y="500" font-size="13" font-weight="600">Quick image-labeling utility</text>
+<text class="muted" x="600" y="500" font-size="10" text-anchor="end">Jamminroot/yolo-labeler</text>
+<text class="muted" x="86" y="516" font-size="11">Built a small on-host image labeling tool for personal projects.</text>
+<text class="fg" x="86" y="544" font-size="13" font-weight="600">Personal Neovim setup</text>
+<text class="muted" x="600" y="544" font-size="10" text-anchor="end">Jamminroot/.dotfiles</text>
+<text class="muted" x="86" y="560" font-size="11">Stood up a personal IDE configuration.</text>
+<line class="border" x1="70" y1="376" x2="70" y2="572" stroke-width="1"/>
+<text class="accent" x="0" y="600" font-size="11" font-weight="600">2026 Jan</text>
+<circle class="accent" cx="70" cy="596" r="4"/>
+<text class="fg" x="86" y="620" font-size="13" font-weight="600">Telegram-automation node stability</text>
+<text class="muted" x="600" y="620" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
+<text class="muted" x="86" y="636" font-size="11">Stability work on the Telegram automation node for n8n.</text>
+<line class="border" x1="70" y1="600" x2="70" y2="648" stroke-width="1"/>
+<text class="accent" x="0" y="676" font-size="11" font-weight="600">2025</text>
+<circle class="accent" cx="70" cy="672" r="4"/>
+<text class="fg" x="86" y="696" font-size="13" font-weight="600">Telegram automation foundations</text>
+<text class="muted" x="600" y="696" font-size="10" text-anchor="end">Jamminroot/n8n-nodes-telepilot-2</text>
+<text class="muted" x="86" y="712" font-size="11">Bootstrapped the Telegram-via-n8n integration as a maintained</text>
+<text class="muted" x="86" y="728" font-size="11">fork.</text>
+<text class="fg" x="86" y="756" font-size="13" font-weight="600">Windows file-tagging utility</text>
+<text class="muted" x="600" y="756" font-size="10" text-anchor="end">Jamminroot/intag</text>
+<text class="muted" x="86" y="772" font-size="11">Continued development of the Windows file-tagging utility.</text>
+<line class="border" x1="70" y1="676" x2="70" y2="784" stroke-width="1"/>
+<text class="accent" x="0" y="812" font-size="11" font-weight="600">2024</text>
+<circle class="accent" cx="70" cy="808" r="4"/>
+<text class="fg" x="86" y="832" font-size="13" font-weight="600">Personal projects and exploration</text>
+<text class="muted" x="86" y="848" font-size="11">General exploration and incremental work across personal</text>
+<text class="muted" x="86" y="864" font-size="11">repositories.</text>
+<line class="border" x1="70" y1="812" x2="70" y2="876" stroke-width="1"/></g>
+  <g transform="translate(648, 24)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">LANGUAGES BY COMMIT</text><text class="fg" x="0" y="36" font-size="11">TypeScript</text><text class="muted" x="280" y="36" font-size="10" text-anchor="end">32 · 47%</text><rect class="panel" x="0" y="40" width="280" height="6" rx="3" ry="3"/><rect x="0" y="40" width="131.76470588235293" height="6" rx="3" ry="3" fill="#3178c6"/><text class="fg" x="0" y="64" font-size="11">C#</text><text class="muted" x="280" y="64" font-size="10" text-anchor="end">20 · 29%</text><rect class="panel" x="0" y="68" width="280" height="6" rx="3" ry="3"/><rect x="0" y="68" width="82.3529411764706" height="6" rx="3" ry="3" fill="#178600"/><text class="fg" x="0" y="92" font-size="11">Lua</text><text class="muted" x="280" y="92" font-size="10" text-anchor="end">10 · 15%</text><rect class="panel" x="0" y="96" width="280" height="6" rx="3" ry="3"/><rect x="0" y="96" width="41.1764705882353" height="6" rx="3" ry="3" fill="#000080"/><text class="fg" x="0" y="120" font-size="11">HTML</text><text class="muted" x="280" y="120" font-size="10" text-anchor="end">5 · 7%</text><rect class="panel" x="0" y="124" width="280" height="6" rx="3" ry="3"/><rect x="0" y="124" width="20.58823529411765" height="6" rx="3" ry="3" fill="#e34c26"/><text class="fg" x="0" y="148" font-size="11">Go</text><text class="muted" x="280" y="148" font-size="10" text-anchor="end">1 · 1%</text><rect class="panel" x="0" y="152" width="280" height="6" rx="3" ry="3"/><rect x="0" y="152" width="4.117647058823529" height="6" rx="3" ry="3" fill="#00ADD8"/></g>
+  <g transform="translate(648, 208)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">COMMITS BY HOUR (UTC)</text><text class="muted" x="280" y="14" font-size="9" text-anchor="end">70 commits</text><rect class="accent" x="0" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="11.708333333333334" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="23.416666666666668" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="35.125" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="46.833333333333336" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="58.54166666666667" y="60" width="10.708333333333334" height="64" rx="1.5" ry="1.5" opacity="0.85"/><rect class="accent" x="70.25" y="81.33333333333334" width="10.708333333333334" height="42.666666666666664" rx="1.5" ry="1.5" opacity="0.75"/><rect class="accent" x="81.95833333333334" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="93.66666666666667" y="49.33333333333333" width="10.708333333333334" height="74.66666666666667" rx="1.5" ry="1.5" opacity="0.90"/><rect class="accent2" x="105.375" y="28" width="10.708333333333334" height="96" rx="1.5" ry="1.5" opacity="1.00"/><rect class="accent" x="117.08333333333334" y="113.33333333333333" width="10.708333333333334" height="10.666666666666666" rx="1.5" ry="1.5" opacity="0.60"/><rect class="accent" x="128.79166666666669" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="140.5" y="81.33333333333334" width="10.708333333333334" height="42.666666666666664" rx="1.5" ry="1.5" opacity="0.75"/><rect class="accent" x="152.20833333333334" y="102.66666666666667" width="10.708333333333334" height="21.333333333333332" rx="1.5" ry="1.5" opacity="0.65"/><rect class="accent" x="163.91666666666669" y="60" width="10.708333333333334" height="64" rx="1.5" ry="1.5" opacity="0.85"/><rect class="accent" x="175.625" y="70.66666666666666" width="10.708333333333334" height="53.333333333333336" rx="1.5" ry="1.5" opacity="0.80"/><rect class="accent" x="187.33333333333334" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><rect class="accent" x="199.04166666666669" y="102.66666666666667" width="10.708333333333334" height="21.333333333333332" rx="1.5" ry="1.5" opacity="0.65"/><rect class="accent" x="210.75" y="70.66666666666666" width="10.708333333333334" height="53.333333333333336" rx="1.5" ry="1.5" opacity="0.80"/><rect class="accent" x="222.45833333333334" y="81.33333333333334" width="10.708333333333334" height="42.666666666666664" rx="1.5" ry="1.5" opacity="0.75"/><rect class="accent" x="234.16666666666669" y="113.33333333333333" width="10.708333333333334" height="10.666666666666666" rx="1.5" ry="1.5" opacity="0.60"/><rect class="accent" x="245.875" y="28" width="10.708333333333334" height="96" rx="1.5" ry="1.5" opacity="1.00"/><rect class="accent" x="257.58333333333337" y="70.66666666666666" width="10.708333333333334" height="53.333333333333336" rx="1.5" ry="1.5" opacity="0.80"/><rect class="accent" x="269.2916666666667" y="124" width="10.708333333333334" height="0" rx="1.5" ry="1.5" opacity="0.55"/><text class="muted" x="5.354166666666667" y="136" font-size="9" text-anchor="middle">00</text><text class="muted" x="75.60416666666667" y="136" font-size="9" text-anchor="middle">06</text><text class="muted" x="145.85416666666666" y="136" font-size="9" text-anchor="middle">12</text><text class="muted" x="216.10416666666666" y="136" font-size="9" text-anchor="middle">18</text><text class="muted" x="0" y="152" font-size="10">peak hour</text><text class="fg" x="280" y="152" font-size="11" text-anchor="end" font-weight="600">09:00 UTC</text></g>
+  <g transform="translate(648, 394)"><text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">MONTHLY CONTRIBUTIONS</text><text class="muted" x="280" y="14" font-size="9" text-anchor="end">last 12 months</text><rect class="accent2" x="0" y="106.79207920792079" width="19.666666666666668" height="7.207920792079208" rx="2" ry="2" opacity="0.59"/><text class="muted" x="9.833333333333334" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="23.666666666666668" y="108.91749174917491" width="19.666666666666668" height="5.082508250825082" rx="2" ry="2" opacity="0.58"/><text class="muted" x="33.5" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="47.333333333333336" y="106.6996699669967" width="19.666666666666668" height="7.3003300330033" rx="2" ry="2" opacity="0.59"/><text class="muted" x="57.16666666666667" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="71" y="109.93399339933994" width="19.666666666666668" height="4.0660066006600655" rx="2" ry="2" opacity="0.57"/><text class="muted" x="80.83333333333333" y="126" font-size="8" text-anchor="middle">S</text><rect class="accent2" x="94.66666666666667" y="107.9009900990099" width="19.666666666666668" height="6.099009900990099" rx="2" ry="2" opacity="0.58"/><text class="muted" x="104.5" y="126" font-size="8" text-anchor="middle">O</text><rect class="accent2" x="118.33333333333334" y="106.60726072607261" width="19.666666666666668" height="7.392739273927393" rx="2" ry="2" opacity="0.59"/><text class="muted" x="128.16666666666669" y="126" font-size="8" text-anchor="middle">N</text><rect class="accent2" x="142" y="98.66006600660066" width="19.666666666666668" height="15.33993399339934" rx="2" ry="2" opacity="0.63"/><text class="muted" x="151.83333333333334" y="126" font-size="8" text-anchor="middle">D</text><rect class="accent2" x="165.66666666666669" y="100.23102310231023" width="19.666666666666668" height="13.768976897689768" rx="2" ry="2" opacity="0.62"/><text class="muted" x="175.50000000000003" y="126" font-size="8" text-anchor="middle">J</text><rect class="accent2" x="189.33333333333334" y="63.45214521452145" width="19.666666666666668" height="50.54785478547855" rx="2" ry="2" opacity="0.82"/><text class="muted" x="199.16666666666669" y="126" font-size="8" text-anchor="middle">F</text><rect class="accent2" x="213" y="30" width="19.666666666666668" height="84" rx="2" ry="2" opacity="1.00"/><text class="muted" x="222.83333333333334" y="126" font-size="8" text-anchor="middle">M</text><rect class="accent2" x="236.66666666666669" y="98.47524752475248" width="19.666666666666668" height="15.524752475247524" rx="2" ry="2" opacity="0.63"/><text class="muted" x="246.50000000000003" y="126" font-size="8" text-anchor="middle">A</text><rect class="accent2" x="260.33333333333337" y="110.3036303630363" width="19.666666666666668" height="3.6963696369636967" rx="2" ry="2" opacity="0.57"/><text class="muted" x="270.1666666666667" y="126" font-size="8" text-anchor="middle">M</text><text class="muted" x="0" y="142" font-size="10">total</text><text class="fg" x="280" y="142" font-size="11" text-anchor="end" font-weight="600">2,381</text></g>
+</svg>

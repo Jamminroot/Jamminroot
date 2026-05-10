@@ -40,6 +40,6 @@ jobs:
               exit 0
             fi
             echo "push rejected on attempt $attempt; pulling and retrying"
-            git pull --rebase --autostash || exit 1
+            git pull --rebase -X ours --autostash || exit 1
           done
           exit 1

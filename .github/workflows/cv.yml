@@ -38,13 +38,14 @@ jobs:
             exit 0
           fi
           git commit -m "Update CV timeline"
-          # Retry push with rebase if remote moved (parallel run from cards.yml)
+          # Retry push if remote moved (parallel run from cards.yml). On conflict, prefer
+          # our regenerated artifacts (-X ours) since they're the freshest output.
           for attempt in 1 2 3; do
             if git push; then
               exit 0
             fi
             echo "push rejected on attempt $attempt; pulling and retrying"
-            git pull --rebase --autostash || exit 1
+            git pull --rebase -X ours --autostash || exit 1
           done
           echo "push still failing after retries"
           exit 1

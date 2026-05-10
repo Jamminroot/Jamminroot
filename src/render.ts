@@ -213,23 +213,26 @@ function projectHeatmapBlock(p: ProfileData, fullWidth: number): Block {
   rows.forEach((row, i) => {
     const y = headerH + i * rowH;
     const max = Math.max(1, ...row.counts);
-    // If we have no per-week data but the row is known active, render a uniform low fill so the
-    // row reads as "present, but commit timestamps weren't accessible".
     const noWeeklyData = row.fetchedTotal === 0 && row.reportedTotal > 0;
     out.push(
       `<text class="fg" x="0" y="${y + cellH / 2 + 5}" font-size="11">${esc(trunc(row.key, 16))}</text>`,
     );
     if (noWeeklyData) {
+      // No per-week data — draw a single faint bar across the row plus a count label.
       out.push(
         `<text class="muted" x="0" y="${y + cellH / 2 + 16}" font-size="8">${row.reportedTotal} commits</text>`,
       );
+      const fullW = NUM_WEEKS * cellW + (NUM_WEEKS - 1) * cellGap;
+      out.push(
+        `<rect ${row.fillAttr} x="${labelW.toFixed(2)}" y="${y}" width="${fullW.toFixed(2)}" height="${cellH}" rx="3" ry="3" opacity="0.18"/>`,
+      );
+      return;
     }
+    // Normal row — only paint cells with activity (per-row normalisation).
     row.counts.forEach((count, w) => {
+      if (count === 0) return;
       const x = labelW + w * (cellW + cellGap);
-      let opacity: number;
-      if (noWeeklyData) opacity = 0.18;
-      else if (count === 0) opacity = 0.06;
-      else opacity = 0.25 + (count / max) * 0.75;
+      const opacity = 0.3 + (count / max) * 0.7;
       out.push(
         `<rect ${row.fillAttr} x="${x.toFixed(2)}" y="${y}" width="${cellW.toFixed(2)}" height="${cellH}" rx="1.5" ry="1.5" opacity="${opacity.toFixed(2)}"/>`,
       );

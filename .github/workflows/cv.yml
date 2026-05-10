@@ -34,7 +34,16 @@ jobs:
           git add cards/cv.json cards/charts.svg cards/cv.pdf CV.md README.md career.json
           if git diff --staged --quiet; then
             echo "no changes"
-          else
-            git commit -m "Update CV timeline"
-            git push
+            exit 0
           fi
+          git commit -m "Update CV timeline"
+          # Retry push with rebase if remote moved (parallel run from cards.yml)
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected on attempt $attempt; pulling and retrying"
+            git pull --rebase --autostash || exit 1
+          done
+          echo "push still failing after retries"
+          exit 1

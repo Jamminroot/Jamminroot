@@ -31,7 +31,14 @@ jobs:
           git add cards/charts.svg
           if git diff --staged --quiet; then
             echo "no changes"
-          else
-            git commit -m "Update activity charts"
-            git push
+            exit 0
           fi
+          git commit -m "Update activity charts"
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected on attempt $attempt; pulling and retrying"
+            git pull --rebase --autostash || exit 1
+          done
+          exit 1

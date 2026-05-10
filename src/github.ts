@@ -218,12 +218,12 @@ type AccessibleReposQuery = {
 };
 
 const COMMITS_QUERY = `
-  query RepoCommits($owner: String!, $name: String!, $authorId: ID!, $since: GitTimestamp!, $cursor: String) {
+  query RepoCommits($owner: String!, $name: String!, $authorId: ID, $emails: [String!], $since: GitTimestamp!, $cursor: String) {
     repository(owner: $owner, name: $name) {
       defaultBranchRef {
         target {
           ... on Commit {
-            history(first: 100, author: {id: $authorId}, since: $since, after: $cursor) {
+            history(first: 100, author: {id: $authorId, emails: $emails}, since: $since, after: $cursor) {
               pageInfo { hasNextPage endCursor }
               nodes { committedDate messageHeadline }
             }
@@ -237,14 +237,22 @@ const COMMITS_QUERY = `
 async function fetchRepoCommits(
   owner: string,
   name: string,
-  authorId: string,
+  authorId: string | null,
+  emails: string[] | null,
   since: string,
   maxPages = 3,
 ): Promise<CommitInfo[]> {
   const out: CommitInfo[] = [];
   let cursor: string | null = null;
   for (let page = 0; page < maxPages; page++) {
-    const data: CommitsQuery = await gql(COMMITS_QUERY, { owner, name, authorId, since, cursor });
+    const data: CommitsQuery = await gql(COMMITS_QUERY, {
+      owner,
+      name,
+      authorId,
+      emails,
+      since,
+      cursor,
+    });
     const branch = data.repository.defaultBranchRef;
     if (!branch) break;
     for (const node of branch.target.history.nodes) {
@@ -300,6 +308,11 @@ export async function fetchProfile(
 
   const weightsConfig = parseWeightsConfig();
   const sinceISO = new Date(Date.now() - sinceDays * 24 * 3600 * 1000).toISOString();
+  const emails = process.env.AUTHOR_EMAILS
+    ?.split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const authorEmails = emails && emails.length > 0 ? emails : null;
 
   // Public repos with known commit counts from contributionsCollection.
   const publicBare: RepoBare[] = cc.commitContributionsByRepository.map((entry) => ({
@@ -330,7 +343,15 @@ export async function fetchProfile(
     const mult = multiplierFor(r.nameWithOwner, weightsConfig.rules);
     if (mult <= 0) continue;
     const [owner, name] = r.nameWithOwner.split("/");
-    const recentCommits = await fetchRepoCommits(owner, name, user.id, sinceISO);
+    // Use emails-only filter when AUTHOR_EMAILS is set (GitHub treats id+emails as AND, not OR).
+    // User is responsible for listing every commit-email they use across accounts.
+    const recentCommits = await fetchRepoCommits(
+      owner,
+      name,
+      authorEmails ? null : user.id,
+      authorEmails,
+      sinceISO,
+    );
     if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
     const totalCommits = r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length;
     const weight = applyWeightFn(totalCommits, weightsConfig.fn) * mult;

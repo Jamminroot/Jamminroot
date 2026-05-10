@@ -24,11 +24,12 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           USERNAME: ${{ github.repository_owner }}
           REPO_WEIGHTS: ${{ vars.REPO_WEIGHTS }}
+          WORK_REPO_REGEX: ${{ vars.WORK_REPO_REGEX }}
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cards/cv.json cards/profile.svg CV.md
+          git add cards/cv.json cards/charts.svg cards/timeline.svg CV.md README.md
           if git diff --staged --quiet; then
             echo "no changes"
           else

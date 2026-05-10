@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 1546" width="920" height="1546" role="img" aria-label="jamminroot activity timeline">
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  .bg { fill: #ffffff; }
+  .panel { fill: #f6f8fa; }
+  .border { stroke: #d0d7de; }
+  .fg { fill: #1f2328; }
+  .muted { fill: #656d76; }
+  .accent { fill: #0969da; }
+  .accent2 { fill: #1f883d; }
+  .work { fill: #6b21a8; }
+  @media (prefers-color-scheme: dark) {
+    .bg { fill: #0d1117; }
+    .panel { fill: #161b22; }
+    .border { stroke: #30363d; }
+    .fg { fill: #e6edf3; }
+    .muted { fill: #7d8590; }
+    .accent { fill: #58a6ff; }
+    .accent2 { fill: #3fb950; }
+    .work { fill: #a855f7; }
+  }
+</style>
+  <rect class="bg" x="0" y="0" width="920" height="1546" rx="8" ry="8"/>
+  <g transform="translate(32, 32)"><text class="fg" x="0" y="22" font-size="22" font-weight="700">Activity timeline</text>
+  <text class="muted" x="856" y="22" font-size="12" text-anchor="end">updated 2026-05-09</text>
+  <text class="accent" x="0" y="62" font-size="14" font-weight="600">2026 May</text>
+  <circle class="accent" cx="100" cy="57" r="5"/>
+  <text class="fg" x="124" y="90" font-size="16" font-weight="600">Profile card generator and CV automation</text>
+  <text class="muted" x="856" y="90" font-size="12" text-anchor="end">Jamminroot</text>
+  <text class="muted" x="124" y="112" font-size="13">Built a custom GitHub profile CV workflow generator producing timeline and sidebar cards.</text>
+  <text class="fg" x="124" y="146" font-size="16" font-weight="600">Profile card rendering engine</text>
+  <text class="muted" x="856" y="146" font-size="12" text-anchor="end">jamminroot_profile_cards</text>
+  <text class="muted" x="124" y="168" font-size="13">Developed a card renderer that outputs combined profile SVG with light/dark theme support.</text>
+  <text class="fg" x="124" y="202" font-size="16" font-weight="600">Crypto AI trading platform</text>
+  <text class="muted" x="856" y="202" font-size="12" text-anchor="end">summit</text>
+  <text class="muted" x="124" y="224" font-size="13">Worked on a SaaS algorithmic crypto trading platform incorporating AI and neural network models.</text>
+  <text class="fg" x="124" y="258" font-size="16" font-weight="600">Archived trading platform iteration</text>
+  <text class="muted" x="856" y="258" font-size="12" text-anchor="end">summit-2-archive-use-regular-instead</text>
+  <text class="muted" x="124" y="280" font-size="13">Maintained an archive version of the crypto trading platform with earlier model experiments.</text>
+  <line class="border" x1="100" y1="62" x2="100" y2="290" stroke-width="1"/>
+  <text class="accent" x="0" y="330" font-size="14" font-weight="600">2026 Apr</text>
+  <circle class="accent" cx="100" cy="325" r="5"/>
+  <text class="fg" x="124" y="358" font-size="16" font-weight="600">FlClash proxy fork</text>
+  <text class="muted" x="856" y="358" font-size="12" text-anchor="end">Clash.Meta</text>
+  <text class="muted" x="124" y="380" font-size="13">Added XHTTP support to a Mihomo fork for the FlClash proxy client.</text>
+  <text class="fg" x="124" y="414" font-size="16" font-weight="600">ESP32-S3 HID firmware</text>
+  <text class="muted" x="856" y="414" font-size="12" text-anchor="end">j-uni-hid</text>
+  <text class="muted" x="124" y="436" font-size="13">Continued work on feature-rich mouse and keyboard emulation firmware for ESP32-S3.</text>
+  <text class="fg" x="124" y="470" font-size="16" font-weight="600">Crypto price prediction modeling</text>
+  <text class="muted" x="856" y="470" font-size="12" text-anchor="end">crypto-model-research</text>
+  <text class="muted" x="124" y="492" font-size="13">Researched and developed cryptocurrency price prediction models in Python.</text>
+  <line class="border" x1="100" y1="330" x2="100" y2="502" stroke-width="1"/>
+  <text class="accent" x="0" y="542" font-size="14" font-weight="600">2026 Feb</text>
+  <circle class="accent" cx="100" cy="537" r="5"/>
+  <text class="fg" x="124" y="570" font-size="16" font-weight="600">TelePilot n8n node fork</text>
+  <text class="muted" x="856" y="570" font-size="12" text-anchor="end">n8n-nodes-telepilot-2</text>
+  <text class="muted" x="124" y="592" font-size="13">Enhanced a Telegram automation node for n8n workflows, improving session handling and CI stability.</text>
+  <text class="fg" x="124" y="626" font-size="16" font-weight="600">Windows file tagging utility</text>
+  <text class="muted" x="856" y="626" font-size="12" text-anchor="end">intag</text>
+  <text class="muted" x="124" y="648" font-size="13">Polished and released v2 of the Windows Explorer file tagging tool, adding metadata support and</text>
+  <text class="muted" x="124" y="666" font-size="13">Store submission.</text>
+  <text class="fg" x="124" y="700" font-size="16" font-weight="600">Neovim IDE configuration</text>
+  <text class="muted" x="856" y="700" font-size="12" text-anchor="end">.dotfiles</text>
+  <text class="muted" x="124" y="722" font-size="13">Maintained a personal Neovim setup with LSP, treesitter, and remote session improvements.</text>
+  <text class="fg" x="124" y="756" font-size="16" font-weight="600">YOLO annotation tool</text>
+  <text class="muted" x="856" y="756" font-size="12" text-anchor="end">yolo-labeler</text>
+  <text class="muted" x="124" y="778" font-size="13">Built a lightweight, browser-based YOLO image labeling utility for personal projects.</text>
+  <line class="border" x1="100" y1="542" x2="100" y2="788" stroke-width="1"/>
+  <text class="accent" x="0" y="828" font-size="14" font-weight="600">2026 Jan</text>
+  <circle class="accent" cx="100" cy="823" r="5"/>
+  <text class="fg" x="124" y="856" font-size="16" font-weight="600">Windows file tagging utility release prep</text>
+  <text class="muted" x="856" y="856" font-size="12" text-anchor="end">intag</text>
+  <text class="muted" x="124" y="878" font-size="13">Prepared v2 release of the Windows Explorer file tagging tool for Microsoft Store submission.</text>
+  <text class="fg" x="124" y="912" font-size="16" font-weight="600">Android LLM assistant</text>
+  <text class="muted" x="856" y="912" font-size="12" text-anchor="end">ozwil-android</text>
+  <text class="muted" x="124" y="934" font-size="13">Worked on an Android assistant using large language models with on-device phone interaction</text>
+  <text class="muted" x="124" y="952" font-size="13">capabilities.</text>
+  <text class="fg" x="124" y="986" font-size="16" font-weight="600">AI coding agent</text>
+  <text class="muted" x="856" y="986" font-size="12" text-anchor="end">auto-claude</text>
+  <text class="muted" x="124" y="1008" font-size="13">Built an autonomous multi-session AI coding tool for iterative development.</text>
+  <text class="fg" x="124" y="1042" font-size="16" font-weight="600">Freqtrade trading strategies</text>
+  <text class="muted" x="856" y="1042" font-size="12" text-anchor="end">freqtrade_startegies</text>
+  <text class="muted" x="124" y="1064" font-size="13">Developed custom algorithmic trading strategies for the Freqtrade bot framework.</text>
+  <line class="border" x1="100" y1="828" x2="100" y2="1074" stroke-width="1"/>
+  <text class="accent" x="0" y="1114" font-size="14" font-weight="600">2025</text>
+  <circle class="accent" cx="100" cy="1109" r="5"/>
+  <text class="fg" x="124" y="1142" font-size="16" font-weight="600">TelePilot n8n node integration</text>
+  <text class="muted" x="856" y="1142" font-size="12" text-anchor="end">n8n-nodes-telepilot-2</text>
+  <text class="muted" x="124" y="1164" font-size="13">Started the TelePilot2 n8n integration project with Docker deployment and session management.</text>
+  <text class="fg" x="124" y="1198" font-size="16" font-weight="600">Poker computer vision experiments</text>
+  <text class="muted" x="856" y="1198" font-size="12" text-anchor="end">poker-cv</text>
+  <text class="muted" x="124" y="1220" font-size="13">Explored computer vision techniques for analyzing online poker platform interactions.</text>
+  <text class="fg" x="124" y="1254" font-size="16" font-weight="600">Windows Explorer tagging utility v2</text>
+  <text class="muted" x="856" y="1254" font-size="12" text-anchor="end">intag2</text>
+  <text class="muted" x="124" y="1276" font-size="13">Worked on an enhanced version of the Windows file tagging tool with a polished UI and style</text>
+  <text class="muted" x="124" y="1294" font-size="13">improvements.</text>
+  <line class="border" x1="100" y1="1114" x2="100" y2="1304" stroke-width="1"/>
+  <text class="accent" x="0" y="1344" font-size="14" font-weight="600">2024</text>
+  <circle class="accent" cx="100" cy="1339" r="5"/>
+  <text class="fg" x="124" y="1372" font-size="16" font-weight="600">GitHub profile setup</text>
+  <text class="muted" x="856" y="1372" font-size="12" text-anchor="end">Jamminroot</text>
+  <text class="muted" x="124" y="1394" font-size="13">Set up initial personal GitHub profile README with introductory content.</text>
+  <text class="fg" x="124" y="1428" font-size="16" font-weight="600">Windows file tagging utility launch</text>
+  <text class="muted" x="856" y="1428" font-size="12" text-anchor="end">intag</text>
+  <text class="muted" x="124" y="1450" font-size="13">Released the first version of the Windows Explorer tagging tool with CLI and graphical interface.</text>
+  <line class="border" x1="100" y1="1344" x2="100" y2="1460" stroke-width="1"/></g>
+</svg>

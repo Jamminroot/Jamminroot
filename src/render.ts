@@ -10,6 +10,7 @@ const STYLE = `
   .muted { fill: #656d76; }
   .accent { fill: #0969da; }
   .accent2 { fill: #1f883d; }
+  .work { fill: #6b21a8; }
   @media (prefers-color-scheme: dark) {
     .bg { fill: #0d1117; }
     .panel { fill: #161b22; }
@@ -18,6 +19,7 @@ const STYLE = `
     .muted { fill: #7d8590; }
     .accent { fill: #58a6ff; }
     .accent2 { fill: #3fb950; }
+    .work { fill: #a855f7; }
   }
 `;
 
@@ -81,10 +83,164 @@ function wrapText(text: string, maxChars: number, maxLines = 99): string[] {
   return lines;
 }
 
+function displayRepo(nameWithOwner: string, login: string): string {
+  const slash = nameWithOwner.indexOf("/");
+  if (slash < 0) return nameWithOwner;
+  const owner = nameWithOwner.slice(0, slash);
+  return owner.toLowerCase() === login.toLowerCase() ? nameWithOwner.slice(slash + 1) : nameWithOwner;
+}
+
+function buildWorkRegex(): RegExp {
+  const raw = process.env.WORK_REPO_REGEX?.trim();
+  if (!raw) return /hint-|deeplay-io|zaxe-|-zaxe/i;
+  try {
+    return new RegExp(raw, "i");
+  } catch (e) {
+    console.warn(`WORK_REPO_REGEX is not valid; using default: ${e}`);
+    return /hint-|deeplay-io|zaxe-|-zaxe/i;
+  }
+}
+const WORK_REGEX = buildWorkRegex();
+function isWorkRepo(name: string): boolean {
+  return WORK_REGEX.test(name);
+}
+
+function fallbackColor(name: string): string {
+  let h = 0;
+  for (const c of name) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return `hsl(${h % 360}, 55%, 50%)`;
+}
+
 type Block = { content: string; width: number; height: number };
 
-function sectionTitle(text: string, width: number): string {
-  return `<text class="muted" x="0" y="14" font-size="10" letter-spacing="0.1em">${esc(text.toUpperCase())}</text>`;
+function sectionTitle(text: string): string {
+  return `<text class="muted" x="0" y="14" font-size="11" letter-spacing="0.1em">${esc(text.toUpperCase())}</text>`;
+}
+
+const SIDEBAR_W = 280;
+
+// ---------- Project activity heatmap ----------
+
+const NUM_WEEKS = 52;
+
+type ActivityRow = {
+  key: string;
+  fillAttr: string; // either fill="#hex" or class="work"
+  counts: number[];
+  total: number;
+};
+
+function buildActivityRows(p: ProfileData): ActivityRow[] {
+  const work: ActivityRow = {
+    key: "Work",
+    fillAttr: 'class="work"',
+    counts: new Array(NUM_WEEKS).fill(0),
+    total: 0,
+  };
+  const personalMap = new Map<string, ActivityRow>();
+  const now = Date.now();
+  const sinceMs = now - NUM_WEEKS * 7 * 24 * 3600 * 1000;
+
+  for (const r of p.repos) {
+    let row: ActivityRow;
+    if (isWorkRepo(r.nameWithOwner)) {
+      row = work;
+    } else {
+      const display = displayRepo(r.nameWithOwner, p.login);
+      let existing = personalMap.get(display);
+      if (!existing) {
+        const color = r.language?.color ?? fallbackColor(r.nameWithOwner);
+        existing = {
+          key: display,
+          fillAttr: `fill="${color}"`,
+          counts: new Array(NUM_WEEKS).fill(0),
+          total: 0,
+        };
+        personalMap.set(display, existing);
+      }
+      row = existing;
+    }
+
+    for (const c of r.recentCommits) {
+      const t = new Date(c.date).getTime();
+      if (Number.isNaN(t) || t < sinceMs) continue;
+      const weeksAgo = Math.floor((now - t) / (7 * 24 * 3600 * 1000));
+      const idx = NUM_WEEKS - 1 - weeksAgo;
+      if (idx >= 0 && idx < NUM_WEEKS) {
+        row.counts[idx]++;
+        row.total++;
+      }
+    }
+  }
+
+  const personal = [...personalMap.values()]
+    .filter((r) => r.total > 0)
+    .sort((a, b) => b.total - a.total);
+  const all = work.total > 0 ? [work, ...personal] : personal;
+  return all.slice(0, 9);
+}
+
+function projectHeatmapBlock(p: ProfileData, fullWidth: number): Block {
+  const rows = buildActivityRows(p);
+  const labelW = 110;
+  const cellGap = 1;
+  const headerH = 30;
+  const footerH = 22;
+  const rowH = 22;
+  const cellW = (fullWidth - labelW - (NUM_WEEKS - 1) * cellGap) / NUM_WEEKS;
+  const cellH = rowH - 6;
+
+  const out: string[] = [sectionTitle("project activity · last 12 months")];
+
+  if (rows.length === 0) {
+    out.push(
+      `<text class="muted" x="${fullWidth / 2}" y="${headerH + 30}" font-size="11" text-anchor="middle">No commit history available.</text>`,
+    );
+    return { content: out.join(""), width: fullWidth, height: headerH + 60 };
+  }
+
+  rows.forEach((row, i) => {
+    const y = headerH + i * rowH;
+    const max = Math.max(1, ...row.counts);
+    out.push(
+      `<text class="fg" x="0" y="${y + cellH / 2 + 5}" font-size="11">${esc(trunc(row.key, 16))}</text>`,
+    );
+    row.counts.forEach((count, w) => {
+      const x = labelW + w * (cellW + cellGap);
+      const opacity = count === 0 ? 0.06 : 0.25 + (count / max) * 0.75;
+      out.push(
+        `<rect ${row.fillAttr} x="${x.toFixed(2)}" y="${y}" width="${cellW.toFixed(2)}" height="${cellH}" rx="1.5" ry="1.5" opacity="${opacity.toFixed(2)}"/>`,
+      );
+    });
+  });
+
+  // Month labels at bottom — show first week of each calendar month.
+  const labelsY = headerH + rows.length * rowH + footerH / 2 + 6;
+  const now = new Date();
+  const monthMarkers: { weekIdx: number; label: string }[] = [];
+  let lastMonthShown = -1;
+  for (let i = 0; i < NUM_WEEKS; i++) {
+    const date = new Date(now.getTime() - (NUM_WEEKS - 1 - i) * 7 * 24 * 3600 * 1000);
+    if (date.getUTCMonth() !== lastMonthShown) {
+      lastMonthShown = date.getUTCMonth();
+      monthMarkers.push({
+        weekIdx: i,
+        label: date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
+      });
+    }
+  }
+  const stride = Math.max(1, Math.ceil(monthMarkers.length / 6));
+  monthMarkers
+    .filter((_, idx) => idx % stride === 0)
+    .forEach((m) => {
+      const x = labelW + m.weekIdx * (cellW + cellGap) + cellW / 2;
+      out.push(
+        `<text class="muted" x="${x.toFixed(2)}" y="${labelsY}" font-size="9" text-anchor="middle">${esc(m.label)}</text>`,
+      );
+    });
+
+  const totalH = headerH + rows.length * rowH + footerH;
+  return { content: out.join(""), width: fullWidth, height: totalH };
 }
 
 // ---------- Languages block ----------
@@ -106,8 +262,6 @@ function aggregateLanguages(
     .sort((a, b) => b.weight - a.weight);
 }
 
-const SIDEBAR_W = 280;
-
 function languagesBlock(p: ProfileData): Block {
   const langs = aggregateLanguages(p.repos).slice(0, 6);
   const totalWeight = langs.reduce((s, l) => s + l.weight, 0) || 1;
@@ -115,13 +269,13 @@ function languagesBlock(p: ProfileData): Block {
   const rowH = 28;
   const height = headerH + langs.length * rowH;
 
-  const out: string[] = [sectionTitle("languages by commit", SIDEBAR_W)];
+  const out: string[] = [sectionTitle("languages by commit")];
   langs.forEach((l, i) => {
     const y = headerH + i * rowH;
     const pct = ((l.weight / totalWeight) * 100).toFixed(0);
     const barW = (l.weight / totalWeight) * SIDEBAR_W;
     out.push(
-      `<text class="fg" x="0" y="${y + 12}" font-size="11">${esc(trunc(l.name, 18))}</text>`,
+      `<text class="fg" x="0" y="${y + 12}" font-size="12">${esc(trunc(l.name, 18))}</text>`,
       `<text class="muted" x="${SIDEBAR_W}" y="${y + 12}" font-size="10" text-anchor="end">${l.commits} · ${pct}%</text>`,
       `<rect class="panel" x="0" y="${y + 16}" width="${SIDEBAR_W}" height="6" rx="3" ry="3"/>`,
       `<rect x="0" y="${y + 16}" width="${barW}" height="6" rx="3" ry="3" fill="${l.color}"/>`,
@@ -158,7 +312,7 @@ function hoursBlock(p: ProfileData): Block {
   const footerH = 28;
   const height = headerH + barAreaH + labelH + footerH;
 
-  const out: string[] = [sectionTitle("commits by hour (utc)", SIDEBAR_W)];
+  const out: string[] = [sectionTitle("commits by hour (utc)")];
   out.push(
     `<text class="muted" x="${SIDEBAR_W}" y="14" font-size="9" text-anchor="end">${total} commits</text>`,
   );
@@ -185,8 +339,8 @@ function hoursBlock(p: ProfileData): Block {
   }
   if (total > 0) {
     out.push(
-      `<text class="muted" x="0" y="${headerH + barAreaH + labelH + 14}" font-size="10">peak hour</text>`,
-      `<text class="fg" x="${SIDEBAR_W}" y="${headerH + barAreaH + labelH + 14}" font-size="11" text-anchor="end" font-weight="600">${peak.toString().padStart(2, "0")}:00 UTC</text>`,
+      `<text class="muted" x="0" y="${headerH + barAreaH + labelH + 14}" font-size="11">peak hour</text>`,
+      `<text class="fg" x="${SIDEBAR_W}" y="${headerH + barAreaH + labelH + 14}" font-size="12" text-anchor="end" font-weight="600">${peak.toString().padStart(2, "0")}:00 UTC</text>`,
     );
   }
 
@@ -217,12 +371,12 @@ function monthlyBlock(p: ProfileData): Block {
   const months = monthlyBuckets(p.contributionDays);
   const max = Math.max(1, ...months.map((m) => m.count));
   const headerH = 24;
-  const barAreaH = 90;
+  const barAreaH = 100;
   const labelH = 14;
   const footerH = 28;
   const height = headerH + barAreaH + labelH + footerH;
 
-  const out: string[] = [sectionTitle("monthly contributions", SIDEBAR_W)];
+  const out: string[] = [sectionTitle("monthly contributions")];
   out.push(
     `<text class="muted" x="${SIDEBAR_W}" y="14" font-size="9" text-anchor="end">last 12 months</text>`,
   );
@@ -237,141 +391,125 @@ function monthlyBlock(p: ProfileData): Block {
     const bx = i * (bw + gap);
     out.push(
       `<rect class="accent2" x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="2" ry="2" opacity="${(0.55 + ratio * 0.45).toFixed(2)}"/>`,
-      `<text class="muted" x="${bx + bw / 2}" y="${baseY + 12}" font-size="8" text-anchor="middle">${m.label[0]}</text>`,
+      `<text class="muted" x="${bx + bw / 2}" y="${baseY + 12}" font-size="9" text-anchor="middle">${m.label[0]}</text>`,
     );
   });
 
   const total = months.reduce((s, m) => s + m.count, 0);
   out.push(
-    `<text class="muted" x="0" y="${headerH + barAreaH + labelH + 14}" font-size="10">total</text>`,
-    `<text class="fg" x="${SIDEBAR_W}" y="${headerH + barAreaH + labelH + 14}" font-size="11" text-anchor="end" font-weight="600">${total.toLocaleString()}</text>`,
+    `<text class="muted" x="0" y="${headerH + barAreaH + labelH + 14}" font-size="11">total</text>`,
+    `<text class="fg" x="${SIDEBAR_W}" y="${headerH + barAreaH + labelH + 14}" font-size="12" text-anchor="end" font-weight="600">${total.toLocaleString()}</text>`,
   );
 
   return { content: out.join(""), width: SIDEBAR_W, height };
 }
 
-// ---------- CV / Timeline block ----------
+// ---------- Charts SVG ----------
 
-const CV_W = 600;
+const CHARTS_W = 920;
+const CHARTS_PAD = 24;
+const CHARTS_INNER = CHARTS_W - CHARTS_PAD * 2;
+const CHARTS_GAP = 16;
 
-function displayRepo(nameWithOwner: string, login: string): string {
-  const slash = nameWithOwner.indexOf("/");
-  if (slash < 0) return nameWithOwner;
-  const owner = nameWithOwner.slice(0, slash);
-  return owner.toLowerCase() === login.toLowerCase() ? nameWithOwner.slice(slash + 1) : nameWithOwner;
-}
-
-function cvBlock(t: Timeline, login: string): Block {
-  const out: string[] = [];
-  let y = 0;
-
-  out.push(
-    `<text class="fg" x="0" y="${y + 14}" font-size="16" font-weight="700">Recent activity</text>`,
-    `<text class="muted" x="${CV_W}" y="${y + 14}" font-size="10" text-anchor="end">updated ${esc(t.generatedAt)}</text>`,
-  );
-  y += 32;
-
-  if (t.summary) {
-    const lines = wrapText(t.summary, 72, 4);
-    lines.forEach((line, i) => {
-      out.push(
-        `<text class="muted" x="0" y="${y + i * 18}" font-size="12">${esc(line)}</text>`,
-      );
-    });
-    y += lines.length * 18 + 16;
-  }
-
-  const railX = 70;
-  const dotR = 4;
-  for (const period of t.periods) {
-    const periodY = y + 14;
-    out.push(
-      `<text class="accent" x="0" y="${periodY}" font-size="11" font-weight="600">${esc(period.period)}</text>`,
-      `<circle class="accent" cx="${railX}" cy="${periodY - 4}" r="${dotR}"/>`,
-    );
-    const periodStartY = y;
-    y += 22;
-
-    for (const item of period.items) {
-      const titleY = y + 12;
-      out.push(
-        `<text class="fg" x="${railX + 16}" y="${titleY}" font-size="13" font-weight="600">${esc(trunc(item.title, 48))}</text>`,
-      );
-      if (item.repo) {
-        out.push(
-          `<text class="muted" x="${CV_W}" y="${titleY}" font-size="10" text-anchor="end">${esc(trunc(displayRepo(item.repo, login), 36))}</text>`,
-        );
-      }
-      const descLines = wrapText(item.description, 64, 4);
-      descLines.forEach((line, i) => {
-        out.push(
-          `<text class="muted" x="${railX + 16}" y="${titleY + 16 + i * 16}" font-size="11">${esc(line)}</text>`,
-        );
-      });
-      y += 18 + descLines.length * 16 + 10;
-    }
-
-    out.push(
-      `<line class="border" x1="${railX}" y1="${periodStartY + 14}" x2="${railX}" y2="${y - 4}" stroke-width="1"/>`,
-    );
-    y += 10;
-  }
-
-  return { content: out.join("\n"), width: CV_W, height: y };
-}
-
-// ---------- Combined profile SVG ----------
-
-const GAP = 24;
-const PAD = 24;
-const SIDEBAR_GAP = 20;
-
-export function renderProfile(p: ProfileData, t: Timeline): string {
-  const cv = cvBlock(t, p.login);
+export function renderCharts(p: ProfileData): string {
+  const heat = projectHeatmapBlock(p, CHARTS_INNER);
   const lang = languagesBlock(p);
   const hrs = hoursBlock(p);
   const mo = monthlyBlock(p);
 
-  const sidebarH = lang.height + SIDEBAR_GAP + hrs.height + SIDEBAR_GAP + mo.height;
-  const innerH = Math.max(cv.height, sidebarH);
-  const totalW = PAD + cv.width + GAP + lang.width + PAD;
-  const totalH = PAD + innerH + PAD;
+  const sidebarRowH = Math.max(lang.height, hrs.height, mo.height);
+  const totalH = CHARTS_PAD + heat.height + CHARTS_GAP + sidebarRowH + CHARTS_PAD;
 
-  const sidebarX = PAD + cv.width + GAP;
+  const langX = CHARTS_PAD;
+  const hrsX = CHARTS_PAD + SIDEBAR_W + CHARTS_GAP;
+  const moX = CHARTS_PAD + 2 * (SIDEBAR_W + CHARTS_GAP);
+  const cardsY = CHARTS_PAD + heat.height + CHARTS_GAP;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" width="${totalW}" height="${totalH}" role="img" aria-label="${esc(p.login)} profile card">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${CHARTS_W} ${totalH}" width="${CHARTS_W}" height="${totalH}" role="img" aria-label="${esc(p.login)} activity charts">
   <style>${STYLE}</style>
-  <rect class="bg" x="0" y="0" width="${totalW}" height="${totalH}" rx="8" ry="8"/>
-  <g transform="translate(${PAD}, ${PAD})">${cv.content}</g>
-  <g transform="translate(${sidebarX}, ${PAD})">${lang.content}</g>
-  <g transform="translate(${sidebarX}, ${PAD + lang.height + SIDEBAR_GAP})">${hrs.content}</g>
-  <g transform="translate(${sidebarX}, ${PAD + lang.height + SIDEBAR_GAP + hrs.height + SIDEBAR_GAP})">${mo.content}</g>
+  <rect class="bg" x="0" y="0" width="${CHARTS_W}" height="${totalH}" rx="8" ry="8"/>
+  <g transform="translate(${CHARTS_PAD}, ${CHARTS_PAD})">${heat.content}</g>
+  <g transform="translate(${langX}, ${cardsY})">${lang.content}</g>
+  <g transform="translate(${hrsX}, ${cardsY})">${hrs.content}</g>
+  <g transform="translate(${moX}, ${cardsY})">${mo.content}</g>
 </svg>`;
 }
 
-// ---------- Markdown CV ----------
+// ---------- Timeline SVG (full-width, larger fonts) ----------
 
-export function renderCVMarkdown(t: Timeline, login: string): string {
+const TIMELINE_W = 920;
+const TIMELINE_PAD = 32;
+const TIMELINE_INNER = TIMELINE_W - TIMELINE_PAD * 2;
+
+export function renderTimeline(t: Timeline, login: string): string {
+  const out: string[] = [];
+  let y = 0;
+  const innerW = TIMELINE_INNER;
+
+  out.push(
+    `<text class="fg" x="0" y="${y + 22}" font-size="22" font-weight="700">Activity timeline</text>`,
+    `<text class="muted" x="${innerW}" y="${y + 22}" font-size="12" text-anchor="end">updated ${esc(t.generatedAt)}</text>`,
+  );
+  y += 44;
+
+  const railX = 100;
+  const dotR = 5;
+  const itemX = railX + 24;
+  const descCharLimit = 100;
+
+  for (const period of t.periods) {
+    const periodY = y + 18;
+    out.push(
+      `<text class="accent" x="0" y="${periodY}" font-size="14" font-weight="600">${esc(period.period)}</text>`,
+      `<circle class="accent" cx="${railX}" cy="${periodY - 5}" r="${dotR}"/>`,
+    );
+    const periodStartY = y;
+    y += 30;
+
+    for (const item of period.items) {
+      const titleY = y + 16;
+      out.push(
+        `<text class="fg" x="${itemX}" y="${titleY}" font-size="16" font-weight="600">${esc(trunc(item.title, 60))}</text>`,
+      );
+      if (item.repo) {
+        out.push(
+          `<text class="muted" x="${innerW}" y="${titleY}" font-size="12" text-anchor="end">${esc(trunc(displayRepo(item.repo, login), 50))}</text>`,
+        );
+      }
+      const descLines = wrapText(item.description, descCharLimit, 5);
+      descLines.forEach((line, i) => {
+        out.push(
+          `<text class="muted" x="${itemX}" y="${titleY + 22 + i * 18}" font-size="13">${esc(line)}</text>`,
+        );
+      });
+      y += 22 + descLines.length * 18 + 16;
+    }
+
+    out.push(
+      `<line class="border" x1="${railX}" y1="${periodStartY + 18}" x2="${railX}" y2="${y - 8}" stroke-width="1"/>`,
+    );
+    y += 14;
+  }
+
+  const totalH = TIMELINE_PAD + y + TIMELINE_PAD;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TIMELINE_W} ${totalH}" width="${TIMELINE_W}" height="${totalH}" role="img" aria-label="${esc(login)} activity timeline">
+  <style>${STYLE}</style>
+  <rect class="bg" x="0" y="0" width="${TIMELINE_W}" height="${totalH}" rx="8" ry="8"/>
+  <g transform="translate(${TIMELINE_PAD}, ${TIMELINE_PAD})">${out.join("\n  ")}</g>
+</svg>`;
+}
+
+// ---------- Recent activity markdown (short summary section) ----------
+
+export function renderActivityMarkdown(t: Timeline): string {
   const lines: string[] = [];
-  lines.push(`# Recent activity timeline`);
+  lines.push("## Recent activity");
   lines.push("");
-  lines.push(`> Updated ${t.generatedAt}`);
+  lines.push(`*Updated ${t.generatedAt}*`);
   lines.push("");
   if (t.summary) {
     lines.push(t.summary);
     lines.push("");
   }
-  for (const period of t.periods) {
-    lines.push(`## ${period.period}`);
-    lines.push("");
-    for (const item of period.items) {
-      const repoSuffix = item.repo ? ` *(${displayRepo(item.repo, login)})*` : "";
-      lines.push(`- **${item.title}**${repoSuffix} — ${item.description}`);
-    }
-    lines.push("");
-  }
-  lines.push(`---`);
-  lines.push(`*Generated from public commit data + LLM summary.*`);
-  lines.push("");
   return lines.join("\n");
 }

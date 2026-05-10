@@ -17,6 +17,6 @@ console.log(`got ${timeline.periods.length} periods`);
 
 await mkdir(resolve("cards"), { recursive: true });
 await writeFile(resolve("cards/cv.json"), JSON.stringify(timeline, null, 2), "utf8");
-await writeFile(resolve("CV.md"), renderCVMarkdown(timeline), "utf8");
+await writeFile(resolve("CV.md"), renderCVMarkdown(timeline, profile.login), "utf8");
 await writeFile(resolve("cards/profile.svg"), renderProfile(profile, timeline), "utf8");
 console.log("wrote cards/cv.json, CV.md, cards/profile.svg");

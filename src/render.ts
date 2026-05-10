@@ -254,7 +254,14 @@ function monthlyBlock(p: ProfileData): Block {
 
 const CV_W = 600;
 
-function cvBlock(t: Timeline): Block {
+function displayRepo(nameWithOwner: string, login: string): string {
+  const slash = nameWithOwner.indexOf("/");
+  if (slash < 0) return nameWithOwner;
+  const owner = nameWithOwner.slice(0, slash);
+  return owner.toLowerCase() === login.toLowerCase() ? nameWithOwner.slice(slash + 1) : nameWithOwner;
+}
+
+function cvBlock(t: Timeline, login: string): Block {
   const out: string[] = [];
   let y = 0;
 
@@ -292,7 +299,7 @@ function cvBlock(t: Timeline): Block {
       );
       if (item.repo) {
         out.push(
-          `<text class="muted" x="${CV_W}" y="${titleY}" font-size="10" text-anchor="end">${esc(trunc(item.repo, 36))}</text>`,
+          `<text class="muted" x="${CV_W}" y="${titleY}" font-size="10" text-anchor="end">${esc(trunc(displayRepo(item.repo, login), 36))}</text>`,
         );
       }
       const descLines = wrapText(item.description, 64, 4);
@@ -320,7 +327,7 @@ const PAD = 24;
 const SIDEBAR_GAP = 20;
 
 export function renderProfile(p: ProfileData, t: Timeline): string {
-  const cv = cvBlock(t);
+  const cv = cvBlock(t, p.login);
   const lang = languagesBlock(p);
   const hrs = hoursBlock(p);
   const mo = monthlyBlock(p);
@@ -344,7 +351,7 @@ export function renderProfile(p: ProfileData, t: Timeline): string {
 
 // ---------- Markdown CV ----------
 
-export function renderCVMarkdown(t: Timeline): string {
+export function renderCVMarkdown(t: Timeline, login: string): string {
   const lines: string[] = [];
   lines.push(`# Recent activity timeline`);
   lines.push("");
@@ -358,7 +365,7 @@ export function renderCVMarkdown(t: Timeline): string {
     lines.push(`## ${period.period}`);
     lines.push("");
     for (const item of period.items) {
-      const repoSuffix = item.repo ? ` *(${item.repo})*` : "";
+      const repoSuffix = item.repo ? ` *(${displayRepo(item.repo, login)})*` : "";
       lines.push(`- **${item.title}**${repoSuffix} — ${item.description}`);
     }
     lines.push("");

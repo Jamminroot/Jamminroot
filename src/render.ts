@@ -127,7 +127,8 @@ type ActivityRow = {
   key: string;
   fillAttr: string; // either fill="#hex" or class="work"
   counts: number[];
-  total: number;
+  fetchedTotal: number; // sum of weekly counts (from per-commit history)
+  reportedTotal: number; // sum of repo.totalCommits (covers private repos with no fetched timestamps)
 };
 
 function buildActivityRows(p: ProfileData): ActivityRow[] {
@@ -135,7 +136,8 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
     key: "Work",
     fillAttr: 'class="work"',
     counts: new Array(NUM_WEEKS).fill(0),
-    total: 0,
+    fetchedTotal: 0,
+    reportedTotal: 0,
   };
   const personalMap = new Map<string, ActivityRow>();
   const now = Date.now();
@@ -154,13 +156,15 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
           key: display,
           fillAttr: `fill="${color}"`,
           counts: new Array(NUM_WEEKS).fill(0),
-          total: 0,
+          fetchedTotal: 0,
+          reportedTotal: 0,
         };
         personalMap.set(display, existing);
       }
       row = existing;
     }
 
+    row.reportedTotal += r.totalCommits;
     for (const c of r.recentCommits) {
       const t = new Date(c.date).getTime();
       if (Number.isNaN(t) || t < sinceMs) continue;
@@ -168,15 +172,16 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
       const idx = NUM_WEEKS - 1 - weeksAgo;
       if (idx >= 0 && idx < NUM_WEEKS) {
         row.counts[idx]++;
-        row.total++;
+        row.fetchedTotal++;
       }
     }
   }
 
+  // Include any row that has activity reported (even if commit timestamps weren't fetchable).
   const personal = [...personalMap.values()]
-    .filter((r) => r.total > 0)
-    .sort((a, b) => b.total - a.total);
-  const all = work.total > 0 ? [work, ...personal] : personal;
+    .filter((r) => r.reportedTotal > 0)
+    .sort((a, b) => b.reportedTotal - a.reportedTotal);
+  const all = work.reportedTotal > 0 ? [work, ...personal] : personal;
   return all.slice(0, 9);
 }
 
@@ -202,12 +207,23 @@ function projectHeatmapBlock(p: ProfileData, fullWidth: number): Block {
   rows.forEach((row, i) => {
     const y = headerH + i * rowH;
     const max = Math.max(1, ...row.counts);
+    // If we have no per-week data but the row is known active, render a uniform low fill so the
+    // row reads as "present, but commit timestamps weren't accessible".
+    const noWeeklyData = row.fetchedTotal === 0 && row.reportedTotal > 0;
     out.push(
       `<text class="fg" x="0" y="${y + cellH / 2 + 5}" font-size="11">${esc(trunc(row.key, 16))}</text>`,
     );
+    if (noWeeklyData) {
+      out.push(
+        `<text class="muted" x="0" y="${y + cellH / 2 + 16}" font-size="8">${row.reportedTotal} commits</text>`,
+      );
+    }
     row.counts.forEach((count, w) => {
       const x = labelW + w * (cellW + cellGap);
-      const opacity = count === 0 ? 0.06 : 0.25 + (count / max) * 0.75;
+      let opacity: number;
+      if (noWeeklyData) opacity = 0.18;
+      else if (count === 0) opacity = 0.06;
+      else opacity = 0.25 + (count / max) * 0.75;
       out.push(
         `<rect ${row.fillAttr} x="${x.toFixed(2)}" y="${y}" width="${cellW.toFixed(2)}" height="${cellH}" rx="1.5" ry="1.5" opacity="${opacity.toFixed(2)}"/>`,
       );

@@ -351,15 +351,14 @@ export async function fetchProfile(
     }
   }
 
-  // REPO_WEIGHTS controls TIMELINE / LLM visibility only. Heatmap aggregation uses all
-  // reachable repos regardless — sensitive repo names never appear in the heatmap (they
-  // bundle into the Work row), only their activity counts.
-  // Skip silent regex from the workRegex pattern as well — workRegex is unused here now,
-  // but kept reachable so future heatmap-only flags can use it.
-  void workRegex;
+  // hidden=true means "do not list individually in timeline / LLM input". Set when:
+  //   - REPO_WEIGHTS multiplier <= 0 (per-repo timeline opt-out), OR
+  //   - WORK_REPO_REGEX matches (sensitive — heatmap bundles it into Work row instead).
+  // Heatmap uses ALL reachable repos; bundling is the renderer's job.
   const repos: RepoData[] = [];
   for (const r of merged) {
     const mult = multiplierFor(r.nameWithOwner, weightsConfig.rules);
+    const isWork = workRegex ? workRegex.test(r.nameWithOwner) : false;
     const [owner, name] = r.nameWithOwner.split("/");
     // Use emails-only filter when AUTHOR_EMAILS is set (GitHub treats id+emails as AND, not OR).
     // User is responsible for listing every commit-email they use across accounts.
@@ -372,7 +371,7 @@ export async function fetchProfile(
     );
     if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
     const totalCommits = r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length;
-    const hidden = mult <= 0;
+    const hidden = mult <= 0 || isWork;
     const weight = hidden ? 0 : applyWeightFn(totalCommits, weightsConfig.fn) * mult;
     repos.push({
       nameWithOwner: r.nameWithOwner,

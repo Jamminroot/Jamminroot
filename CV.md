@@ -1,46 +1,48 @@
 # Recent activity timeline
 
-> Updated 2026-05-09
+> Updated 2026-05-10
 
-Focused on building and maintaining a crypto trading platform with AI models, developing various utility tools (file tagging, HID firmware, CV generation), and exploring AI/ML applications in trading, poker, and personal assistants. The work spans multiple languages and platforms, including SaaS, Android, embedded firmware, and desktop utilities.
+Heavy focus on a SaaS crypto trading platform, alongside hardware emulation firmware and several machine learning research projects. Also maintained a Windows Explorer tagging utility and an Android LLM assistant.
 
 ## 2026 May
 
-- **Profile card generator and CV automation** *(Jamminroot/Jamminroot)* — Built a custom GitHub profile CV workflow generator producing timeline and sidebar cards.
-- **Profile card rendering engine** *(Jamminroot/jamminroot_profile_cards)* — Developed a card renderer that outputs combined profile SVG with light/dark theme support.
-- **Crypto AI trading platform** *(Jamminroot/summit)* — Worked on a SaaS algorithmic crypto trading platform incorporating AI and neural network models.
-- **Archived trading platform iteration** *(Jamminroot/summit-2-archive-use-regular-instead)* — Maintained an archive version of the crypto trading platform with earlier model experiments.
+- **Profile README and CV automation** *(Jamminroot)* — Iterated on the personal profile README, refining the automated CV generation workflow and repository display logic.
+- **Profile card generator updates** *(jamminroot_profile_cards)* — Worked on the custom profile card generator, combining cards and syncing CV data for the automated timeline.
 
 ## 2026 Apr
 
-- **FlClash proxy fork** *(Jamminroot/Clash.Meta)* — Added XHTTP support to a Mihomo fork for the FlClash proxy client.
-- **ESP32-S3 HID firmware** *(Jamminroot/j-uni-hid)* — Continued work on feature-rich mouse and keyboard emulation firmware for ESP32-S3.
-- **Crypto price prediction modeling** *(Jamminroot/crypto-model-research)* — Researched and developed cryptocurrency price prediction models in Python.
+- **SaaS crypto trading platform** *(summit)* — Continued development on the SaaS crypto algorithmic trading platform with AI and neural network features.
+- **Proxy API for FlClash** *(Clash.Meta)* — Maintained a Mihomo fork, re-exposing proxy APIs for integration with the FlClash client.
+
+## 2026 Mar
+
+- **SaaS crypto trading platform** *(summit)* — Continued development on the SaaS crypto algorithmic trading platform with AI and neural network features.
 
 ## 2026 Feb
 
-- **TelePilot n8n node fork** *(Jamminroot/n8n-nodes-telepilot-2)* — Enhanced a Telegram automation node for n8n workflows, improving session handling and CI stability.
-- **Windows file tagging utility** *(Jamminroot/intag)* — Polished and released v2 of the Windows Explorer file tagging tool, adding metadata support and Store submission.
-- **Neovim IDE configuration** *(Jamminroot/.dotfiles)* — Maintained a personal Neovim setup with LSP, treesitter, and remote session improvements.
-- **YOLO annotation tool** *(Jamminroot/yolo-labeler)* — Built a lightweight, browser-based YOLO image labeling utility for personal projects.
+- **SaaS crypto trading platform** *(summit)* — Continued development on the SaaS crypto algorithmic trading platform with AI and neural network features.
+- **Telegram automation node for n8n** *(n8n-nodes-telepilot-2)* — Maintained a fork of a Telegram automation node for n8n, working on CI stability and new trigger features.
+- **Neovim development environment** *(.dotfiles)* — Polished a personal Neovim IDE setup, migrating to newer APIs and improving remote session support.
+- **YOLO labeling tool** *(yolo-labeler)* — Built a minimalistic, on-host labeling tool for personal computer vision projects.
+- **Windows Explorer file tagging** *(intag)* — Polished the Windows Explorer file and folder tagging utility, preparing documentation and store assets.
 
 ## 2026 Jan
 
-- **Windows file tagging utility release prep** *(Jamminroot/intag)* — Prepared v2 release of the Windows Explorer file tagging tool for Microsoft Store submission.
-- **Android LLM assistant** *(Jamminroot/ozwil-android)* — Worked on an Android assistant using large language models with on-device phone interaction capabilities.
-- **AI coding agent** *(Jamminroot/auto-claude)* — Built an autonomous multi-session AI coding tool for iterative development.
-- **Freqtrade trading strategies** *(Jamminroot/freqtrade_startegies)* — Developed custom algorithmic trading strategies for the Freqtrade bot framework.
+- **SaaS crypto trading platform** *(summit)* — Continued development on the SaaS crypto algorithmic trading platform with AI and neural network features.
+- **Telegram automation node for n8n** *(n8n-nodes-telepilot-2)* — Iterated on a Telegram automation node fork, stabilizing session storage and authentication.
+- **Windows Explorer file tagging** *(intag)* — Prepared a major release of the Windows Explorer tagging utility, adding metadata support and store listing materials.
 
 ## 2025
 
-- **TelePilot n8n node integration** *(Jamminroot/n8n-nodes-telepilot-2)* — Started the TelePilot2 n8n integration project with Docker deployment and session management.
-- **Poker computer vision experiments** *(Jamminroot/poker-cv)* — Explored computer vision techniques for analyzing online poker platform interactions.
-- **Windows Explorer tagging utility v2** *(Jamminroot/intag2)* — Worked on an enhanced version of the Windows file tagging tool with a polished UI and style improvements.
-
-## 2024
-
-- **GitHub profile setup** *(Jamminroot/Jamminroot)* — Set up initial personal GitHub profile README with introductory content.
-- **Windows file tagging utility launch** *(Jamminroot/intag)* — Released the first version of the Windows Explorer tagging tool with CLI and graphical interface.
+- **SaaS crypto trading platform** *(summit)* — Worked extensively on the SaaS crypto algorithmic trading platform with AI and neural network features.
+- **ESP32-S3 HID emulation firmware** *(j-uni-hid)* — Developed feature-rich mouse and keyboard emulation firmware for the ESP32-S3 microcontroller.
+- **Crypto price prediction research** *(crypto-model-research)* — Conducted R&D on cryptocurrency price prediction models.
+- **Computer vision for online poker** *(poker-cv)* — Explored computer vision techniques for use on online poker platforms.
+- **Windows Explorer tagging utility** *(intag2)* — Built a stylish Windows Explorer extension for assigning tags to files and folders.
+- **Android LLM assistant** *(ozwil-android)* — Developed an Android LLM assistant with phone-use capabilities.
+- **Freqtrade strategies** *(freqtrade_startegies)* — Worked on custom trading strategies for the Freqtrade framework.
+- **Autonomous AI coding tool** *(auto-claude)* — Built an autonomous multi-session AI coding assistant.
+- **CV and input emulation research** *(MEMU3)* — Explored computer vision, input emulation, and screen capture in a C++ research project.
 
 ---
 *Generated from public commit data + LLM summary.*

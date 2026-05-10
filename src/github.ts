@@ -351,15 +351,15 @@ export async function fetchProfile(
     }
   }
 
-  // For each candidate: multiplier <= 0 normally means skip, but if the repo matches
-  // WORK_REPO_REGEX we still fetch commits so the heatmap can aggregate them into the
-  // Work bundle. Such repos are flagged hidden=true so the LLM payload and individual
-  // rendering ignore them.
+  // REPO_WEIGHTS controls TIMELINE / LLM visibility only. Heatmap aggregation uses all
+  // reachable repos regardless — sensitive repo names never appear in the heatmap (they
+  // bundle into the Work row), only their activity counts.
+  // Skip silent regex from the workRegex pattern as well — workRegex is unused here now,
+  // but kept reachable so future heatmap-only flags can use it.
+  void workRegex;
   const repos: RepoData[] = [];
   for (const r of merged) {
     const mult = multiplierFor(r.nameWithOwner, weightsConfig.rules);
-    const isWork = workRegex ? workRegex.test(r.nameWithOwner) : false;
-    if (mult <= 0 && !isWork) continue;
     const [owner, name] = r.nameWithOwner.split("/");
     // Use emails-only filter when AUTHOR_EMAILS is set (GitHub treats id+emails as AND, not OR).
     // User is responsible for listing every commit-email they use across accounts.

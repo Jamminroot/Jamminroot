@@ -287,23 +287,64 @@ function aggregateLanguages(
     .sort((a, b) => b.weight - a.weight);
 }
 
-function languagesBlock(p: ProfileData): Block {
+function pieSlice(
+  cx: number,
+  cy: number,
+  r: number,
+  startAngle: number,
+  endAngle: number,
+  color: string,
+): string {
+  // Avoid degenerate slices and the M..L..Z artifact when a single slice is the whole pie.
+  if (endAngle - startAngle >= Math.PI * 2 - 0.001) {
+    return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}"/>`;
+  }
+  const x1 = cx + r * Math.cos(startAngle);
+  const y1 = cy + r * Math.sin(startAngle);
+  const x2 = cx + r * Math.cos(endAngle);
+  const y2 = cy + r * Math.sin(endAngle);
+  const largeArc = endAngle - startAngle > Math.PI ? 1 : 0;
+  return `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${color}"/>`;
+}
+
+function languagesBlock(p: ProfileData, height: number): Block {
   const langs = aggregateLanguages(p.repos).slice(0, 6);
   const totalWeight = langs.reduce((s, l) => s + l.weight, 0) || 1;
   const headerH = 24;
-  const rowH = 28;
-  const height = headerH + langs.length * rowH;
 
   const out: string[] = [sectionTitle("languages by commit")];
-  langs.forEach((l, i) => {
-    const y = headerH + i * rowH;
-    const pct = ((l.weight / totalWeight) * 100).toFixed(0);
-    const barW = (l.weight / totalWeight) * SIDEBAR_W;
+
+  if (langs.length === 0) {
     out.push(
-      `<text class="fg" x="0" y="${y + 12}" font-size="12">${esc(trunc(l.name, 18))}</text>`,
-      `<text class="muted" x="${SIDEBAR_W}" y="${y + 12}" font-size="10" text-anchor="end">${l.commits} · ${pct}%</text>`,
-      `<rect class="panel" x="0" y="${y + 16}" width="${SIDEBAR_W}" height="6" rx="3" ry="3"/>`,
-      `<rect x="0" y="${y + 16}" width="${barW}" height="6" rx="3" ry="3" fill="${l.color}"/>`,
+      `<text class="muted" x="${SIDEBAR_W / 2}" y="${headerH + 30}" font-size="11" text-anchor="middle">no language data</text>`,
+    );
+    return { content: out.join(""), width: SIDEBAR_W, height };
+  }
+
+  const pieR = 56;
+  const pieCx = pieR + 6;
+  const pieCy = headerH + pieR + 6;
+
+  // Pie slices, going clockwise from -π/2 (12 o'clock).
+  let angle = -Math.PI / 2;
+  for (const l of langs) {
+    const sweep = (l.weight / totalWeight) * Math.PI * 2;
+    out.push(pieSlice(pieCx, pieCy, pieR, angle, angle + sweep, l.color));
+    angle += sweep;
+  }
+
+  // Legend on the right.
+  const legendX = pieCx + pieR + 16;
+  const legendW = SIDEBAR_W - legendX;
+  const legendStartY = headerH + 8;
+  const legendRowH = 18;
+  langs.forEach((l, i) => {
+    const ly = legendStartY + i * legendRowH;
+    const pct = ((l.weight / totalWeight) * 100).toFixed(0);
+    out.push(
+      `<rect x="${legendX}" y="${ly + 2}" width="9" height="9" rx="1.5" ry="1.5" fill="${l.color}"/>`,
+      `<text class="fg" x="${legendX + 14}" y="${ly + 11}" font-size="11">${esc(trunc(l.name, 9))}</text>`,
+      `<text class="muted" x="${legendX + legendW}" y="${ly + 11}" font-size="10" text-anchor="end">${pct}%</text>`,
     );
   });
 
@@ -328,14 +369,13 @@ function buildHourCounts(repos: RepoData[]): { hours: number[]; total: number; p
   return { hours, total, peak };
 }
 
-function hoursBlock(p: ProfileData): Block {
+function hoursBlock(p: ProfileData, height: number): Block {
   const { hours, total, peak } = buildHourCounts(p.repos);
   const max = Math.max(1, ...hours);
   const headerH = 24;
-  const barAreaH = 100;
   const labelH = 14;
   const footerH = 28;
-  const height = headerH + barAreaH + labelH + footerH;
+  const barAreaH = height - headerH - labelH - footerH;
 
   const out: string[] = [sectionTitle("commits by hour (utc)")];
   out.push(
@@ -392,14 +432,13 @@ function monthlyBuckets(days: ContributionDay[]): { label: string; count: number
   return buckets;
 }
 
-function monthlyBlock(p: ProfileData): Block {
+function monthlyBlock(p: ProfileData, height: number): Block {
   const months = monthlyBuckets(p.contributionDays);
   const max = Math.max(1, ...months.map((m) => m.count));
   const headerH = 24;
-  const barAreaH = 100;
   const labelH = 14;
   const footerH = 28;
-  const height = headerH + barAreaH + labelH + footerH;
+  const barAreaH = height - headerH - labelH - footerH;
 
   const out: string[] = [sectionTitle("monthly contributions")];
   out.push(
@@ -436,11 +475,13 @@ const CHARTS_PAD = 24;
 const CHARTS_INNER = CHARTS_W - CHARTS_PAD * 2;
 const CHARTS_GAP = 16;
 
+const CARDS_ROW_H = 220;
+
 export function renderCharts(p: ProfileData): string {
   const heat = projectHeatmapBlock(p, CHARTS_INNER);
-  const lang = languagesBlock(p);
-  const hrs = hoursBlock(p);
-  const mo = monthlyBlock(p);
+  const lang = languagesBlock(p, CARDS_ROW_H);
+  const hrs = hoursBlock(p, CARDS_ROW_H);
+  const mo = monthlyBlock(p, CARDS_ROW_H);
 
   const sidebarRowH = Math.max(lang.height, hrs.height, mo.height);
   const totalH = CHARTS_PAD + heat.height + CHARTS_GAP + sidebarRowH + CHARTS_PAD;
@@ -462,7 +503,7 @@ export function renderCharts(p: ProfileData): string {
 
 // ---------- Recent activity markdown (full timeline as markdown) ----------
 
-export function renderActivityMarkdown(t: Timeline, login: string): string {
+export function renderActivitySummaryMarkdown(t: Timeline): string {
   const lines: string[] = [];
   lines.push("## Recent activity");
   lines.push("");
@@ -472,6 +513,11 @@ export function renderActivityMarkdown(t: Timeline, login: string): string {
     lines.push(t.summary);
     lines.push("");
   }
+  return lines.join("\n");
+}
+
+export function renderTimelineMarkdown(t: Timeline, login: string): string {
+  const lines: string[] = [];
   // Wrap each period inside a blockquote — GitHub renders these with a vertical
   // bar on the left, giving the timeline a rail look without needing HTML.
   for (const period of t.periods) {
@@ -484,4 +530,8 @@ export function renderActivityMarkdown(t: Timeline, login: string): string {
     lines.push("");
   }
   return lines.join("\n");
+}
+
+export function renderActivityMarkdown(t: Timeline, login: string): string {
+  return renderActivitySummaryMarkdown(t) + renderTimelineMarkdown(t, login);
 }

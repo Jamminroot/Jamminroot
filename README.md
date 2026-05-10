@@ -1,4 +1,4 @@
-## .NET SDE, TL at Deeplay.io.
+## .NET Software Developer, TechLead at Deeplay.io.
 
 ### C++, Python enthusiast
 

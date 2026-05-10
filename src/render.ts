@@ -188,7 +188,7 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
     return b.reportedTotal - a.reportedTotal;
   });
   const all = work.reportedTotal > 0 ? [work, ...personal] : personal;
-  return all.slice(0, 9);
+  return all.slice(0, 12);
 }
 
 function projectHeatmapBlock(p: ProfileData, fullWidth: number): Block {

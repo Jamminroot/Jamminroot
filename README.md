@@ -12,57 +12,49 @@ Feel free to reach out, too!
 
 *Updated 2026-05-10*
 
-Across the year, focused on a SaaS crypto trading platform, AI/LLM tools, and hardware emulation firmware. Also built utilities for Windows Explorer, computer vision, and automation.
+Focused on building a SaaS crypto trading platform with AI, alongside hardware emulation firmware and various research projects in computer vision and price prediction. Also maintained Windows utilities, Android LLM assistants, and workflow automation tools.
 
 > **2026 May**
 >
-> - **SaaS crypto trading platform** *(summit)* — Continued development on the AI-driven algorithmic trading platform for cryptocurrencies.
-> - **ESP32-S3 HID firmware** *(j-uni-hid)* — Worked on feature-rich mouse and keyboard emulation firmware for ESP32-S3.
-> - **Profile README and CV generator** *(Jamminroot)* — Iterated on the automated GitHub profile with CV timeline and activity charts.
-> - **Profile card generator** *(jamminroot_profile_cards)* — Maintained the custom profile card SVG generator with light/dark theme support.
+> - **Crypto trading platform with AI** *(summit)* — Built a SaaS crypto algorithmic trading platform incorporating AI and neural network components.
+> - **On-device LLM assistant for Android** *(ozwil-android)* — Created an Android app providing LLM capabilities with phone control features.
 
 > **2026 Apr**
 >
-> - **Crypto price prediction research** *(crypto-model-research)* — Experimented with machine learning models for cryptocurrency price forecasting.
-> - **Computer vision for poker** *(poker-cv)* — Developed computer vision tools for online poker platforms.
-> - **Freqtrade trading strategies** *(freqtrade_startegies)* — Built and refined custom trading strategies for the Freqtrade bot.
-> - **Clash proxy fork** *(Clash.Meta)* — Maintained a fork of Clash.Meta with custom API support for FlClash.
+> - **Clash proxy fork for FlClash** *(Clash.Meta)* — Maintained a fork of Clash proxy with custom API support for FlClash.
+> - **ESP32-S3 HID emulation firmware** *(j-uni-hid)* — Developed feature-rich firmware for mouse and keyboard emulation on ESP32-S3.
+> - **Input emulation and screen capture research** *(MEMU3)* — Researched computer vision and input emulation for overlaying and screen capture.
 
 > **2026 Mar**
 >
-> - **Windows Explorer file tagging** *(intag2)* — Built a new version of the file and folder tagging utility for Windows Explorer.
-> - **On-device LLM assistant** *(ozwil-android)* — Developed an Android app with LLM capabilities for phone use.
-> - **CV and input emulation research** *(MEMU3)* — Worked on computer vision, mouse/keyboard emulation, and screen capture experiments.
-> - **Autonomous AI coding tool** *(auto-claude)* — Built a multi-session autonomous coding assistant using AI.
+> - **Crypto price prediction research** *(crypto-model-research)* — Conducted R&D on cryptocurrency price prediction models.
+> - **Computer vision for online poker** *(poker-cv)* — Explored computer vision techniques for online poker platforms.
 
 > **2026 Feb**
 >
-> - **Telegram n8n automation node** *(n8n-nodes-telepilot-2)* — Maintained a fork of the TelePilot n8n node, focusing on stability and new triggers.
-> - **Windows Explorer tagging utility** *(intag)* — Polished the original file tagging tool for Windows Explorer, preparing v2 release.
-> - **Neovim development environment** *(.dotfiles)* — Maintained a custom Neovim configuration with IDE features and remote clipboard support.
-> - **YOLO annotation tool** *(yolo-labeler)* — Built a minimalistic, fast YOLO labeling tool for personal computer vision projects.
+> - **Telegram automation node for n8n** *(n8n-nodes-telepilot-2)* — Developed a Telegram integration node for n8n workflow automation.
+> - **Windows Explorer file tagging (legacy)** *(intag)* — Worked on the original file tagging utility for Windows Explorer.
+> - **Neovim configuration setup** *(.dotfiles)* — Set up and maintained a personal Neovim IDE configuration.
+> - **YOLO annotation tool** *(yolo-labeler)* — Built a minimalistic on-host labeling tool for YOLO object detection.
 
 > **2026 Jan**
 >
-> - **Telegram n8n node stabilization** *(n8n-nodes-telepilot-2)* — Stabilized the forked TelePilot n8n node with session handling and deployment setup.
-> - **Windows Explorer tagging v2 prep** *(intag)* — Prepared the Windows Explorer tagging tool for v2 release with Microsoft Store submission.
-> - **Crypto trading platform** *(summit)* — Continued development on the SaaS crypto algo trading platform.
+> - **Windows Explorer file tagging v2 release** *(intag)* — Prepared the v2.0 release of the file tagging utility for Windows Explorer, including Microsoft Store submission.
+> - **Telegram automation node maintenance** *(n8n-nodes-telepilot-2)* — Performed maintenance and version updates on the Telegram n8n integration node.
+> - **Windows Explorer file tagging utility** *(intag2)* — Built a Windows Explorer extension to assign tags to files and folders.
+> - **Freqtrade trading strategies** *(freqtrade_startegies)* — Developed custom trading strategies for the Freqtrade bot.
 
 > **2025 Dec**
 >
-> - **Crypto trading platform** *(summit)* — Ongoing work on the AI-driven cryptocurrency trading platform.
-> - **HID firmware maintenance** *(j-uni-hid)* — Maintained the ESP32-S3 mouse and keyboard emulation firmware.
+> - **Autonomous AI coding tool** *(auto-claude)* — Worked on an autonomous multi-session AI coding assistant.
 
 > **2025**
 >
-> - **Telegram n8n node fork** *(n8n-nodes-telepilot-2)* — Initial fork and setup of the TelePilot n8n node with Docker deployment.
-> - **Profile README updates** *(Jamminroot)* — Updated the GitHub profile README with notes and activity tracking.
-> - **Crypto trading platform** *(summit)* — Worked on the SaaS crypto trading platform throughout the year.
+> - **Telegram automation node for n8n** *(n8n-nodes-telepilot-2)* — Developed and maintained a Telegram integration node for n8n workflow automation.
 
 > **2024**
 >
-> - **Profile README updates** *(Jamminroot)* — Updated the GitHub profile README with notes and activity tracking.
-> - **Windows Explorer tagging start** *(intag)* — Started development of the Windows Explorer file tagging utility.
+> - **Windows Explorer file tagging utility** *(intag)* — Developed the initial version of a file tagging utility for Windows Explorer.
 <!-- ACTIVITY-END -->
 
 <img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/charts.svg" alt="Activity charts">

@@ -25,11 +25,13 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
           REPO_WEIGHTS: ${{ vars.REPO_WEIGHTS }}
           WORK_REPO_REGEX: ${{ vars.WORK_REPO_REGEX }}
+          LEGAL_NAME: ${{ vars.LEGAL_NAME }}
+          DATE_OF_BIRTH: ${{ vars.DATE_OF_BIRTH }}
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cards/cv.json cards/charts.svg cards/timeline.svg CV.md README.md
+          git add cards/cv.json cards/charts.svg cards/cv.pdf CV.md README.md career.json
           if git diff --staged --quiet; then
             echo "no changes"
           else

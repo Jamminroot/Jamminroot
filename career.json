@@ -1,0 +1,66 @@
+{
+  "experiences": [
+    {
+      "company": "Deeplay",
+      "role": ".NET Developer / Tech Lead",
+      "employmentType": "Full-time",
+      "start": "2021-06",
+      "end": null,
+      "location": null,
+      "bullets": []
+    },
+    {
+      "company": "Akvelon (vendor for Microsoft)",
+      "role": "Software Development Engineer",
+      "employmentType": "Full-time",
+      "start": "2019-03",
+      "end": "2021-10",
+      "location": "Ivanovo, Russia",
+      "bullets": [
+        "Developer in the Microsoft App Center SDK team",
+        "Worked on .NET, Android, Apple, Cordova, Xamarin and React Native App Center SDKs"
+      ]
+    },
+    {
+      "company": "ICVR",
+      "role": "Developer",
+      "employmentType": "Full-time",
+      "start": "2018-09",
+      "end": "2019-02",
+      "location": "United States (remote)",
+      "bullets": [
+        "Built JetSetTV, an Android TV application, from scratch in a couple of months",
+        "Worked on bug fixes and new features in Unity",
+        "Set up CI/CD with Unity Cloud Build + GitLab",
+        "Built a barebones REST API with ASP.NET"
+      ]
+    },
+    {
+      "company": "Konstanta, LLC",
+      "role": "Full-stack Android developer",
+      "employmentType": "Full-time",
+      "start": "2016-01",
+      "end": "2018-04",
+      "location": "Arkhangelsk, Russia",
+      "bullets": [
+        "Designed and built Android applications for clients across multiple verticals",
+        "Worked with cross-functional teams; integrated third-party APIs; wrote unit tests",
+        "Developed and deployed several b2b systems on 1C:Enterprise",
+        "Built software for tracking Parkinson's disease patients (prescriptions, treatments, signs, test results) on 1C:Enterprise"
+      ]
+    },
+    {
+      "company": "Konstanta, LLC",
+      "role": "Full-stack ERP developer",
+      "employmentType": "Full-time",
+      "start": "2012-08",
+      "end": "2016-01",
+      "location": "Arkhangelsk, Russia",
+      "bullets": [
+        "Specified, customized and tested 1C ERP/CRM features for end users",
+        "Authored help documentation; defined ERP design and coding standards",
+        "Worked with end users to translate business processes into technical solutions"
+      ]
+    }
+  ]
+}

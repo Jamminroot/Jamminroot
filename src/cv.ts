@@ -2,7 +2,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fetchProfile } from "./github.js";
 import { summarizeTimeline } from "./llm.js";
-import { renderActivityMarkdown, renderCharts, renderTimeline } from "./render.js";
+import { renderActivityMarkdown, renderCharts } from "./render.js";
+import { renderCVPdf } from "./pdf.js";
 
 const login = process.env.USERNAME || process.env.GITHUB_USER;
 if (!login) throw new Error("USERNAME env var is required");
@@ -15,14 +16,16 @@ console.log("calling LLM to summarise timeline…");
 const timeline = await summarizeTimeline(profile);
 console.log(`got ${timeline.periods.length} periods`);
 
-const activityMd = renderActivityMarkdown(timeline);
+const activityMd = renderActivityMarkdown(timeline, profile.login);
 
 await mkdir(resolve("cards"), { recursive: true });
 await writeFile(resolve("cards/cv.json"), JSON.stringify(timeline, null, 2), "utf8");
 await writeFile(resolve("CV.md"), activityMd, "utf8");
 await writeFile(resolve("cards/charts.svg"), renderCharts(profile), "utf8");
-await writeFile(resolve("cards/timeline.svg"), renderTimeline(timeline, profile.login), "utf8");
-console.log("wrote cards/cv.json, CV.md, cards/charts.svg, cards/timeline.svg");
+console.log("wrote cards/cv.json, CV.md, cards/charts.svg");
+
+await renderCVPdf(profile, timeline, resolve("cards/cv.pdf"));
+console.log("wrote cards/cv.pdf");
 
 // Inject activity markdown into README between markers, if present.
 const readmePath = resolve("README.md");

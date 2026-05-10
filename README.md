@@ -17,4 +17,4 @@ Heavy focus on a SaaS crypto trading platform and custom hardware firmware, alon
 
 <img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/charts.svg" alt="Activity charts">
 
-<img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/timeline.svg" alt="Activity timeline">
+[**Download CV (PDF)**](https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/cv.pdf)

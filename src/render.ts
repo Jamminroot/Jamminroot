@@ -435,73 +435,9 @@ export function renderCharts(p: ProfileData): string {
 </svg>`;
 }
 
-// ---------- Timeline SVG (full-width, larger fonts) ----------
+// ---------- Recent activity markdown (full timeline as markdown) ----------
 
-const TIMELINE_W = 920;
-const TIMELINE_PAD = 32;
-const TIMELINE_INNER = TIMELINE_W - TIMELINE_PAD * 2;
-
-export function renderTimeline(t: Timeline, login: string): string {
-  const out: string[] = [];
-  let y = 0;
-  const innerW = TIMELINE_INNER;
-
-  out.push(
-    `<text class="fg" x="0" y="${y + 22}" font-size="22" font-weight="700">Activity timeline</text>`,
-    `<text class="muted" x="${innerW}" y="${y + 22}" font-size="12" text-anchor="end">updated ${esc(t.generatedAt)}</text>`,
-  );
-  y += 44;
-
-  const railX = 100;
-  const dotR = 5;
-  const itemX = railX + 24;
-  const descCharLimit = 100;
-
-  for (const period of t.periods) {
-    const periodY = y + 18;
-    out.push(
-      `<text class="accent" x="0" y="${periodY}" font-size="14" font-weight="600">${esc(period.period)}</text>`,
-      `<circle class="accent" cx="${railX}" cy="${periodY - 5}" r="${dotR}"/>`,
-    );
-    const periodStartY = y;
-    y += 30;
-
-    for (const item of period.items) {
-      const titleY = y + 16;
-      out.push(
-        `<text class="fg" x="${itemX}" y="${titleY}" font-size="16" font-weight="600">${esc(trunc(item.title, 60))}</text>`,
-      );
-      if (item.repo) {
-        out.push(
-          `<text class="muted" x="${innerW}" y="${titleY}" font-size="12" text-anchor="end">${esc(trunc(displayRepo(item.repo, login), 50))}</text>`,
-        );
-      }
-      const descLines = wrapText(item.description, descCharLimit, 5);
-      descLines.forEach((line, i) => {
-        out.push(
-          `<text class="muted" x="${itemX}" y="${titleY + 22 + i * 18}" font-size="13">${esc(line)}</text>`,
-        );
-      });
-      y += 22 + descLines.length * 18 + 16;
-    }
-
-    out.push(
-      `<line class="border" x1="${railX}" y1="${periodStartY + 18}" x2="${railX}" y2="${y - 8}" stroke-width="1"/>`,
-    );
-    y += 14;
-  }
-
-  const totalH = TIMELINE_PAD + y + TIMELINE_PAD;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TIMELINE_W} ${totalH}" width="${TIMELINE_W}" height="${totalH}" role="img" aria-label="${esc(login)} activity timeline">
-  <style>${STYLE}</style>
-  <rect class="bg" x="0" y="0" width="${TIMELINE_W}" height="${totalH}" rx="8" ry="8"/>
-  <g transform="translate(${TIMELINE_PAD}, ${TIMELINE_PAD})">${out.join("\n  ")}</g>
-</svg>`;
-}
-
-// ---------- Recent activity markdown (short summary section) ----------
-
-export function renderActivityMarkdown(t: Timeline): string {
+export function renderActivityMarkdown(t: Timeline, login: string): string {
   const lines: string[] = [];
   lines.push("## Recent activity");
   lines.push("");
@@ -509,6 +445,15 @@ export function renderActivityMarkdown(t: Timeline): string {
   lines.push("");
   if (t.summary) {
     lines.push(t.summary);
+    lines.push("");
+  }
+  for (const period of t.periods) {
+    lines.push(`### ${period.period}`);
+    lines.push("");
+    for (const item of period.items) {
+      const repoSuffix = item.repo ? ` *(${displayRepo(item.repo, login)})*` : "";
+      lines.push(`- **${item.title}**${repoSuffix} — ${item.description}`);
+    }
     lines.push("");
   }
   return lines.join("\n");

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@octokit/graphql": "^8.1.1",
+    "@types/pdfkit": "^0.17.6",
+    "pdfkit": "^0.18.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

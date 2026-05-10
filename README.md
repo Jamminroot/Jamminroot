@@ -1,10 +1,11 @@
-### .NET SDE, TL at Deeplay.io.
+## .NET SDE, TL at Deeplay.io.
 
-#### C++, Python enthusiast
+### C++, Python enthusiast
 
 #### [@jamminroot (telegram)](https://t.me/jamminroot), [Dmitrii Chichuk (LinkedIn)](https://linkedin.com/in/dchichuk)
 
 Make sure to check out my pinned projects, they are are quite handy and free.
+Feel free to reach out, too!
 
 <!-- ACTIVITY-START -->
 ## Recent activity

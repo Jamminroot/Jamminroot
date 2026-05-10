@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ProfileData, ContributionDay, RepoData } from "./github.js";
+import type { CommitInfo, ContributionDay, ProfileData, RepoData } from "./github.js";
 
 const STYLE = `
   text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
@@ -508,6 +508,155 @@ export function renderCharts(p: ProfileData): string {
   <g transform="translate(${langX}, ${cardsY})">${lang.content}</g>
   <g transform="translate(${hrsX}, ${cardsY})">${hrs.content}</g>
   <g transform="translate(${moX}, ${cardsY})">${mo.content}</g>
+</svg>`;
+}
+
+// ---------- Project cards ----------
+
+const PROJECTS_W = 920;
+const PROJECT_PAD = 24;
+const PROJECT_COLS = 3;
+const PROJECT_GAP = 16;
+const PROJECT_CARD_W = (PROJECTS_W - PROJECT_PAD * 2 - PROJECT_GAP * (PROJECT_COLS - 1)) / PROJECT_COLS;
+const PROJECT_CARD_H = 200;
+
+function monthlyCommitCounts(commits: CommitInfo[]): number[] {
+  const now = new Date();
+  const counts = new Array(12).fill(0);
+  for (const c of commits) {
+    const d = new Date(c.date);
+    if (Number.isNaN(d.getTime())) continue;
+    const monthsAgo =
+      (now.getUTCFullYear() - d.getUTCFullYear()) * 12 +
+      (now.getUTCMonth() - d.getUTCMonth());
+    if (monthsAgo >= 0 && monthsAgo < 12) counts[11 - monthsAgo]++;
+  }
+  return counts;
+}
+
+function pickProjects(
+  p: ProfileData,
+  t: Timeline,
+  max: number,
+): { repo: RepoData; title: string; description: string }[] {
+  const lookup = new Map<string, { title: string; description: string }>();
+  for (const period of t.periods) {
+    for (const item of period.items) {
+      if (item.repo && !lookup.has(item.repo)) {
+        lookup.set(item.repo, { title: item.title, description: item.description });
+      }
+    }
+  }
+  const out: { repo: RepoData; title: string; description: string }[] = [];
+  for (const r of p.repos) {
+    if (r.hidden || r.weight <= 0) continue;
+    const entry = lookup.get(r.nameWithOwner);
+    out.push({
+      repo: r,
+      title: entry?.title ?? displayRepo(r.nameWithOwner, p.login),
+      description: entry?.description ?? r.description ?? "",
+    });
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
+function renderProjectCard(
+  card: { repo: RepoData; title: string; description: string },
+  loginForDisplay: string,
+  x: number,
+  y: number,
+): string {
+  const w = PROJECT_CARD_W;
+  const h = PROJECT_CARD_H;
+  const r = card.repo;
+  const pad = 14;
+  const name = displayRepo(r.nameWithOwner, loginForDisplay);
+  const out: string[] = [];
+
+  // Card panel with subtle border via stroke on a fill="none" overlay
+  out.push(
+    `<rect class="panel" x="${x}" y="${y}" width="${w}" height="${h}" rx="8" ry="8"/>`,
+    `<rect class="border" x="${x + 0.5}" y="${y + 0.5}" width="${w - 1}" height="${h - 1}" rx="8" ry="8" fill="none"/>`,
+  );
+
+  // Name + language pill
+  const langName = r.language?.name ?? "—";
+  const langColor = r.language?.color ?? "#888";
+  out.push(
+    `<text class="fg" x="${x + pad}" y="${y + pad + 12}" font-size="14" font-weight="700">${esc(trunc(name, 22))}</text>`,
+    `<circle cx="${x + w - pad - 60}" cy="${y + pad + 8}" r="4" fill="${langColor}"/>`,
+    `<text class="muted" x="${x + w - pad - 50}" y="${y + pad + 12}" font-size="10">${esc(trunc(langName, 10))}</text>`,
+  );
+
+  // Catchy title
+  const titleLines = wrapText(card.title, Math.floor((w - pad * 2) / 6.5), 2);
+  titleLines.forEach((line, i) => {
+    out.push(
+      `<text class="accent" x="${x + pad}" y="${y + pad + 36 + i * 16}" font-size="12" font-weight="600">${esc(line)}</text>`,
+    );
+  });
+
+  // Description (3 lines)
+  const descY = y + pad + 36 + titleLines.length * 16 + 6;
+  const descLines = wrapText(card.description, Math.floor((w - pad * 2) / 5.8), 4);
+  descLines.forEach((line, i) => {
+    out.push(
+      `<text class="muted" x="${x + pad}" y="${descY + i * 14}" font-size="11">${esc(line)}</text>`,
+    );
+  });
+
+  // Monthly sparkline at the bottom
+  const sparkBaseY = y + h - pad - 4;
+  const sparkAreaH = 28;
+  const months = monthlyCommitCounts(r.recentCommits);
+  const max = Math.max(1, ...months);
+  const gap = 2;
+  const sparkW = w - pad * 2;
+  const bw = (sparkW - gap * 11) / 12;
+  months.forEach((c, i) => {
+    const bx = x + pad + i * (bw + gap);
+    if (c === 0) {
+      out.push(
+        `<rect class="panel" x="${bx.toFixed(2)}" y="${sparkBaseY - 4}" width="${bw.toFixed(2)}" height="4" rx="1" ry="1"/>`,
+      );
+      return;
+    }
+    const bh = 4 + (c / max) * (sparkAreaH - 4);
+    out.push(
+      `<rect x="${bx.toFixed(2)}" y="${(sparkBaseY - bh).toFixed(2)}" width="${bw.toFixed(2)}" height="${bh.toFixed(2)}" rx="1" ry="1" fill="${langColor}" opacity="${(0.55 + (c / max) * 0.45).toFixed(2)}"/>`,
+    );
+  });
+  const totalCommitsInWindow = months.reduce((a, b) => a + b, 0);
+  out.push(
+    `<text class="muted" x="${x + pad}" y="${sparkBaseY + 14}" font-size="9">last 12 months · ${totalCommitsInWindow} commits</text>`,
+  );
+
+  return out.join("");
+}
+
+export function renderProjectsCards(p: ProfileData, t: Timeline): string {
+  const maxCards = PROJECT_COLS * 3; // up to 3 rows
+  const projects = pickProjects(p, t, maxCards);
+  if (projects.length === 0) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PROJECTS_W} 60" width="${PROJECTS_W}" height="60"><style>${STYLE}</style><rect class="bg" width="${PROJECTS_W}" height="60" rx="8" ry="8"/><text class="muted" x="${PROJECTS_W / 2}" y="36" text-anchor="middle" font-size="12">No project cards available.</text></svg>`;
+  }
+
+  const rows = Math.ceil(projects.length / PROJECT_COLS);
+  const totalH = PROJECT_PAD * 2 + rows * PROJECT_CARD_H + (rows - 1) * PROJECT_GAP;
+  const out: string[] = [];
+  projects.forEach((card, i) => {
+    const col = i % PROJECT_COLS;
+    const row = Math.floor(i / PROJECT_COLS);
+    const x = PROJECT_PAD + col * (PROJECT_CARD_W + PROJECT_GAP);
+    const y = PROJECT_PAD + row * (PROJECT_CARD_H + PROJECT_GAP);
+    out.push(renderProjectCard(card, p.login, x, y));
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PROJECTS_W} ${totalH}" width="${PROJECTS_W}" height="${totalH}" role="img" aria-label="${esc(p.login)} project cards">
+  <style>${STYLE}</style>
+  <rect class="bg" x="0" y="0" width="${PROJECTS_W}" height="${totalH}" rx="8" ry="8"/>
+  ${out.join("\n  ")}
 </svg>`;
 }
 

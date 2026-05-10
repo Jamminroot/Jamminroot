@@ -177,10 +177,16 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
     }
   }
 
-  // Include any row that has activity reported (even if commit timestamps weren't fetchable).
-  const personal = [...personalMap.values()]
-    .filter((r) => r.reportedTotal > 0)
-    .sort((a, b) => b.reportedTotal - a.reportedTotal);
+  // Sort: rows with actual weekly data first (so the heatmap shows real variation),
+  // then no-weekly-data rows by reported total. Within each group, by activity desc.
+  const personal = [...personalMap.values()].filter((r) => r.reportedTotal > 0);
+  personal.sort((a, b) => {
+    const aHas = a.fetchedTotal > 0 ? 1 : 0;
+    const bHas = b.fetchedTotal > 0 ? 1 : 0;
+    if (aHas !== bHas) return bHas - aHas;
+    if (aHas) return b.fetchedTotal - a.fetchedTotal;
+    return b.reportedTotal - a.reportedTotal;
+  });
   const all = work.reportedTotal > 0 ? [work, ...personal] : personal;
   return all.slice(0, 9);
 }
@@ -463,12 +469,14 @@ export function renderActivityMarkdown(t: Timeline, login: string): string {
     lines.push(t.summary);
     lines.push("");
   }
+  // Wrap each period inside a blockquote — GitHub renders these with a vertical
+  // bar on the left, giving the timeline a rail look without needing HTML.
   for (const period of t.periods) {
-    lines.push(`### ${period.period}`);
-    lines.push("");
+    lines.push(`> **${esc(period.period)}**`);
+    lines.push(">");
     for (const item of period.items) {
       const repoSuffix = item.repo ? ` *(${displayRepo(item.repo, login)})*` : "";
-      lines.push(`- **${item.title}**${repoSuffix} — ${item.description}`);
+      lines.push(`> - **${item.title}**${repoSuffix} — ${item.description}`);
     }
     lines.push("");
   }

@@ -228,11 +228,18 @@ function projectHeatmapBlock(p: ProfileData, fullWidth: number): Block {
       );
       return;
     }
-    // Normal row — only paint cells with activity (per-row normalisation).
+    // Normal row — paint empty weeks with a faint panel slot so they read as
+    // "empty" rather than "missing"; active weeks use the repo color, with
+    // minimum opacity bumped so even a single commit clearly stands out.
     row.counts.forEach((count, w) => {
-      if (count === 0) return;
       const x = labelW + w * (cellW + cellGap);
-      const opacity = 0.3 + (count / max) * 0.7;
+      if (count === 0) {
+        out.push(
+          `<rect class="panel" x="${x.toFixed(2)}" y="${y}" width="${cellW.toFixed(2)}" height="${cellH}" rx="1.5" ry="1.5"/>`,
+        );
+        return;
+      }
+      const opacity = 0.5 + (count / max) * 0.5;
       out.push(
         `<rect ${row.fillAttr} x="${x.toFixed(2)}" y="${y}" width="${cellW.toFixed(2)}" height="${cellH}" rx="1.5" ry="1.5" opacity="${opacity.toFixed(2)}"/>`,
       );

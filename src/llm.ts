@@ -119,6 +119,7 @@ function formatPayload(p: ProfileData): string {
   lines.push("");
 
   for (const repo of p.repos) {
+    if (repo.hidden) continue;
     const lang = repo.language?.name ?? "—";
     lines.push(
       `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, weight ${repo.weight.toFixed(2)}`,
@@ -142,7 +143,7 @@ function formatPayload(p: ProfileData): string {
   }
 
   // Mandatory coverage section — explicit list the LLM must mention.
-  const mandatory = p.repos.slice(0, 10);
+  const mandatory = p.repos.filter((r) => !r.hidden).slice(0, 10);
   if (mandatory.length > 0) {
     lines.push("========================================");
     lines.push("MANDATORY COVERAGE — output JSON MUST include at least one item with a matching `repo` field for EACH of these:");
@@ -205,7 +206,7 @@ export async function summarizeTimeline(p: ProfileData): Promise<Timeline> {
   const mentioned = new Set(
     result.periods.flatMap((per) => per.items.map((i) => i.repo).filter((r): r is string => !!r)),
   );
-  const mandatory = p.repos.slice(0, 10);
+  const mandatory = p.repos.filter((r) => !r.hidden).slice(0, 10);
   const missing = mandatory.filter((r) => !mentioned.has(r.nameWithOwner));
   if (missing.length > 0) {
     console.warn(`WARN: model skipped ${missing.length} of ${mandatory.length} mandatory repos:`);

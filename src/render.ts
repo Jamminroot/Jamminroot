@@ -144,8 +144,11 @@ function buildActivityRows(p: ProfileData): ActivityRow[] {
   const sinceMs = now - NUM_WEEKS * 7 * 24 * 3600 * 1000;
 
   for (const r of p.repos) {
+    const isWork = isWorkRepo(r.nameWithOwner);
+    // Hidden repos contribute only to Work; never to individual rows.
+    if (r.hidden && !isWork) continue;
     let row: ActivityRow;
-    if (isWorkRepo(r.nameWithOwner)) {
+    if (isWork) {
       row = work;
     } else {
       const display = displayRepo(r.nameWithOwner, p.login);

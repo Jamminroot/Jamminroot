@@ -17,6 +17,10 @@ export type RepoData = {
   totalCommits: number;
   weight: number;
   recentCommits: CommitInfo[];
+  // True when REPO_WEIGHTS sets this repo's weight to 0 — kept in the dataset only so the
+  // heatmap can aggregate it into the Work bundle. Excluded from individual rendering and
+  // from the LLM prompt.
+  hidden?: boolean;
 };
 
 type WeightFn = "linear" | "sqrt" | "log";
@@ -313,6 +317,18 @@ export async function fetchProfile(
     .map((s) => s.trim())
     .filter(Boolean);
   const authorEmails = emails && emails.length > 0 ? emails : null;
+  // Repos matching this still get their commits fetched even if REPO_WEIGHTS excludes them,
+  // so the heatmap's Work bundle stays accurate.
+  const workPattern = process.env.WORK_REPO_REGEX?.trim();
+  const workRegex = workPattern
+    ? (() => {
+        try {
+          return new RegExp(workPattern, "i");
+        } catch {
+          return null;
+        }
+      })()
+    : null;
 
   // Public repos with known commit counts from contributionsCollection.
   const publicBare: RepoBare[] = cc.commitContributionsByRepository.map((entry) => ({
@@ -335,13 +351,15 @@ export async function fetchProfile(
     }
   }
 
-  // For each candidate, check the multiplier from REPO_WEIGHTS first — skip excluded repos
-  // (multiplier <= 0) BEFORE paying API cost for commit history. Then fetch and skip repos
-  // with no actual user commits in the window.
+  // For each candidate: multiplier <= 0 normally means skip, but if the repo matches
+  // WORK_REPO_REGEX we still fetch commits so the heatmap can aggregate them into the
+  // Work bundle. Such repos are flagged hidden=true so the LLM payload and individual
+  // rendering ignore them.
   const repos: RepoData[] = [];
   for (const r of merged) {
     const mult = multiplierFor(r.nameWithOwner, weightsConfig.rules);
-    if (mult <= 0) continue;
+    const isWork = workRegex ? workRegex.test(r.nameWithOwner) : false;
+    if (mult <= 0 && !isWork) continue;
     const [owner, name] = r.nameWithOwner.split("/");
     // Use emails-only filter when AUTHOR_EMAILS is set (GitHub treats id+emails as AND, not OR).
     // User is responsible for listing every commit-email they use across accounts.
@@ -354,8 +372,8 @@ export async function fetchProfile(
     );
     if (recentCommits.length === 0 && r.publicCommitCount === 0) continue;
     const totalCommits = r.publicCommitCount > 0 ? r.publicCommitCount : recentCommits.length;
-    const weight = applyWeightFn(totalCommits, weightsConfig.fn) * mult;
-    if (weight <= 0) continue;
+    const hidden = mult <= 0;
+    const weight = hidden ? 0 : applyWeightFn(totalCommits, weightsConfig.fn) * mult;
     repos.push({
       nameWithOwner: r.nameWithOwner,
       description: r.description,
@@ -363,6 +381,7 @@ export async function fetchProfile(
       totalCommits,
       weight,
       recentCommits,
+      hidden,
     });
   }
   repos.sort((a, b) => b.weight - a.weight);

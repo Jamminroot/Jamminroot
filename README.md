@@ -10,9 +10,9 @@ Feel free to reach out, too!
 <!-- ACTIVITY-SUMMARY-START -->
 ## Recent activity
 
-*Updated 2026-05-10*
+*Updated 2026-05-11*
 
-Across the year, the engineer focused on building a SaaS crypto trading platform, developing firmware for HID devices, and conducting AI research for trading and poker. Additional work spanned Android LLM assistants, Windows utilities, and automation tooling.
+Focused on crypto trading platforms and tooling, embedded firmware for HID devices, and AI/ML research. Also worked on Windows utilities, Android apps, and developer tooling.
 <!-- ACTIVITY-SUMMARY-END -->
 
 <img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/charts.svg" alt="Activity charts">
@@ -20,53 +20,42 @@ Across the year, the engineer focused on building a SaaS crypto trading platform
 <!-- ACTIVITY-TIMELINE-START -->
 > **2026 May**
 >
-> - **Windows input filter driver development** *(input-driver)* — Built a KMDF input filter driver for capturing and injecting keyboard/mouse events, adding integration tests and library features.
+> - **Windows input filter driver** *(input-driver)* — Built a Windows kernel input filter driver for capturing and injecting keyboard and mouse events.
 
 > **2026 Apr**
 >
-> - **Crypto trading platform iteration** *(summit)* — Iterated on the SaaS crypto trading platform, adding infrastructure, security hardening, and user-facing features like templates and topology visualization.
-> - **Firmware iteration for ESP32-S3 HID device** *(j-uni-hid)* — Continued development of the mouse/keyboard emulation firmware, adding new hardware variants and stability fixes.
-> - **File tagging utility maintenance** *(intag2)* — Polished the Windows Explorer file-tagging tool, fixing metadata handling and release workflow.
-> - **Aim assist and overlay tool development** *(MEMU3)* — Worked on a personal C++ project for aim assist with YOLO detection, overlay, and input emulation.
+> - **Crypto trading platform development** *(summit)* — Worked on the SaaS crypto trading platform, focusing on infrastructure, UI, and deployment.
+> - **ESP32-S3 HID firmware** *(j-uni-hid)* — Developed firmware for ESP32-S3 based HID emulation device.
+> - **File tagging utility for Windows** *(intag2)* — Iterated on the Windows Explorer file tagging tool, including release pipeline and store publishing.
 
 > **2026 Mar**
 >
-> - **Firmware version upgrades** *(j-uni-hid)* — Added dual-core and USB support for new firmware versions of the HID emulation device.
-> - **Crypto price prediction model research** *(crypto-model-research)* — Conducted research on deep learning models for crypto price prediction, experimenting with Mixture of Experts architectures and benchmarking.
-> - **Android LLM assistant with phone control** *(ozwil-android)* — Developed an Android app for on-device LLM with tool use, implementing sub-agent delegation and model management.
-> - **E-reader custom firmware development** *(papyrix)* — Built custom firmware for an e-reader device, adding a map viewer, knowledge base, and book processing pipeline.
+> - **ESP32-S3 HID firmware updates** *(j-uni-hid)* — Continued development of the ESP32-S3 HID firmware with new hardware variants.
+> - **Crypto price prediction research** *(crypto-model-research)* — Conducted research on crypto price prediction models, experimenting with various architectures.
+> - **On-device AI assistant for Android** *(ozwil-android)* — Built an Android LLM assistant with on-device model support and tool use.
 
 > **2026 Feb**
 >
-> - **File tagging utility release engineering** *(intag2)* — Set up CI/CD pipelines, Microsoft Store publishing, and CLI features for the file-tagging tool.
-> - **Graph-powered code intelligence engine** *(jaxon)* — Developed a code intelligence tool that indexes codebases into a knowledge graph, adding LSP integration and multi-language support.
-> - **Telegram node for n8n automation** *(n8n-nodes-telepilot-2)* — Maintained a fork of the TelePilot n8n node, fixing authentication issues and adding new triggers.
+> - **File tagging utility release engineering** *(intag2)* — Polished the Windows file tagging utility, focusing on CI/CD and store publishing.
 
 > **2026 Jan**
 >
-> - **Firmware stability fixes** *(j-uni-hid)* — Addressed connectivity and restart issues in the HID firmware.
-> - **Computer vision for online poker** *(poker-cv)* — Developed a computer vision pipeline for analyzing online poker games, including hand detection and state recovery.
-> - **Aim assist tool updates** *(MEMU3)* — Continued work on the aim assist project, adding new modes and HID click emulation.
-> - **Task management Android app** *(tasker)* — Built a simple task management app for Android with touch event visualization.
+> - **HID firmware maintenance** *(j-uni-hid)* — Maintained the ESP32-S3 HID firmware, fixing connectivity issues.
+> - **Poker computer vision system** *(poker-cv)* — Developed a computer vision system for analyzing online poker games.
 
 > **2025 Dec**
 >
-> - **Firmware v11 feature expansion** *(j-uni-hid)* — Developed v11 firmware with new device support, BLE safety features, and performance profiles.
-> - **Autonomous AI coding tool** *(auto-claude)* — Worked on an autonomous multi-session AI coding assistant, adding squash merge and worktree management features.
-> - **Aim assist input emulation** *(MEMU3)* — Added USB HID mouse movement and rate limiting to the aim assist tool.
+> - **HID firmware feature expansion** *(j-uni-hid)* — Worked on the ESP32-S3 HID firmware, adding new device variants and features.
 
 > **2025**
 >
-> - **Freqtrade strategy development** *(freqtrade_startegies)* — Created and refined trading strategies for Freqtrade, adding new strategy variants and performance optimizations.
-> - **Freqtrade Telegram bot monitoring** *(freqtrade-tg-multibot)* — Built a Telegram bot for monitoring Freqtrade instances, with profit tracking and web dashboard.
-> - **Telegram assistant bot** *(pAssistant)* — Developed a Telegram bot for content forwarding and summarization, with multi-target sending.
+> - **Freqtrade Telegram bot** *(freqtrade-tg-multibot)* — Built a Telegram bot for managing Freqtrade crypto trading instances.
+> - **Trading strategy development** — Developed and optimized trading strategies and monitoring tools for Freqtrade.
 
 > **2024**
 >
-> - **Freqtrade trading strategy development** *(freqtrade_strats)* — Developed and optimized trading strategies for the Freqtrade bot, focusing on hyperparameter tuning and performance.
-> - **Crypto signal bot development** *(CryptoSignalerBot)* — Built a Telegram bot for crypto trading signals, integrating AI analysis and technical indicators.
-> - **File tagging utility early development** *(intag)* — Started the Windows Explorer file-tagging project, adding CLI and UI features.
-> - **ChatGPT Telegram bot** *(chatgpt_telegram_net)* — Maintained a .NET Telegram bot for ChatGPT, handling long messages and updates.
+> - **Freqtrade strategy development** *(freqtrade_strats)* — Developed and backtested trading strategies for the Freqtrade platform.
+> - **Crypto signaler bot** *(CryptoSignalerBot)* — Created a Telegram bot for crypto trading signals using AI analysis.
 <!-- ACTIVITY-TIMELINE-END -->
 
 [**Download CV (PDF)**](https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/cv.pdf)

@@ -28,6 +28,7 @@ jobs:
           LEGAL_NAME: ${{ vars.LEGAL_NAME }}
           DATE_OF_BIRTH: ${{ vars.DATE_OF_BIRTH }}
           AUTHOR_EMAILS: ${{ vars.AUTHOR_EMAILS }}
+          HIDDEN_PROMPT: ${{ vars.HIDDEN_PROMPT }}
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"

@@ -43,7 +43,7 @@ await writeFile(
 );
 console.log("wrote cards/cv.json, CV.md, cards/charts.svg, cards/projects.svg");
 
-await renderCVPdf(profile, timeline, resolve("cards/cv.pdf"));
+await renderCVPdf(profile, timeline, descriptions, resolve("cards/cv.pdf"));
 console.log("wrote cards/cv.pdf");
 
 // Inject summary + timeline into README between markers, if present.

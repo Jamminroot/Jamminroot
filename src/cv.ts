@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fetchProfile } from "./github.js";
 import { summarizeTimeline } from "./llm.js";
+import { fillMissingDescriptions, loadDescriptions, saveDescriptions } from "./descriptions.js";
 import {
   renderActivityMarkdown,
   renderActivitySummaryMarkdown,
@@ -29,8 +30,17 @@ const timelineMd = renderTimelineMarkdown(timeline, profile.login);
 await mkdir(resolve("cards"), { recursive: true });
 await writeFile(resolve("cards/cv.json"), JSON.stringify(timeline, null, 2), "utf8");
 await writeFile(resolve("CV.md"), fullMd, "utf8");
+// Project descriptions cache: load, fill missing via LLM, save.
+const descCache = await loadDescriptions();
+const descriptions = await fillMissingDescriptions(profile, descCache);
+if (descriptions !== descCache) await saveDescriptions(descriptions);
+
 await writeFile(resolve("cards/charts.svg"), renderCharts(profile), "utf8");
-await writeFile(resolve("cards/projects.svg"), renderProjectsCards(profile, timeline), "utf8");
+await writeFile(
+  resolve("cards/projects.svg"),
+  renderProjectsCards(profile, timeline, descriptions),
+  "utf8",
+);
 console.log("wrote cards/cv.json, CV.md, cards/charts.svg, cards/projects.svg");
 
 await renderCVPdf(profile, timeline, resolve("cards/cv.pdf"));

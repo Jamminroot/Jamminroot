@@ -520,16 +520,17 @@ const PROJECT_GAP = 16;
 const PROJECT_CARD_W = (PROJECTS_W - PROJECT_PAD * 2 - PROJECT_GAP * (PROJECT_COLS - 1)) / PROJECT_COLS;
 const PROJECT_CARD_H = 200;
 
-function monthlyCommitCounts(commits: CommitInfo[]): number[] {
-  const now = new Date();
-  const counts = new Array(12).fill(0);
+const PULSE_WEEKS = 52;
+
+function weeklyPulseCounts(commits: CommitInfo[]): number[] {
+  const now = Date.now();
+  const counts = new Array(PULSE_WEEKS).fill(0);
+  const weekMs = 7 * 24 * 3600 * 1000;
   for (const c of commits) {
-    const d = new Date(c.date);
-    if (Number.isNaN(d.getTime())) continue;
-    const monthsAgo =
-      (now.getUTCFullYear() - d.getUTCFullYear()) * 12 +
-      (now.getUTCMonth() - d.getUTCMonth());
-    if (monthsAgo >= 0 && monthsAgo < 12) counts[11 - monthsAgo]++;
+    const t = new Date(c.date).getTime();
+    if (Number.isNaN(t)) continue;
+    const weeksAgo = Math.floor((now - t) / weekMs);
+    if (weeksAgo >= 0 && weeksAgo < PULSE_WEEKS) counts[PULSE_WEEKS - 1 - weeksAgo]++;
   }
   return counts;
 }
@@ -537,6 +538,7 @@ function monthlyCommitCounts(commits: CommitInfo[]): number[] {
 function pickProjects(
   p: ProfileData,
   t: Timeline,
+  descriptions: Record<string, string>,
   max: number,
 ): { repo: RepoData; title: string; description: string }[] {
   const lookup = new Map<string, { title: string; description: string }>();
@@ -551,10 +553,15 @@ function pickProjects(
   for (const r of p.repos) {
     if (r.hidden || r.weight <= 0) continue;
     const entry = lookup.get(r.nameWithOwner);
+    const desc =
+      descriptions[r.nameWithOwner] ??
+      r.description ??
+      entry?.description ??
+      "";
     out.push({
       repo: r,
       title: entry?.title ?? displayRepo(r.nameWithOwner, p.login),
-      description: entry?.description ?? r.description ?? "",
+      description: desc,
     });
     if (out.length >= max) break;
   }
@@ -606,38 +613,45 @@ function renderProjectCard(
     );
   });
 
-  // Monthly sparkline at the bottom
-  const sparkBaseY = y + h - pad - 4;
-  const sparkAreaH = 28;
-  const months = monthlyCommitCounts(r.recentCommits);
-  const max = Math.max(1, ...months);
-  const gap = 2;
+  // Pulse line at the bottom — weekly counts, drawn as a stroked polyline with a
+  // faint area fill below, EKG-style. Empty weeks sit on a flat baseline; active
+  // weeks spike up.
+  const counts = weeklyPulseCounts(r.recentCommits);
+  const max = Math.max(1, ...counts);
+  const sparkAreaH = 32;
+  const baselineY = y + h - pad - 14;
+  const peakY = baselineY - sparkAreaH;
   const sparkW = w - pad * 2;
-  const bw = (sparkW - gap * 11) / 12;
-  months.forEach((c, i) => {
-    const bx = x + pad + i * (bw + gap);
-    if (c === 0) {
-      out.push(
-        `<rect class="panel" x="${bx.toFixed(2)}" y="${sparkBaseY - 4}" width="${bw.toFixed(2)}" height="4" rx="1" ry="1"/>`,
-      );
-      return;
-    }
-    const bh = 4 + (c / max) * (sparkAreaH - 4);
-    out.push(
-      `<rect x="${bx.toFixed(2)}" y="${(sparkBaseY - bh).toFixed(2)}" width="${bw.toFixed(2)}" height="${bh.toFixed(2)}" rx="1" ry="1" fill="${langColor}" opacity="${(0.55 + (c / max) * 0.45).toFixed(2)}"/>`,
-    );
-  });
-  const totalCommitsInWindow = months.reduce((a, b) => a + b, 0);
+  const startX = x + pad;
+  const dx = sparkW / (counts.length - 1);
+  const pts = counts.map((c, i) => ({
+    x: startX + i * dx,
+    y: baselineY - (c / max) * sparkAreaH,
+  }));
+  const linePath = pts
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
+    .join(" ");
+  const areaPath = `${linePath} L ${pts[pts.length - 1].x.toFixed(2)} ${baselineY} L ${pts[0].x.toFixed(2)} ${baselineY} Z`;
+  void peakY;
   out.push(
-    `<text class="muted" x="${x + pad}" y="${sparkBaseY + 14}" font-size="9">last 12 months · ${totalCommitsInWindow} commits</text>`,
+    `<path d="${areaPath}" fill="${langColor}" opacity="0.18"/>`,
+    `<path d="${linePath}" stroke="${langColor}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+  );
+  const totalCommitsInWindow = counts.reduce((a, b) => a + b, 0);
+  out.push(
+    `<text class="muted" x="${x + pad}" y="${y + h - pad}" font-size="9">last 12 months · ${totalCommitsInWindow} commits</text>`,
   );
 
   return out.join("");
 }
 
-export function renderProjectsCards(p: ProfileData, t: Timeline): string {
+export function renderProjectsCards(
+  p: ProfileData,
+  t: Timeline,
+  descriptions: Record<string, string> = {},
+): string {
   const maxCards = PROJECT_COLS * 3; // up to 3 rows
-  const projects = pickProjects(p, t, maxCards);
+  const projects = pickProjects(p, t, descriptions, maxCards);
   if (projects.length === 0) {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PROJECTS_W} 60" width="${PROJECTS_W}" height="60"><style>${STYLE}</style><rect class="bg" width="${PROJECTS_W}" height="60" rx="8" ry="8"/><text class="muted" x="${PROJECTS_W / 2}" y="36" text-anchor="middle" font-size="12">No project cards available.</text></svg>`;
   }

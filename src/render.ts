@@ -522,6 +522,25 @@ const PROJECT_CARD_H = 200;
 
 const PULSE_WEEKS = 52;
 
+// Smooth a polyline using Catmull-Rom-to-Bezier conversion. Tension 0..1; lower = tighter.
+function smoothPath(pts: { x: number; y: number }[], tension = 0.2): string {
+  if (pts.length === 0) return "";
+  if (pts.length === 1) return `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
+  let d = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(pts.length - 1, i + 2)];
+    const c1x = p1.x + (p2.x - p0.x) * tension;
+    const c1y = p1.y + (p2.y - p0.y) * tension;
+    const c2x = p2.x - (p3.x - p1.x) * tension;
+    const c2y = p2.y - (p3.y - p1.y) * tension;
+    d += ` C ${c1x.toFixed(2)} ${c1y.toFixed(2)} ${c2x.toFixed(2)} ${c2y.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+  }
+  return d;
+}
+
 function weeklyPulseCounts(commits: CommitInfo[]): number[] {
   const now = Date.now();
   const counts = new Array(PULSE_WEEKS).fill(0);
@@ -613,14 +632,12 @@ function renderProjectCard(
     );
   });
 
-  // Pulse line at the bottom — weekly counts, drawn as a stroked polyline with a
-  // faint area fill below, EKG-style. Empty weeks sit on a flat baseline; active
-  // weeks spike up.
+  // Pulse line at the bottom — weekly commit counts as a smooth Catmull-Rom-style
+  // curve with a faint area fill below, mimicking GitHub's project pulse chart.
   const counts = weeklyPulseCounts(r.recentCommits);
   const max = Math.max(1, ...counts);
   const sparkAreaH = 32;
   const baselineY = y + h - pad - 14;
-  const peakY = baselineY - sparkAreaH;
   const sparkW = w - pad * 2;
   const startX = x + pad;
   const dx = sparkW / (counts.length - 1);
@@ -628,13 +645,10 @@ function renderProjectCard(
     x: startX + i * dx,
     y: baselineY - (c / max) * sparkAreaH,
   }));
-  const linePath = pts
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
-    .join(" ");
+  const linePath = smoothPath(pts);
   const areaPath = `${linePath} L ${pts[pts.length - 1].x.toFixed(2)} ${baselineY} L ${pts[0].x.toFixed(2)} ${baselineY} Z`;
-  void peakY;
   out.push(
-    `<path d="${areaPath}" fill="${langColor}" opacity="0.18"/>`,
+    `<path d="${areaPath}" fill="${langColor}" opacity="0.20"/>`,
     `<path d="${linePath}" stroke="${langColor}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
   );
   const totalCommitsInWindow = counts.reduce((a, b) => a + b, 0);

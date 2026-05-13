@@ -1,24 +1,24 @@
 {
   "generatedAt": "2026-05-13",
-  "summary": "Heavy focus on a SaaS crypto trading platform rewrite, alongside embedded firmware for input devices, Windows driver development, and AI/ML research for trading and poker. Also maintained several automation and utility projects across C++, Python, Kotlin, and C#.",
+  "summary": "Heavy focus on a SaaS crypto trading platform rewrite, alongside embedded firmware for input emulation, a Windows kernel driver, and AI/ML research projects. Also maintained Android apps, personal tooling, and several trading-related utilities.",
   "periods": [
     {
       "period": "2026 May",
       "items": [
         {
-          "title": "Windows input filter driver development",
+          "title": "Windows input filter driver",
           "repo": "Jamminroot/input-driver",
-          "description": "Built and tested a kernel-level input filtering and injection driver for Windows."
+          "description": "Built a Windows kernel driver for input filtering and injection, adding push-style event delivery and integration tests."
         },
         {
-          "title": "Android TTS engine implementation",
+          "title": "Android TTS engine",
           "repo": "Jamminroot/j-tts-android",
-          "description": "Developed an Android text-to-speech engine using Silero models and custom phonetizers."
+          "description": "Started an Android TTS engine project using Silero models with voice API and accent support."
         },
         {
           "title": "E-ink firmware expansion",
           "repo": "Jamminroot/biscuit",
-          "description": "Extended custom firmware for an e-ink device with a knowledge base app and mesh chat fixes."
+          "description": "Expanded custom e-reader firmware with a knowledge base app and mesh chat fixes."
         }
       ]
     },
@@ -26,34 +26,34 @@
       "period": "2026 Apr",
       "items": [
         {
-          "title": "Crypto trading platform rewrite",
+          "title": "SaaS crypto trading platform",
           "repo": "Jamminroot/summit",
-          "description": "Executed a full .NET rewrite of a SaaS algorithmic trading platform, building out infrastructure, trading domain, and deployment pipelines."
+          "description": "Iterated on a SaaS crypto algo-trading platform, building out proxy infrastructure, strategy templates, billing, and a .NET rewrite."
         },
         {
-          "title": "ESP32-S3 firmware iteration",
+          "title": "ESP32-S3 input emulation firmware",
           "repo": "Jamminroot/j-uni-hid",
-          "description": "Developed new firmware variants for a feature-rich mouse and keyboard emulation device."
+          "description": "Developed new firmware variants for an ESP32-S3 mouse and keyboard emulation device."
         },
         {
-          "title": "Windows Explorer file-tagging utility",
+          "title": "Windows Explorer file tagging",
           "repo": "Jamminroot/intag2",
-          "description": "Polished a Windows Explorer extension for tagging files and folders, including CI/CD and store publishing."
+          "description": "Polished a Windows Explorer file-tagging utility, working on release pipelines and metadata handling."
         },
         {
-          "title": "Computer vision aim assist tool",
+          "title": "CV and input emulation research",
           "repo": "Jamminroot/MEMU3",
-          "description": "Iterated on a personal computer vision project for mouse event emulation and screen overlay."
+          "description": "Worked on a computer vision and input emulation research project, adding aim assist and overlay features."
         },
         {
           "title": "E-ink reader custom firmware",
           "repo": "Jamminroot/papyrix",
-          "description": "Enhanced custom firmware for an e-ink device with a map application and knowledge base."
+          "description": "Built custom firmware for an e-ink reader, adding a map viewer and knowledge base app."
         },
         {
-          "title": "FlClash proxy client maintenance",
+          "title": "Clash proxy client fork",
           "repo": "Jamminroot/FlCLash",
-          "description": "Updated a proxy client with new transport support and rebased dependencies."
+          "description": "Maintained a Clash proxy client fork, updating the core and adding transport support."
         }
       ]
     },
@@ -61,19 +61,19 @@
       "period": "2026 Mar",
       "items": [
         {
-          "title": "Crypto price prediction research",
-          "repo": "Jamminroot/crypto-model-research",
-          "description": "Conducted deep learning experiments with mixture-of-experts architectures for cryptocurrency price prediction."
+          "title": "Android LLM assistant",
+          "repo": "Jamminroot/ozwil-android",
+          "description": "Built an Android LLM assistant with phone-use capabilities, focusing on sub-agent delegation and model management."
         },
         {
-          "title": "Android LLM assistant development",
-          "repo": "Jamminroot/ozwil-android",
-          "description": "Built an on-device LLM chat assistant with tool-use and sub-agent delegation capabilities."
+          "title": "Crypto price prediction research",
+          "repo": "Jamminroot/crypto-model-research",
+          "description": "Conducted research on crypto price prediction models, experimenting with mixture-of-experts architectures."
         },
         {
           "title": "E-ink Android launcher",
           "repo": "Jamminroot/blackboard-launcher",
-          "description": "Created a minimalist Android launcher centered around note-taking for e-ink readers."
+          "description": "Developed a note-taking focused Android launcher for e-ink devices."
         }
       ]
     },
@@ -81,19 +81,29 @@
       "period": "2026 Feb",
       "items": [
         {
-          "title": "Code intelligence engine development",
+          "title": "Code intelligence engine",
           "repo": "Jamminroot/jaxon",
-          "description": "Built a graph-powered code intelligence engine with multi-language support and LSP integration."
+          "description": "Built a graph-powered code intelligence engine with LSP integration and dead code detection."
         },
         {
-          "title": "Neovim configuration maintenance",
+          "title": "Neovim configuration",
           "repo": "Jamminroot/.dotfiles",
-          "description": "Maintained a personal Neovim IDE setup with LSP and treesitter configurations."
+          "description": "Maintained a personal Neovim IDE configuration, updating for newer versions and adding remote clipboard support."
         },
         {
-          "title": "YOLO labeling tool creation",
+          "title": "n8n Telegram node fork",
+          "repo": "Jamminroot/n8n-nodes-telepilot-2",
+          "description": "Maintained a fork of a Telegram node for n8n automation, fixing auth and CI issues."
+        },
+        {
+          "title": "YOLO labeling tool",
           "repo": "Jamminroot/yolo-labeler",
-          "description": "Built a minimalistic, browser-based labeling tool for YOLO object detection projects."
+          "description": "Built a minimalistic, browser-based YOLO labeling tool for personal projects."
+        },
+        {
+          "title": "Dotfiles management",
+          "repo": "Jamminroot/dotfiles",
+          "description": "Set up chezmoi-managed dotfiles with encrypted secrets."
         }
       ]
     },
@@ -103,12 +113,17 @@
         {
           "title": "Poker computer vision research",
           "repo": "Jamminroot/poker-cv",
-          "description": "Developed a computer vision pipeline for analyzing online poker games and reconstructing hand histories."
+          "description": "Worked on a computer vision project for online poker, implementing hand history extraction and validation."
         },
         {
-          "title": "n8n automation node maintenance",
+          "title": "Claude Code n8n node",
           "repo": "Jamminroot/n8n-nodes-claudecode",
-          "description": "Updated an n8n community node for integrating with an AI coding agent."
+          "description": "Updated an n8n node for Claude Code, migrating to the agent SDK."
+        },
+        {
+          "title": "Android tasker utility",
+          "repo": "Jamminroot/tasker",
+          "description": "Started an Android task management utility with touch event visualization."
         }
       ]
     },
@@ -116,29 +131,34 @@
       "period": "2025",
       "items": [
         {
-          "title": "Telegram automation tooling",
+          "title": "Freqtrade Telegram multi-bot",
           "repo": "Jamminroot/freqtrade-tg-multibot",
-          "description": "Built and maintained a multi-bot Telegram interface for trading automation."
-        },
-        {
-          "title": "Trading strategy development",
-          "repo": "Jamminroot/freqtrade_startegies",
-          "description": "Developed and optimized numerous algorithmic trading strategies."
+          "description": "Built a Telegram bot manager for Freqtrade, adding a web dashboard and profit calculations."
         },
         {
           "title": "Autonomous AI coding tool",
           "repo": "Jamminroot/auto-claude",
-          "description": "Built a multi-session autonomous coding assistant with worktree management."
+          "description": "Developed an autonomous multi-session AI coding tool with worktree management and git rules."
         },
         {
-          "title": "Flutter trading monitor app",
+          "title": "Freqtrade strategy development",
+          "repo": "Jamminroot/freqtrade_startegies",
+          "description": "Developed and optimized numerous trading strategies for the Freqtrade bot."
+        },
+        {
+          "title": "Flutter trading monitor",
           "repo": "Jamminroot/freqtrade_monitor",
-          "description": "Created a mobile trading dashboard with performance charts and bot management."
+          "description": "Built a Flutter mobile app for monitoring Freqtrade bot performance."
         },
         {
-          "title": "Telegram content aggregation bot",
+          "title": "Telegram automation bot",
           "repo": "Jamminroot/pAssistant",
-          "description": "Maintained a Telegram bot for content aggregation, forwarding, and summarization."
+          "description": "Worked on a Telegram automation bot for content forwarding and summarization."
+        },
+        {
+          "title": "Content collector service",
+          "repo": "Jamminroot/jContentCollector",
+          "description": "Built a content collection service with webhook and ad filtering capabilities."
         }
       ]
     },
@@ -148,17 +168,17 @@
         {
           "title": "Freqtrade strategy optimization",
           "repo": "Jamminroot/freqtrade_strats",
-          "description": "Conducted hyperparameter optimization and backtesting for algorithmic trading strategies."
+          "description": "Optimized trading strategies for Freqtrade, focusing on hyperparameter tuning."
         },
         {
-          "title": "Crypto trading signal bot",
+          "title": "Crypto signaler Telegram bot",
           "repo": "Jamminroot/CryptoSignalerBot",
-          "description": "Developed a Telegram bot for generating and posting cryptocurrency trading signals."
+          "description": "Built a Telegram bot for crypto signaling with AI-powered analysis."
         },
         {
-          "title": "ChatGPT Telegram bot maintenance",
+          "title": "ChatGPT Telegram bot",
           "repo": "Jamminroot/chatgpt_telegram_net",
-          "description": "Maintained a .NET Telegram bot for interacting with ChatGPT."
+          "description": "Maintained a .NET ChatGPT Telegram bot, adding long message support."
         }
       ]
     }

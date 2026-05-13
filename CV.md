@@ -2,49 +2,53 @@
 
 *Updated 2026-05-13*
 
-Heavy focus on a SaaS crypto trading platform rewrite, alongside embedded firmware for input devices, Windows driver development, and AI/ML research for trading and poker. Also maintained several automation and utility projects across C++, Python, Kotlin, and C#.
+Heavy focus on a SaaS crypto trading platform rewrite, alongside embedded firmware for input emulation, a Windows kernel driver, and AI/ML research projects. Also maintained Android apps, personal tooling, and several trading-related utilities.
 > **2026 May**
 >
-> - **Windows input filter driver development** *(input-driver)* — Built and tested a kernel-level input filtering and injection driver for Windows.
-> - **Android TTS engine implementation** *(j-tts-android)* — Developed an Android text-to-speech engine using Silero models and custom phonetizers.
-> - **E-ink firmware expansion** *(biscuit)* — Extended custom firmware for an e-ink device with a knowledge base app and mesh chat fixes.
+> - **Windows input filter driver** *(input-driver)* — Built a Windows kernel driver for input filtering and injection, adding push-style event delivery and integration tests.
+> - **Android TTS engine** *(j-tts-android)* — Started an Android TTS engine project using Silero models with voice API and accent support.
+> - **E-ink firmware expansion** *(biscuit)* — Expanded custom e-reader firmware with a knowledge base app and mesh chat fixes.
 
 > **2026 Apr**
 >
-> - **Crypto trading platform rewrite** *(summit)* — Executed a full .NET rewrite of a SaaS algorithmic trading platform, building out infrastructure, trading domain, and deployment pipelines.
-> - **ESP32-S3 firmware iteration** *(j-uni-hid)* — Developed new firmware variants for a feature-rich mouse and keyboard emulation device.
-> - **Windows Explorer file-tagging utility** *(intag2)* — Polished a Windows Explorer extension for tagging files and folders, including CI/CD and store publishing.
-> - **Computer vision aim assist tool** *(MEMU3)* — Iterated on a personal computer vision project for mouse event emulation and screen overlay.
-> - **E-ink reader custom firmware** *(papyrix)* — Enhanced custom firmware for an e-ink device with a map application and knowledge base.
-> - **FlClash proxy client maintenance** *(FlCLash)* — Updated a proxy client with new transport support and rebased dependencies.
+> - **SaaS crypto trading platform** *(summit)* — Iterated on a SaaS crypto algo-trading platform, building out proxy infrastructure, strategy templates, billing, and a .NET rewrite.
+> - **ESP32-S3 input emulation firmware** *(j-uni-hid)* — Developed new firmware variants for an ESP32-S3 mouse and keyboard emulation device.
+> - **Windows Explorer file tagging** *(intag2)* — Polished a Windows Explorer file-tagging utility, working on release pipelines and metadata handling.
+> - **CV and input emulation research** *(MEMU3)* — Worked on a computer vision and input emulation research project, adding aim assist and overlay features.
+> - **E-ink reader custom firmware** *(papyrix)* — Built custom firmware for an e-ink reader, adding a map viewer and knowledge base app.
+> - **Clash proxy client fork** *(FlCLash)* — Maintained a Clash proxy client fork, updating the core and adding transport support.
 
 > **2026 Mar**
 >
-> - **Crypto price prediction research** *(crypto-model-research)* — Conducted deep learning experiments with mixture-of-experts architectures for cryptocurrency price prediction.
-> - **Android LLM assistant development** *(ozwil-android)* — Built an on-device LLM chat assistant with tool-use and sub-agent delegation capabilities.
-> - **E-ink Android launcher** *(blackboard-launcher)* — Created a minimalist Android launcher centered around note-taking for e-ink readers.
+> - **Android LLM assistant** *(ozwil-android)* — Built an Android LLM assistant with phone-use capabilities, focusing on sub-agent delegation and model management.
+> - **Crypto price prediction research** *(crypto-model-research)* — Conducted research on crypto price prediction models, experimenting with mixture-of-experts architectures.
+> - **E-ink Android launcher** *(blackboard-launcher)* — Developed a note-taking focused Android launcher for e-ink devices.
 
 > **2026 Feb**
 >
-> - **Code intelligence engine development** *(jaxon)* — Built a graph-powered code intelligence engine with multi-language support and LSP integration.
-> - **Neovim configuration maintenance** *(.dotfiles)* — Maintained a personal Neovim IDE setup with LSP and treesitter configurations.
-> - **YOLO labeling tool creation** *(yolo-labeler)* — Built a minimalistic, browser-based labeling tool for YOLO object detection projects.
+> - **Code intelligence engine** *(jaxon)* — Built a graph-powered code intelligence engine with LSP integration and dead code detection.
+> - **Neovim configuration** *(.dotfiles)* — Maintained a personal Neovim IDE configuration, updating for newer versions and adding remote clipboard support.
+> - **n8n Telegram node fork** *(n8n-nodes-telepilot-2)* — Maintained a fork of a Telegram node for n8n automation, fixing auth and CI issues.
+> - **YOLO labeling tool** *(yolo-labeler)* — Built a minimalistic, browser-based YOLO labeling tool for personal projects.
+> - **Dotfiles management** *(dotfiles)* — Set up chezmoi-managed dotfiles with encrypted secrets.
 
 > **2026 Jan**
 >
-> - **Poker computer vision research** *(poker-cv)* — Developed a computer vision pipeline for analyzing online poker games and reconstructing hand histories.
-> - **n8n automation node maintenance** *(n8n-nodes-claudecode)* — Updated an n8n community node for integrating with an AI coding agent.
+> - **Poker computer vision research** *(poker-cv)* — Worked on a computer vision project for online poker, implementing hand history extraction and validation.
+> - **Claude Code n8n node** *(n8n-nodes-claudecode)* — Updated an n8n node for Claude Code, migrating to the agent SDK.
+> - **Android tasker utility** *(tasker)* — Started an Android task management utility with touch event visualization.
 
 > **2025**
 >
-> - **Telegram automation tooling** *(freqtrade-tg-multibot)* — Built and maintained a multi-bot Telegram interface for trading automation.
-> - **Trading strategy development** *(freqtrade_startegies)* — Developed and optimized numerous algorithmic trading strategies.
-> - **Autonomous AI coding tool** *(auto-claude)* — Built a multi-session autonomous coding assistant with worktree management.
-> - **Flutter trading monitor app** *(freqtrade_monitor)* — Created a mobile trading dashboard with performance charts and bot management.
-> - **Telegram content aggregation bot** *(pAssistant)* — Maintained a Telegram bot for content aggregation, forwarding, and summarization.
+> - **Freqtrade Telegram multi-bot** *(freqtrade-tg-multibot)* — Built a Telegram bot manager for Freqtrade, adding a web dashboard and profit calculations.
+> - **Autonomous AI coding tool** *(auto-claude)* — Developed an autonomous multi-session AI coding tool with worktree management and git rules.
+> - **Freqtrade strategy development** *(freqtrade_startegies)* — Developed and optimized numerous trading strategies for the Freqtrade bot.
+> - **Flutter trading monitor** *(freqtrade_monitor)* — Built a Flutter mobile app for monitoring Freqtrade bot performance.
+> - **Telegram automation bot** *(pAssistant)* — Worked on a Telegram automation bot for content forwarding and summarization.
+> - **Content collector service** *(jContentCollector)* — Built a content collection service with webhook and ad filtering capabilities.
 
 > **2024**
 >
-> - **Freqtrade strategy optimization** *(freqtrade_strats)* — Conducted hyperparameter optimization and backtesting for algorithmic trading strategies.
-> - **Crypto trading signal bot** *(CryptoSignalerBot)* — Developed a Telegram bot for generating and posting cryptocurrency trading signals.
-> - **ChatGPT Telegram bot maintenance** *(chatgpt_telegram_net)* — Maintained a .NET Telegram bot for interacting with ChatGPT.
+> - **Freqtrade strategy optimization** *(freqtrade_strats)* — Optimized trading strategies for Freqtrade, focusing on hyperparameter tuning.
+> - **Crypto signaler Telegram bot** *(CryptoSignalerBot)* — Built a Telegram bot for crypto signaling with AI-powered analysis.
+> - **ChatGPT Telegram bot** *(chatgpt_telegram_net)* — Maintained a .NET ChatGPT Telegram bot, adding long message support.

@@ -17,6 +17,8 @@ Heavy focus on a SaaS crypto trading platform rewrite, alongside embedded firmwa
 
 <img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/charts.svg" alt="Activity charts">
 
+<img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/projects.svg" alt="Project cards">
+
 <!-- ACTIVITY-TIMELINE-START -->
 > **2026 May**
 >

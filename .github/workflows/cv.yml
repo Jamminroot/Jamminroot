@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cards/cv.json cards/charts.svg cards/cv.pdf CV.md README.md career.json
+          git add cards/cv.json cards/charts.svg cards/projects.svg cards/cv.pdf CV.md README.md career.json
           if git diff --staged --quiet; then
             echo "no changes"
             exit 0

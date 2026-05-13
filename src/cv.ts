@@ -6,6 +6,7 @@ import {
   renderActivityMarkdown,
   renderActivitySummaryMarkdown,
   renderCharts,
+  renderProjectsCards,
   renderTimelineMarkdown,
 } from "./render.js";
 import { renderCVPdf } from "./pdf.js";
@@ -29,7 +30,8 @@ await mkdir(resolve("cards"), { recursive: true });
 await writeFile(resolve("cards/cv.json"), JSON.stringify(timeline, null, 2), "utf8");
 await writeFile(resolve("CV.md"), fullMd, "utf8");
 await writeFile(resolve("cards/charts.svg"), renderCharts(profile), "utf8");
-console.log("wrote cards/cv.json, CV.md, cards/charts.svg");
+await writeFile(resolve("cards/projects.svg"), renderProjectsCards(profile, timeline), "utf8");
+console.log("wrote cards/cv.json, CV.md, cards/charts.svg, cards/projects.svg");
 
 await renderCVPdf(profile, timeline, resolve("cards/cv.pdf"));
 console.log("wrote cards/cv.pdf");

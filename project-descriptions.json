@@ -24,6 +24,7 @@
   "Jamminroot/j-uni-hid": "Feature-rich mouse and keyboard emulation firmware for ESP32-S3.",
   "Jamminroot/jContentCollector": "Telegram content collector with ad filtering and webhooks.",
   "Jamminroot/jaxon": "Graph-powered code intelligence engine with MCP tools and CLI.",
+  "Jamminroot/jolt": "Minimal AutoHotKey alternative with interception support and scripting.",
   "Jamminroot/n8n-nodes-claudecode": "n8n node for Claude Code agent integration.",
   "Jamminroot/n8n-nodes-telepilot-2": "Fork of Telepilot n8n node for Telegram automation.",
   "Jamminroot/notes": "Personal notes repository.",

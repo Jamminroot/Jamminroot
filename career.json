@@ -1,15 +1,6 @@
 {
   "experiences": [
     {
-      "company": "Deeplay",
-      "role": ".NET Developer / Tech Lead",
-      "employmentType": "Full-time",
-      "start": "2021-06",
-      "end": null,
-      "location": null,
-      "bullets": []
-    },
-    {
       "company": "Akvelon (vendor for Microsoft)",
       "role": "Software Development Engineer",
       "employmentType": "Full-time",

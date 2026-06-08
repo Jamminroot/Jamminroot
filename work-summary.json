@@ -1,0 +1,46 @@
+{
+  "experiences": [
+    {
+      "company": "Deeplay",
+      "role": "Tech Lead",
+      "employmentType": "Full-time",
+      "start": "2024-09",
+      "end": null,
+      "location": null,
+      "bullets": [
+        "Lead engineering on a real-time desktop application for intellectual/skill-based online games statistics and analytics; own architecture, roadmap, and the release pipeline shipping to 10+ target online platforms.",
+        "Set technical direction and run ongoing code review as the primary quality gate.",
+        "Hands-on across the stack: C# / .NET backend, Kotlin Android companion app, CI/CD, dynamic server configuration.",
+        "Built and maintain internal frameworks — notably an image/video tool for previewing and scaling rectangular regions — adopted team-wide for QA and content production."
+      ]
+    },
+    {
+      "company": "Deeplay",
+      "role": "Lead .NET Developer",
+      "employmentType": "Full-time",
+      "start": "2023-10",
+      "end": "2024-08",
+      "location": null,
+      "bullets": [
+        "Owned end-to-end backend feature delivery (C# / .NET); drove cross-component design decisions and stability work.",
+        "Coordinated release rollouts across 10+ target online platforms; tightened the deployment pipeline.",
+        "Standardised internal tooling and authored team-wide operational runbooks; mentored junior engineers.",
+        "Continued maintenance of the Android companion app (Kotlin) and internal annotation frameworks."
+      ]
+    },
+    {
+      "company": "Deeplay",
+      "role": "Senior .NET Developer",
+      "employmentType": "Full-time",
+      "start": "2021-06",
+      "end": "2023-09",
+      "location": null,
+      "bullets": [
+        "Shipped backend features (C# / .NET) for a real-time desktop application for intellectual/skill-based online games statistics and analytics, supporting 10+ target online platforms.",
+        "Built and maintained the companion Android app (Kotlin): telemetry, CI/CD, dynamic server configuration, in-app updates.",
+        "Authored internal frameworks including an image/video annotation tool for scaled rectangle previews — adopted across the team.",
+        "Mentored junior engineers and wrote team onboarding documentation: workspace setup, conventions, operational runbooks."
+      ]
+    }
+  ]
+}

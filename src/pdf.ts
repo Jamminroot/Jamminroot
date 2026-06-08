@@ -64,12 +64,27 @@ async function fetchAvatarPng(login: string): Promise<Buffer | null> {
 }
 
 async function loadCareer(): Promise<Career | null> {
+  const career: Experience[] = [];
+  // work-summary.json — auto-generated, current job entries
+  try {
+    const raw = await readFile(resolve("work-summary.json"), "utf8");
+    const parsed = JSON.parse(raw) as Career;
+    career.push(...parsed.experiences);
+  } catch {
+    // ignore — file optional
+  }
+  // career.json — hand-curated, prior jobs
   try {
     const raw = await readFile(resolve("career.json"), "utf8");
-    return JSON.parse(raw) as Career;
+    const parsed = JSON.parse(raw) as Career;
+    career.push(...parsed.experiences);
   } catch {
-    return null;
+    // ignore — file optional
   }
+  if (career.length === 0) return null;
+  // Sort by start date desc (newer first)
+  career.sort((a, b) => b.start.localeCompare(a.start));
+  return { experiences: career };
 }
 
 const DEFAULT_HIDDEN_PROMPT =

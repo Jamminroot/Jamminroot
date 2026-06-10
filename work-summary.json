@@ -8,15 +8,15 @@
       "end": null,
       "location": null,
       "bullets": [
-        "Lead engineering on a real-time desktop application for intellectual/skill-based online games statistics and analytics; own architecture, roadmap, and the release pipeline shipping to 10+ target online platforms.",
-        "Led end-to-end development and launch of major product initiatives — a computer-vision pipeline, a desktop client, an agent/partner network, and several cloud-based services — owning architecture, core use scenarios, and UX direction.",
+        "Lead a 14-person engineering team (7 developers, 2 reverse engineers, 2 L2 diagnostics experts, DevOps, 2 QA) building a real-time desktop application for intellectual/skill-based online games statistics and analytics; own architecture, roadmap, and the release pipeline shipping to 10+ target online platforms. Regularly drive cross-team efforts with analysts, technical writers, and project managers beyond my direct hierarchy.",
+        "Led end-to-end development and launch of major product initiatives — a computer-vision pipeline, a desktop client, an agent/partner network, and several cloud-based services — owning architecture, core use scenarios, and UX direction. The desktop client drew 100+ organic access requests before any public announcement.",
         "Technically curated a series of product launches, each adding 5–30% to revenue.",
-        "Single-handedly re-engineered the pricing mechanics of an expense-heavy, high-frequency billing system; rolled it out to production with ~2 minutes of downtime and a seamless transition for clients.",
+        "Single-handedly re-engineered the pricing mechanics of a billing system processing 0.5–1.5M operations per day; rolled it out to production with ~2 minutes of downtime and a seamless transition for clients.",
         "Shipped a customer-facing AI assistant backed by a curated knowledge base: account lifecycle, authentication, knowledge-base tooling, and failure alerting.",
-        "Built the observability stack: ClickHouse + Grafana metrics and alerting, messenger notifications, and internal diagnostic tools including screenshot-based remote debugging.",
+        "Built the observability stack ingesting ~10M events/day: ClickHouse + Grafana metrics and alerting, messenger notifications, and internal diagnostic tools including screenshot-based remote debugging.",
         "Routinely build internal tooling that automates monotonous operational work — data converters with validation gates, log retrieval, admin UIs, and workflow integrations (n8n pipelines, custom hooks, Telegram/Mattermost clients).",
-        "Set technical direction and run ongoing code review as the primary quality gate; mentored engineers hands-on before delegating day-to-day mentorship in 2025.",
-        "Hands-on across the stack: C# / .NET backend, Kotlin Android companion app (including an accessibility-based input automation engine), CI/CD, dynamic server configuration."
+        "Primary quality gate for a codebase shipping ~50 PRs/month (250+ formal reviews on record); mentored 6 engineers end-to-end — several began onboarding newcomers themselves — before delegating day-to-day mentorship in 2025.",
+        "Hands-on across the stack: C# / .NET backend, Kotlin Android companion app serving up to 2.5k DAU (including an accessibility-based input automation engine), CI/CD, dynamic server configuration."
       ]
     },
     {
@@ -29,7 +29,7 @@
       "bullets": [
         "Owned end-to-end backend feature delivery (C# / .NET); drove cross-component design decisions and stability work.",
         "Led a platform-wide migration of 10+ production integrations onto a new shared core in a single coordinated sweep.",
-        "Owned release engineering for the service fleet: hundreds of coordinated test/stage/production rollouts on Kubernetes, capacity management, and credential/endpoint migrations across two product lines.",
+        "Owned release engineering for a 13-service fleet on Kubernetes — 350+ versioned production releases shipped over my tenure — including capacity management and credential/endpoint migrations across two product lines.",
         "Extended protocol-level integrations with new session modes, event types, and dynamic pricing flows.",
         "Standardised internal tooling and authored team-wide operational runbooks; mentored junior engineers.",
         "Continued maintenance of the Android companion app (Kotlin) and internal annotation frameworks."
@@ -44,7 +44,7 @@
       "location": null,
       "bullets": [
         "Shipped backend features (C# / .NET) for a real-time desktop application for intellectual/skill-based online games statistics and analytics, supporting 10+ target online platforms.",
-        "Engineered protocol-level platform integrations: transformed captured, decoded network traffic into consistent real-time session state with reconnect, recovery, and catch-up handling; took three integrations from empty repository to production.",
+        "Engineered protocol-level platform integrations: transformed captured, decoded network traffic into consistent real-time session state with reconnect, recovery, and catch-up handling; took three integrations from empty repository to production, the largest — including a full secondary real-time subsystem — in ~6 months.",
         "Rolled out a shared rules-based classification engine across the entire integration fleet.",
         "Acted as de-facto release manager: coordinated hundreds of staged rollouts across test/stage/production environments on Kubernetes.",
         "Built and maintained the companion Android app (Kotlin): telemetry, CI/CD, dynamic server configuration, in-app updates.",

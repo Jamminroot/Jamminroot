@@ -9,9 +9,14 @@
       "location": null,
       "bullets": [
         "Lead engineering on a real-time desktop application for intellectual/skill-based online games statistics and analytics; own architecture, roadmap, and the release pipeline shipping to 10+ target online platforms.",
-        "Set technical direction and run ongoing code review as the primary quality gate.",
-        "Hands-on across the stack: C# / .NET backend, Kotlin Android companion app, CI/CD, dynamic server configuration.",
-        "Built and maintain internal frameworks — notably an image/video tool for previewing and scaling rectangular regions — adopted team-wide for QA and content production."
+        "Led end-to-end development and launch of major product initiatives — a computer-vision pipeline, a desktop client, an agent/partner network, and several cloud-based services — owning architecture, core use scenarios, and UX direction.",
+        "Technically curated a series of product launches, each adding 5–30% to revenue.",
+        "Single-handedly re-engineered the pricing mechanics of an expense-heavy, high-frequency billing system; rolled it out to production with ~2 minutes of downtime and a seamless transition for clients.",
+        "Shipped a customer-facing AI assistant backed by a curated knowledge base: account lifecycle, authentication, knowledge-base tooling, and failure alerting.",
+        "Built the observability stack: ClickHouse + Grafana metrics and alerting, messenger notifications, and internal diagnostic tools including screenshot-based remote debugging.",
+        "Routinely build internal tooling that automates monotonous operational work — data converters with validation gates, log retrieval, admin UIs, and workflow integrations (n8n pipelines, custom hooks, Telegram/Mattermost clients).",
+        "Set technical direction and run ongoing code review as the primary quality gate; mentored engineers hands-on before delegating day-to-day mentorship in 2025.",
+        "Hands-on across the stack: C# / .NET backend, Kotlin Android companion app (including an accessibility-based input automation engine), CI/CD, dynamic server configuration."
       ]
     },
     {
@@ -23,7 +28,9 @@
       "location": null,
       "bullets": [
         "Owned end-to-end backend feature delivery (C# / .NET); drove cross-component design decisions and stability work.",
-        "Coordinated release rollouts across 10+ target online platforms; tightened the deployment pipeline.",
+        "Led a platform-wide migration of 10+ production integrations onto a new shared core in a single coordinated sweep.",
+        "Owned release engineering for the service fleet: hundreds of coordinated test/stage/production rollouts on Kubernetes, capacity management, and credential/endpoint migrations across two product lines.",
+        "Extended protocol-level integrations with new session modes, event types, and dynamic pricing flows.",
         "Standardised internal tooling and authored team-wide operational runbooks; mentored junior engineers.",
         "Continued maintenance of the Android companion app (Kotlin) and internal annotation frameworks."
       ]
@@ -37,6 +44,9 @@
       "location": null,
       "bullets": [
         "Shipped backend features (C# / .NET) for a real-time desktop application for intellectual/skill-based online games statistics and analytics, supporting 10+ target online platforms.",
+        "Engineered protocol-level platform integrations: transformed captured, decoded network traffic into consistent real-time session state with reconnect, recovery, and catch-up handling; took three integrations from empty repository to production.",
+        "Rolled out a shared rules-based classification engine across the entire integration fleet.",
+        "Acted as de-facto release manager: coordinated hundreds of staged rollouts across test/stage/production environments on Kubernetes.",
         "Built and maintained the companion Android app (Kotlin): telemetry, CI/CD, dynamic server configuration, in-app updates.",
         "Authored internal frameworks including an image/video annotation tool for scaled rectangle previews — adopted across the team.",
         "Mentored junior engineers and wrote team onboarding documentation: workspace setup, conventions, operational runbooks."

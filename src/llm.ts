@@ -115,14 +115,13 @@ Output a SINGLE JSON object. No markdown fences. No commentary. Schema:
   ]
 }`;
 
-// Band repos by weight relative to the heaviest visible repo. Repos are already
-// sorted by weight desc, so visible[0] holds the max.
-function importanceTag(weight: number, maxWeight: number): "PRIMARY" | "SECONDARY" | "MINOR" {
-  if (maxWeight <= 0) return "MINOR";
-  const rel = weight / maxWeight;
-  if (rel >= 0.5) return "PRIMARY";
-  if (rel >= 0.2) return "SECONDARY";
-  return "MINOR";
+// Band repos by the user's REPO_WEIGHTS multiplier — the editorial signal — rather than
+// the volume-mixed weight, so a boosted repo with few commits still reads as PRIMARY and
+// a downweighted busy repo can't dominate the summary.
+function importanceTag(multiplier: number): "PRIMARY" | "SECONDARY" | "MINOR" {
+  if (multiplier > 1) return "PRIMARY";
+  if (multiplier < 1) return "MINOR";
+  return "SECONDARY";
 }
 
 function formatPayload(p: ProfileData): string {
@@ -136,12 +135,11 @@ function formatPayload(p: ProfileData): string {
   lines.push("Repositories with activity in the window (sorted by importance — see Importance levels and Coverage rule):");
   lines.push("");
 
-  const maxWeight = p.repos.find((r) => !r.hidden)?.weight ?? 0;
   for (const repo of p.repos) {
     if (repo.hidden) continue;
     const lang = repo.language?.name ?? "—";
     lines.push(
-      `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, importance: ${importanceTag(repo.weight, maxWeight)}`,
+      `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, importance: ${importanceTag(repo.multiplier)}`,
     );
     if (repo.description) lines.push(`Description: ${repo.description}`);
     if (repo.recentCommits.length > 0) {
@@ -167,7 +165,7 @@ function formatPayload(p: ProfileData): string {
     lines.push("========================================");
     lines.push("MANDATORY COVERAGE — output JSON MUST include at least one item with a matching `repo` field for EACH of these:");
     for (const r of mandatory) {
-      lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, importance: ${importanceTag(r.weight, maxWeight)})`);
+      lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, importance: ${importanceTag(r.multiplier)})`);
     }
     lines.push("If a repo has no description and uninformative or absent commit messages, infer the project type from its name + language and write a brief generic item like 'Worked on the personal C++ project named X.' Do not omit any of these from the output.");
     lines.push("========================================");

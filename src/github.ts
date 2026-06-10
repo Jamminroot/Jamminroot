@@ -16,6 +16,9 @@ export type RepoData = {
   language: { name: string; color: string } | null;
   totalCommits: number;
   weight: number;
+  // Raw REPO_WEIGHTS multiplier (1.0 when no rule matches) — the user's editorial signal,
+  // independent of commit volume. Drives the PRIMARY/SECONDARY/MINOR tag in the LLM prompt.
+  multiplier: number;
   recentCommits: CommitInfo[];
   // True when REPO_WEIGHTS sets this repo's weight to 0 — kept in the dataset only so the
   // heatmap can aggregate it into the Work bundle. Excluded from individual rendering and
@@ -379,6 +382,7 @@ export async function fetchProfile(
       language: r.language,
       totalCommits,
       weight,
+      multiplier: mult,
       recentCommits,
       hidden,
     });

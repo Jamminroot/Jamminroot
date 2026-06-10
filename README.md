@@ -10,9 +10,9 @@ Feel free to reach out, too!
 <!-- ACTIVITY-SUMMARY-START -->
 ## Recent activity
 
-*Updated 2026-06-08*
+*Updated 2026-06-10*
 
-Focused on building the Summit crypto trading platform, developing computer vision and input emulation tools, and advancing on-device AI assistants. Also maintained trading automation bots and firmware projects.
+Worked extensively on a SaaS crypto algorithmic trading platform, completing a major .NET rewrite and infrastructure setup. Added advanced features like proxy infrastructure, strategy templates, and service-account authentication.
 <!-- ACTIVITY-SUMMARY-END -->
 
 <img src="https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/charts.svg" alt="Activity charts">
@@ -22,50 +22,43 @@ Focused on building the Summit crypto trading platform, developing computer visi
 <!-- ACTIVITY-TIMELINE-START -->
 > **2026 Jun**
 >
-> - **Auth and deployment fixes on Summit platform** *(summit)* — Tweaked authentication pipeline and Docker deployment for the crypto trading SaaS.
-> - **Started new input automation engine Jolt** *(jolt)* — Began building a lightweight hotkey tool with interception and scenario support.
+> - **Crypto trading platform rewrite and deployment** *(summit)* — Worked on the SaaS crypto algo trading platform, focusing on the .NET rewrite, deployment pipeline, and service-account auth.
+> - **Minimal AutoHotKey alternative** *(jolt)* — Started a minimal C++ automation tool with interception support and typed actions.
 
 > **2026 May**
 >
-> - **Firmware features for ESP32-S3 HID device** *(j-uni-hid)* — Added fire-and-forget event emission and an 8×8 matrix variant to the mouse/keyboard firmware.
-> - **Windows input driver library and tests** *(input-driver)* — Integrated push-style event delivery and wrote integration tests for the KMDF input filter.
-> - **Fixed Explorer file metadata encoding** *(intag2)* — Ensured desktop.ini writes in UTF‑16 LE for non‑ASCII tag display in Windows Explorer.
-> - **Android TTS engine expansion and polish** *(j-tts-android)* — Added multiple speech engines, pitch control, intonation sliders, and Russian text normalization.
+> - **Firmware development for ESP32-S3 HID device** *(j-uni-hid)* — Iterated on feature-rich mouse and keyboard emulation firmware, adding new device variants and fire-and-forget emitting.
+> - **Windows input filter driver** *(input-driver)* — Built a KMDF input filter and injection driver with a testing framework and library enhancements.
+> - **File tagging tool for Windows Explorer** *(intag2)* — Maintained the C++ file and folder tagging utility, fixing encoding issues and improving metadata handling.
+> - **Android text-to-speech engine** *(j-tts-android)* — Developed a multi-engine TTS app with pitch control, RuNorm text normalization, and Vosk-based voice input.
 
 > **2026 Apr**
 >
-> - **Major feature rollout on Summit crypto platform** *(summit)* — Built quickstart templates, outbound proxy infrastructure, billing revamp, and completed .NET rewrite deployment.
-> - **Firmware variant development for ESP32-S3** *(j-uni-hid)* — Drafted a new firmware variant with USB improvements and fixed connection stability.
-> - **Release automation for Windows file tagger** *(intag2)* — Polished release pipelines and metadata handling for the Explorer tagging utility.
-> - **Aim assist enhancements with YOLO overlay** *(MEMU3)* — Improved target detection, autofire gating, and debug overlay for the CV-based input tool.
+> - **Crypto trading platform feature rollout** *(summit)* — Continued building the automated trading platform, adding proxy infrastructure, strategy templates, and billing overhaul.
+> - **New firmware variant for ESP32-S3** *(j-uni-hid)* — Drafted a new firmware variant for the HID device and fixed connectivity issues.
+> - **CI/CD for file tagging tool** *(intag2)* — Set up release automation for the Windows Explorer file-tagging utility.
+> - **Computer vision and automation tool** *(MEMU3)* — Enhanced a computer vision utility with YOLO model improvements and bow/flick assist features.
 
 > **2026 Mar**
 >
-> - **Dual-core firmware release for ESP32-S3** *(j-uni-hid)* — Shipped new firmware versions supporting dual-core operation and improved USB connectivity.
-> - **Crypto price model research with MoE architectures** *(crypto-model-research)* — Ran controlled experiments on mixture-of-experts models and published benchmark results for spike prediction.
-> - **On-device LLM assistant with agent delegation** *(ozwil-android)* — Implemented sub-agent delegation, model presets, and background processing for the Android LLM tool.
-> - **Overlay and state persistence for CV tool** *(MEMU3)* — Rewrote the overlay with D3D11/D2D and added mode persistence across restarts.
+> - **Crypto price prediction model research** *(crypto-model-research)* — Experimented with neural network architectures for crypto price prediction, including mixture of experts and ensemble models.
+> - **On-device LLM assistant for Android** *(ozwil-android)* — Built a mobile AI assistant with sub-agent delegation, model presets, and local inference capabilities.
+> - **HID firmware hardware variants** *(j-uni-hid)* — Developed firmware updates for multiple ESP32 variants, including USB and dual-core versions.
+> - **Automation tool with overlay and YOLO** *(MEMU3)* — Added mode persistence, YOLO confidence control, and status display to the automation utility.
 
 > **2026 Feb**
 >
-> - **Store publishing and CI polish for file tagger** *(intag2)* — Automated Microsoft Store submissions, fixed release workflows, and expanded CLI capabilities.
-> - **Code intelligence engine with LSP integration** *(jaxon)* — Added language-server support, DI detection, and multi-language parsers to the graph-based code analysis tool.
+> - **Microsoft Store publishing and CLI** *(intag2)* — Automated store publishing and added CLI features to the file tagging utility.
+> - **Code knowledge graph engine** *(jaxon)* — Expanded a code intelligence tool with LSP integration, DI detection, and broader language support.
 
 > **2026 Jan**
 >
-> - **COM restart fix for HID firmware** *(j-uni-hid)* — Improved serial connection recovery for the custom input device firmware.
-> - **Computer vision pipeline for online poker** *(poker-cv)* — Built a pipeline for detecting cards, blinds, and actions from poker table video streams.
+> - **Online poker CV research tool** *(poker-cv)* — Developed a computer vision pipeline for poker table state recognition and hand history reconstruction.
 
 > **2025**
 >
-> - **Telegram bot for Freqtrade trading** *(freqtrade-tg-multibot)* — Developed a multi‑bot Telegram interface with authentication and profit tracking for the Freqtrade platform.
-> - **Autonomous AI coding sessions tool** *(auto-claude)* — Built a multi‑session AI coding assistant with worktree management, squash merging, and git rules.
-> - **Algorithmic trading strategy development** *(freqtrade_startegies)* — Iterated on multiple Freqtrade strategies, running hyperopt optimizations and backtesting for crypto markets.
-> - **Initial CV/input emulation experiments** *(MEMU3)* — Started the MEMU3 project with HID mouse emulation, YOLO integration, and aim assistance prototyping.
-
-> **2024**
->
-> - **Early Freqtrade strategy research** *(freqtrade_strats)* — Developed and backtested trading strategies, exploring hyperopt and leveraged configurations.
+> - **Telegram trading bot multi-instance tool** *(freqtrade-tg-multibot)* — Built a C# web application for managing multiple Freqtrade bots with Telegram authentication and daily profit tracking.
+> - **Autonomous AI coding assistant** *(auto-claude)* — Developed an autonomous multi-session AI coding tool with worktree management and squash merging.
 <!-- ACTIVITY-TIMELINE-END -->
 
 [**Download CV (PDF)**](https://raw.githubusercontent.com/Jamminroot/Jamminroot/master/cards/cv.pdf)

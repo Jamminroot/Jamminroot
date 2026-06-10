@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-06-10",
-  "summary": "Focused primarily on building a SaaS crypto trading platform with AI capabilities, while also developing custom hardware firmware for input emulation and a Windows kernel-level input driver.",
+  "summary": "Built a SaaS crypto trading platform, developed embedded HID firmware and a Windows input driver, and iterated on AI/ML research projects including crypto prediction and computer vision for online poker.",
   "periods": [
     {
       "period": "2026 Jun",
@@ -8,12 +8,7 @@
         {
           "title": "SaaS crypto trading platform",
           "repo": "Jamminroot/summit",
-          "description": "Polished the web build and authentication system for the AI-driven trading platform."
-        },
-        {
-          "title": "Minimal input automation tool",
-          "repo": "Jamminroot/jolt",
-          "description": "Started a new lightweight AutoHotKey alternative with a scenario engine and interception support."
+          "description": "Continued work on the AI-driven crypto trading platform, touching build infrastructure, authentication, and deployment tooling."
         }
       ]
     },
@@ -21,24 +16,14 @@
       "period": "2026 May",
       "items": [
         {
-          "title": "ESP32-S3 input emulation firmware",
+          "title": "ESP32-S3 HID firmware development",
           "repo": "Jamminroot/j-uni-hid",
-          "description": "Iterated on feature-rich mouse and keyboard emulation firmware, adding new device variants and performance modes."
+          "description": "Iterated on feature-rich mouse and keyboard emulation firmware for the ESP32-S3, adding a new matrix variant and event emitting."
         },
         {
           "title": "Windows input filter driver",
           "repo": "Jamminroot/input-driver",
-          "description": "Developed a KMDF input filter driver with capture, injection, and push-style event delivery."
-        },
-        {
-          "title": "Android text-to-speech engine",
-          "repo": "Jamminroot/j-tts-android",
-          "description": "Worked on a multi-engine TTS implementation, adding new voice engines and pitch controls."
-        },
-        {
-          "title": "Computer vision aim assist tool",
-          "repo": "Jamminroot/MEMU3",
-          "description": "Enhanced a CV-based utility with GPU inference, new aiming modes, and overlay improvements."
+          "description": "Developed a KMDF input filter and injection driver, adding push-style event delivery and integration tests."
         }
       ]
     },
@@ -48,17 +33,7 @@
         {
           "title": "SaaS crypto trading platform",
           "repo": "Jamminroot/summit",
-          "description": "Built out the core platform with a .NET rewrite, deployment pipeline, and major feature phases including billing and execution engine."
-        },
-        {
-          "title": "Custom e-reader firmware",
-          "repo": "Jamminroot/papyrix",
-          "description": "Developed custom firmware for an e-ink device, adding a map application and knowledge base browser."
-        },
-        {
-          "title": "Proxy client with custom transport",
-          "repo": "Jamminroot/FlCLash",
-          "description": "Updated a proxy client fork with new transport support and API exposure."
+          "description": "Worked heavily on the trading platform, shipping features for outbound proxies, strategy templates, billing model changes, UI overhauls, and security hardening."
         }
       ]
     },
@@ -66,19 +41,19 @@
       "period": "2026 Mar",
       "items": [
         {
-          "title": "Crypto price prediction research",
-          "repo": "Jamminroot/crypto-model-research",
-          "description": "Conducted deep research on model architectures, running hundreds of experiments on a prediction model."
+          "title": "SaaS crypto trading platform",
+          "repo": "Jamminroot/summit",
+          "description": "Built out features including an MCP server agent interface, LLM client integrations, and a WebSocket notification system for the trading platform."
         },
         {
           "title": "On-device LLM assistant for Android",
           "repo": "Jamminroot/ozwil-android",
-          "description": "Built an LLM-powered assistant with phone-use capabilities, focusing on sub-agent delegation and model management."
+          "description": "Iterated on an Android LLM assistant, restructuring the sub-agent architecture, adding new offline models, and implementing wake-word processing."
         },
         {
           "title": "E-ink note-taking launcher",
           "repo": "Jamminroot/blackboard-launcher",
-          "description": "Developed a minimalist Android launcher centered around note-taking for e-ink devices."
+          "description": "Built an Android launcher centered around note-taking for E-ink devices."
         }
       ]
     },
@@ -86,19 +61,14 @@
       "period": "2026 Feb",
       "items": [
         {
-          "title": "Windows Explorer file tagging utility",
-          "repo": "Jamminroot/intag2",
-          "description": "Polished a file and folder tagging tool for Windows Explorer, working on CI pipelines and store publishing."
+          "title": "SaaS crypto trading platform",
+          "repo": "Jamminroot/summit",
+          "description": "Continued development of the crypto trading platform."
         },
         {
-          "title": "Graph-powered code intelligence engine",
-          "repo": "Jamminroot/jaxon",
-          "description": "Expanded a codebase indexing tool with LSP integration and broader language support."
-        },
-        {
-          "title": "Neovim development environment",
+          "title": "Neovim IDE configuration",
           "repo": "Jamminroot/.dotfiles",
-          "description": "Maintained a personal Neovim configuration, updating for compatibility and adding remote session support."
+          "description": "Maintained a personal Neovim development environment setup."
         }
       ]
     },
@@ -106,9 +76,9 @@
       "period": "2026 Jan",
       "items": [
         {
-          "title": "Computer vision for online poker",
-          "repo": "Jamminroot/poker-cv",
-          "description": "Built a CV pipeline for analyzing online poker games, achieving high accuracy in hand and card detection."
+          "title": "ESP32-S3 HID firmware development",
+          "repo": "Jamminroot/j-uni-hid",
+          "description": "Iterated on multiple firmware versions for the ESP32-S3, introducing BLE and USB touch support and performance profiles."
         }
       ]
     },
@@ -116,19 +86,24 @@
       "period": "2025",
       "items": [
         {
-          "title": "Autonomous multi-session AI coding tool",
+          "title": "AI coding assistant tooling",
           "repo": "Jamminroot/auto-claude",
-          "description": "Developed an autonomous coding assistant with worktree management and git rules systems."
+          "description": "Worked on an autonomous multi-session AI coding tool, adding Git rules, task IDs, and squash-merge features."
         },
         {
-          "title": "Telegram automation and content collection",
+          "title": "Trading bot infrastructure",
           "repo": "Jamminroot/freqtrade-tg-multibot",
-          "description": "Worked on Telegram bot tooling for trading and content aggregation."
-        },
+          "description": "Built and iterated on a Telegram-based multi-bot frontend for Freqtrade trading bots."
+        }
+      ]
+    },
+    {
+      "period": "2024",
+      "items": [
         {
-          "title": "Freqtrade monitoring and strategies",
-          "repo": "Jamminroot/freqtrade_monitor",
-          "description": "Built a mobile monitoring app and iterated on trading strategies for the Freqtrade platform."
+          "title": "Explorer file-tagging utility",
+          "repo": "Jamminroot/intag2",
+          "description": "Iterated on a Windows Explorer file and folder tagging utility, focusing on Microsoft Store publishing and CI pipelines."
         }
       ]
     }

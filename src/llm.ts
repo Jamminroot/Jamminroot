@@ -18,6 +18,14 @@ The user's payload includes "today's date" — use it to derive the period label
 
 Skip a month or year entirely if there is no meaningful commit activity for it. Months always come before years in the output. Example output sequence for today = 2026 May: ["2026 May", "2026 Apr", "2026 Mar", "2026 Feb", "2025", "2024"].
 
+# Importance levels (STRICT)
+
+Each repo is tagged with an importance level (PRIMARY / SECONDARY / MINOR) derived from the user's own configuration. This is the emphasis signal — commit volume does NOT override it. A MINOR repo with hundreds of commits is still MINOR.
+
+- PRIMARY: the projects this CV is built around. The \`summary\` field MUST be about these and only these.
+- SECONDARY: include as timeline items; may get a brief nod in the summary only if it reads naturally.
+- MINOR: cover in timeline items where the Coverage rule requires it, keep descriptions short, and NEVER mention in the summary.
+
 # Coverage rule (STRICT, NON-NEGOTIABLE)
 
 The user payload ends with a "MANDATORY COVERAGE" section listing specific repos. Your output JSON MUST contain at least one item with a matching \`repo\` field for EACH listed repo. Repos with no description, no recognisable theme, or uninformative commit messages STILL must be covered — write a generic project-level description from the repo name + language alone (e.g., "Worked on the personal C++ project named MEMU3" is acceptable). Skipping a mandatory repo is a failure of the task.
@@ -96,7 +104,7 @@ Bad outputs (DO NOT produce these):
 Output a SINGLE JSON object. No markdown fences. No commentary. Schema:
 
 {
-  "summary": "string, 2 sentences max, big-picture themes across all periods (high-level only, no specifics)",
+  "summary": "string, 2 sentences max, big-picture themes across all periods — PRIMARY repos only (high-level, no specifics)",
   "periods": [
     {
       "period": "string (YYYY MMM for months, YYYY for years)",
@@ -107,6 +115,16 @@ Output a SINGLE JSON object. No markdown fences. No commentary. Schema:
   ]
 }`;
 
+// Band repos by weight relative to the heaviest visible repo. Repos are already
+// sorted by weight desc, so visible[0] holds the max.
+function importanceTag(weight: number, maxWeight: number): "PRIMARY" | "SECONDARY" | "MINOR" {
+  if (maxWeight <= 0) return "MINOR";
+  const rel = weight / maxWeight;
+  if (rel >= 0.5) return "PRIMARY";
+  if (rel >= 0.2) return "SECONDARY";
+  return "MINOR";
+}
+
 function formatPayload(p: ProfileData): string {
   const lines: string[] = [];
   lines.push(`Today's date: ${new Date().toISOString().slice(0, 10)}`);
@@ -115,14 +133,15 @@ function formatPayload(p: ProfileData): string {
     `Last 12 months: ${p.totals.contributions} total contributions, ${p.totals.commits} commits attributed to public repos, across ${p.repos.length} repositories.`,
   );
   lines.push("");
-  lines.push("Repositories with activity in the window (sorted by importance weight — see Coverage rule):");
+  lines.push("Repositories with activity in the window (sorted by importance — see Importance levels and Coverage rule):");
   lines.push("");
 
+  const maxWeight = p.repos.find((r) => !r.hidden)?.weight ?? 0;
   for (const repo of p.repos) {
     if (repo.hidden) continue;
     const lang = repo.language?.name ?? "—";
     lines.push(
-      `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, weight ${repo.weight.toFixed(2)}`,
+      `### ${repo.nameWithOwner} (${lang}) — ${repo.totalCommits} commits, importance: ${importanceTag(repo.weight, maxWeight)}`,
     );
     if (repo.description) lines.push(`Description: ${repo.description}`);
     if (repo.recentCommits.length > 0) {
@@ -148,7 +167,7 @@ function formatPayload(p: ProfileData): string {
     lines.push("========================================");
     lines.push("MANDATORY COVERAGE — output JSON MUST include at least one item with a matching `repo` field for EACH of these:");
     for (const r of mandatory) {
-      lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, weight ${r.weight.toFixed(2)})`);
+      lines.push(`- ${r.nameWithOwner} (${r.language?.name ?? "—"}, importance: ${importanceTag(r.weight, maxWeight)})`);
     }
     lines.push("If a repo has no description and uninformative or absent commit messages, infer the project type from its name + language and write a brief generic item like 'Worked on the personal C++ project named X.' Do not omit any of these from the output.");
     lines.push("========================================");

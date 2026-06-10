@@ -2,40 +2,46 @@
 
 *Updated 2026-06-10*
 
-Built a SaaS crypto trading platform, developed embedded HID firmware and a Windows input driver, and iterated on AI/ML research projects including crypto prediction and computer vision for online poker.
+Focused on building a SaaS crypto algorithmic trading platform with AI and neural network capabilities. Also developed custom firmware for ESP32-S3 HID devices and a Windows kernel-level input filter driver.
 > **2026 Jun**
 >
-> - **SaaS crypto trading platform** *(summit)* — Continued work on the AI-driven crypto trading platform, touching build infrastructure, authentication, and deployment tooling.
+> - **SaaS crypto trading platform** *(summit)* — Polished deployment configuration and authentication for the trading platform.
 
 > **2026 May**
 >
-> - **ESP32-S3 HID firmware development** *(j-uni-hid)* — Iterated on feature-rich mouse and keyboard emulation firmware for the ESP32-S3, adding a new matrix variant and event emitting.
-> - **Windows input filter driver** *(input-driver)* — Developed a KMDF input filter and injection driver, adding push-style event delivery and integration tests.
+> - **ESP32-S3 HID firmware** *(j-uni-hid)* — Developed new firmware versions with USB and BLE HID capabilities.
+> - **Windows input filter driver** *(input-driver)* — Built a kernel-level driver for keyboard and mouse capture and injection.
+> - **Windows file-tagging utility** *(intag2)* — Maintained the file-tagging Explorer extension, including CI/CD and Store publishing.
+> - **Android TTS engine** *(j-tts-android)* — Enhanced the text-to-speech engine with multiple voice models and intonation controls.
 
 > **2026 Apr**
 >
-> - **SaaS crypto trading platform** *(summit)* — Worked heavily on the trading platform, shipping features for outbound proxies, strategy templates, billing model changes, UI overhauls, and security hardening.
+> - **Crypto trading platform features** *(summit)* — Iterated on billing, strategy templates, security hardening, and deployment pipeline.
+> - **HID firmware variant** *(j-uni-hid)* — Worked on a new firmware variant for the ESP32-S3 device.
+> - **File-tagging utility maintenance** *(intag2)* — Continued maintenance of the Windows Explorer tagging tool.
 
 > **2026 Mar**
 >
-> - **SaaS crypto trading platform** *(summit)* — Built out features including an MCP server agent interface, LLM client integrations, and a WebSocket notification system for the trading platform.
-> - **On-device LLM assistant for Android** *(ozwil-android)* — Iterated on an Android LLM assistant, restructuring the sub-agent architecture, adding new offline models, and implementing wake-word processing.
-> - **E-ink note-taking launcher** *(blackboard-launcher)* — Built an Android launcher centered around note-taking for E-ink devices.
+> - **Firmware development** *(j-uni-hid)* — Continued development of the ESP32-S3 HID firmware.
+> - **Crypto prediction model research** *(crypto-model-research)* — Experimented with mixture-of-experts architectures for price prediction.
+> - **On-device LLM assistant** *(ozwil-android)* — Built an Android assistant with local LLM, tool use, and delegation.
 
 > **2026 Feb**
 >
-> - **SaaS crypto trading platform** *(summit)* — Continued development of the crypto trading platform.
-> - **Neovim IDE configuration** *(.dotfiles)* — Maintained a personal Neovim development environment setup.
+> - **File-tagging utility updates** *(intag2)* — Worked on the Windows file-tagging tool, including CI/CD and Store publishing.
 
 > **2026 Jan**
 >
-> - **ESP32-S3 HID firmware development** *(j-uni-hid)* — Iterated on multiple firmware versions for the ESP32-S3, introducing BLE and USB touch support and performance profiles.
+> - **HID firmware updates** *(j-uni-hid)* — Continued development of the ESP32-S3 HID firmware.
+> - **Poker computer vision** *(poker-cv)* — Developed a CV pipeline for online poker hand history reconstruction.
 
 > **2025**
 >
-> - **AI coding assistant tooling** *(auto-claude)* — Worked on an autonomous multi-session AI coding tool, adding Git rules, task IDs, and squash-merge features.
-> - **Trading bot infrastructure** *(freqtrade-tg-multibot)* — Built and iterated on a Telegram-based multi-bot frontend for Freqtrade trading bots.
+> - **Telegram trading bot** *(freqtrade-tg-multibot)* — Built a Telegram bot for managing Freqtrade trading instances.
+> - **Autonomous AI coding tool** *(auto-claude)* — Developed an autonomous multi-session AI coding assistant with worktree management.
+> - **HID firmware earlier versions** *(j-uni-hid)* — Worked on earlier versions of the ESP32-S3 HID firmware.
 
 > **2024**
 >
-> - **Explorer file-tagging utility** *(intag2)* — Iterated on a Windows Explorer file and folder tagging utility, focusing on Microsoft Store publishing and CI pipelines.
+> - **Trading strategy development** *(freqtrade_strats)* — Developed and optimized trading strategies for Freqtrade.
+> - **Telegram assistant bot** *(pAssistant)* — Worked on a Telegram bot for content summarization and forwarding.

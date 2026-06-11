@@ -692,9 +692,9 @@ export function renderProjectsCards(
 
 export function renderActivitySummaryMarkdown(t: Timeline): string {
   const lines: string[] = [];
-  lines.push("## Recent activity");
+  lines.push("## Recent activity (last 12 months)");
   lines.push("");
-  lines.push(`*Updated ${t.generatedAt}*`);
+  lines.push(`*Auto-generated weekly from commit history · updated ${t.generatedAt}*`);
   lines.push("");
   if (t.summary) {
     lines.push(t.summary);

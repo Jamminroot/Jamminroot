@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "label": "Languages",
+      "items": ["C# / .NET", "Kotlin", "TypeScript / Node.js", "Python", "C / C++"]
+    },
+    {
+      "label": "Backend",
+      "items": ["ASP.NET", "gRPC / Protobuf", "WebSockets", "PostgreSQL", "Redis", "high-throughput billing & metering", "real-time event processing"]
+    },
+    {
+      "label": "Infrastructure",
+      "items": ["Kubernetes", "Docker", "GitHub Actions", "GitLab CI", "release engineering", "S3"]
+    },
+    {
+      "label": "Data & observability",
+      "items": ["ClickHouse", "Grafana", "metrics & alerting design", "analytics pipelines"]
+    },
+    {
+      "label": "Mobile & desktop",
+      "items": ["Android (Kotlin)", "accessibility services", "desktop applications", "UI automation"]
+    },
+    {
+      "label": "AI & automation",
+      "items": ["LLM integrations", "AI assistants with knowledge bases", "computer vision", "n8n / workflow automation"]
+    },
+    {
+      "label": "Leadership",
+      "items": ["team leadership (14 engineers)", "architecture & system design", "code review", "mentoring", "UX direction"]
+    }
+  ]
+}

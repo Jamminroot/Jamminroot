@@ -13,7 +13,9 @@ const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
 export type DescriptionCache = Record<string, string>;
 
-const SYSTEM = `You write short, evergreen one-sentence descriptions for software projects.
+const SYSTEM =
+  process.env.LLM_PROJECT_GUIDANCE?.trim() ||
+  `You write short, evergreen one-sentence descriptions for software projects.
 
 Rules:
 - Describe WHAT THE PROJECT IS, not what was changed recently.

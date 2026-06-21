@@ -34,6 +34,9 @@ jobs:
           DATE_OF_BIRTH: ${{ vars.DATE_OF_BIRTH }}
           AUTHOR_EMAILS: ${{ vars.AUTHOR_EMAILS }}
           HIDDEN_PROMPT: ${{ vars.HIDDEN_PROMPT }}
+          LLM_SUMMARY_GUIDANCE: ${{ vars.LLM_SUMMARY_GUIDANCE }}
+          LLM_TIMELINE_GUIDANCE: ${{ vars.LLM_TIMELINE_GUIDANCE }}
+          LLM_PROJECT_GUIDANCE: ${{ vars.LLM_PROJECT_GUIDANCE }}
       - name: Upload preview (dry run)
         if: ${{ inputs.dry_run }}
         uses: actions/upload-artifact@v4

@@ -7,6 +7,37 @@ if (!apiKey) throw new Error("OPENROUTER_API_KEY is required");
 const MODEL = process.env.LLM_MODEL || "deepseek/deepseek-v4-pro";
 const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
+// Per-place guidance, each overridable via env var so the prose can be retuned without
+// a code change. Defaults below are the baked-in instructions.
+const SUMMARY_GUIDANCE =
+  process.env.LLM_SUMMARY_GUIDANCE?.trim() ||
+  `Write 3-5 sentences. This is a narrative of what the engineer has actually been doing across the whole window, not a list of project names. Convey:
+- the KINDS of work (building from scratch, large refactors, infrastructure/CI, debugging campaigns, research/experimentation, UX/polish, ops tooling)
+- the problem areas being solved (what was hard or needed doing, at a domain level)
+- the technologies and domains involved
+Go deep on PRIMARY repos; weave in notable SECONDARY themes briefly. Plain, concrete language — no corporate puffery.`;
+
+const TIMELINE_GUIDANCE =
+  process.env.LLM_TIMELINE_GUIDANCE?.trim() ||
+  `Each item describes WHAT THE USER WORKED ON and WHAT KIND OF WORK it was — enough that a reader understands the nature and substance of the effort, without commit-level noise.
+
+DO include:
+- Project domain or theme ("Telegram automation tooling", "Windows Explorer file-tagging utility")
+- The TYPE of work (new feature build, rework/refactor, bugfixing, infra/CI, research, performance, UX) and the problem area it addressed ("reworked the sync layer", "stabilised the build pipeline", "researched model architectures")
+- Repo nameWithOwner in the \`repo\` field
+- An activity verb ("built", "reworked", "stabilised", "investigated", "polished", "maintained")
+
+DO NOT include:
+- Specific function names, file names, library names, version numbers
+- Single-commit granularity ("fixed README typo", "bumped version 0.3.2")
+- CI/dependency minutiae ("upgraded n8n 1.89 → 2.8.3", "fixed CSRF middleware ordering")
+Characterise the work; don't transcribe the commits.
+
+Field rules:
+- title (3-7 words): noun-phrase naming the project / area
+- description (1-2 sentences, max ~35 words): what was worked on AND what kind of work it was
+- For yearly periods, stay higher-level: which projects got attention and the broad thrust of the work.`;
+
 const SYSTEM = `You produce a CV-style activity timeline for a software engineer based on their public GitHub commits and repository descriptions. Your output is consumed by a templated SVG renderer, so adherence to the schema and to the rules below is critical.
 
 # Period structure (strict)
@@ -32,25 +63,15 @@ The user payload ends with a "MANDATORY COVERAGE" section listing specific repos
 
 Non-mandatory repos may be included or omitted at your discretion based on activity level.
 
-# Detail level (strict — HIGH-LEVEL ONLY, no implementation details)
+# Timeline item detail
 
-Each item describes WHAT THE USER WORKED ON at a project / domain level. The reader of this CV should learn the *areas* the engineer touched, not the technical changes.
+${TIMELINE_GUIDANCE}
 
-DO include:
-- Project domain or theme ("Telegram automation tooling", "Windows Explorer file-tagging utility", "Android chat assistant", "personal Neovim setup")
-- Repo nameWithOwner in the \`repo\` field
-- General activity verb ("built", "iterated on", "polished", "started", "maintained")
+# Summary detail
 
-DO NOT include:
-- Specific feature names, function names, file names, library names, version numbers
-- Commit-level changes ("added X", "fixed Y bug", "refactored Z")
-- CI/build/dependency details ("upgraded n8n 1.89 → 2.8.3", "moved session storage", "fixed CSRF middleware")
-- "How" — just "what (project area)"
+The \`summary\` field is governed by these rules:
 
-Field rules:
-- title (3-7 words): noun-phrase naming the project / area
-- description (1-2 sentences, max ~25 words): rough sentence about what was being worked on at the project level
-- For yearly periods, descriptions can be even more high-level (which projects got attention overall)
+${SUMMARY_GUIDANCE}
 
 # Grouping rules
 
@@ -104,7 +125,7 @@ Bad outputs (DO NOT produce these):
 Output a SINGLE JSON object. No markdown fences. No commentary. Schema:
 
 {
-  "summary": "string, 2 sentences max, big-picture themes across all periods — PRIMARY repos only (high-level, no specifics)",
+  "summary": "string, 3-5 sentences per the Summary detail rules above",
   "periods": [
     {
       "period": "string (YYYY MMM for months, YYYY for years)",

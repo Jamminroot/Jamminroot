@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 4 * * 1"
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only — generate files as a downloadable artifact, do not commit"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,7 +34,20 @@ jobs:
           DATE_OF_BIRTH: ${{ vars.DATE_OF_BIRTH }}
           AUTHOR_EMAILS: ${{ vars.AUTHOR_EMAILS }}
           HIDDEN_PROMPT: ${{ vars.HIDDEN_PROMPT }}
+      - name: Upload preview (dry run)
+        if: ${{ inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-preview
+          path: |
+            CV.md
+            README.md
+            cards/cv.pdf
+            cards/cv.json
+            cards/charts.svg
+            cards/projects.svg
       - name: Commit
+        if: ${{ !inputs.dry_run }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

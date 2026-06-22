@@ -23,6 +23,7 @@
   "Jamminroot/j-tts-android": "Android TTS engine using Silero and phonetizers.",
   "Jamminroot/j-uni-hid": "Feature-rich mouse and keyboard emulation firmware for ESP32-S3.",
   "Jamminroot/jContentCollector": "Telegram content collector with ad filtering and webhooks.",
+  "Jamminroot/jamminroot": "A personal CV generator using LLMs to analyze work history and produce PDFs.",
   "Jamminroot/jaxon": "Graph-powered code intelligence engine with MCP tools and CLI.",
   "Jamminroot/jolt": "Minimal AutoHotKey alternative with interception support and scripting.",
   "Jamminroot/n8n-nodes-claudecode": "n8n node for Claude Code agent integration.",

@@ -11,7 +11,7 @@ const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 // a code change. Defaults below are the baked-in instructions.
 const SUMMARY_GUIDANCE =
   process.env.LLM_SUMMARY_GUIDANCE?.trim() ||
-  `Write 3-5 sentences. This is a narrative of what the engineer has actually been doing across the whole window, not a list of project names. Convey:
+  `Write a few paragraphs, 3-4 sentences each — what I have actually been doing across the whole window, split into meaningful groups. Convey:
 - the KINDS of work (building from scratch, large refactors, infrastructure/CI, debugging campaigns, research/experimentation, UX/polish, ops tooling)
 - the problem areas being solved (what was hard or needed doing, at a domain level)
 - the technologies and domains involved
@@ -78,6 +78,10 @@ ${SUMMARY_GUIDANCE}
 - Cluster all commits within a calendar month for the same repo into ONE item.
 - A second item in the same period for the same repo is allowed ONLY for a clearly distinct workstream (e.g., a fork foundation vs a release push).
 - Each period has 1-4 items.
+
+# Voice (STRICT — applies everywhere, summary and items)
+
+NEVER write in the third person. Do not refer to "the engineer", "the user", "the developer", or "they". Write either in the first person ("I built…", "I reworked…") or impersonally with no subject ("Built…", "Reworked…"). Pick one and stay consistent across the whole output.
 
 # Grounding rules
 

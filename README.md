@@ -1,11 +1,10 @@
 ## .NET Software Developer, TechLead at Deeplay.io.
 
-### C++, Python enthusiast
+### What a time to be alive!
 
 #### [@jamminroot (telegram)](https://t.me/jamminroot), [Dmitrii Chichuk (LinkedIn)](https://linkedin.com/in/dchichuk)
 
-Make sure to check out my pinned projects, they are are quite handy and free.
-Feel free to reach out, too!
+Feel free to reach out!
 
 <!-- ACTIVITY-SUMMARY-START -->
 ## Recent activity (last 12 months)

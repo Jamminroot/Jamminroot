@@ -201,6 +201,7 @@ const ACCESSIBLE_REPOS_QUERY = `
           nameWithOwner
           description
           isPrivate
+          isArchived
           pushedAt
           primaryLanguage { name color }
         }
@@ -217,6 +218,7 @@ type AccessibleReposQuery = {
         nameWithOwner: string;
         description: string | null;
         isPrivate: boolean;
+        isArchived: boolean;
         pushedAt: string | null;
         primaryLanguage: { name: string; color: string } | null;
       }[];
@@ -291,6 +293,7 @@ async function fetchAccessibleRepos(sinceISO: string): Promise<RepoBare[]> {
         stop = true;
         break;
       }
+      if (node.isArchived) continue;
       out.push({
         nameWithOwner: node.nameWithOwner,
         description: node.description,

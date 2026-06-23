@@ -1,55 +1,70 @@
 ## Recent activity (last 12 months)
 
-*Auto-generated weekly from commit history · updated 2026-06-22*
+*Auto-generated weekly from commit history · updated 2026-06-23*
 
-I built the follower execution pipeline, guard system, and trader dashboard for Summit, a SaaS crypto trading platform. This work spanned transactional outbox messaging, live SL/TP on multiple exchange APIs, a layered risk guard with independent per-follow configuration, and a full notification stack (in-app and Telegram). I also shipped position lifecycle management, admin analytics, and user-facing features like onboarding and leaderboards.
-
-On the systems side, I developed a multi-version HID emulation firmware for the ESP32-S3, culminating in v13 with fire-and-forget event injection and an 8×8 matrix variant. I wrote a Windows kernel-mode input filter driver that captures and injects keyboard/mouse events, complete with a push-style listener API, integration tests, and per-event block predicates.
-
-I conducted AI research with mixture-of-experts and ensemble architectures for crypto price prediction, running hundreds of experiments and pushing accuracy to new highs. For Android, I engineered an on-device LLM assistant with sub-agent delegation and tool routing, and I integrated multiple TTS engines with custom pitch, intonation, and licensing for commercial use. I also built a computer vision pipeline for poker hand recognition and a YOLO-based labeling tool.
-
-Additionally, I continued work on the Intag file-tagging tool, Freqtrade strategies, Telegram bot infrastructure for trade monitoring, autonomous coding tooling, and an AutoHotKey alternative.
+I've been primarily focused on building a SaaS crypto algo trading platform (summit) with an AI twist — implementing backtest engines, LLM-driven exit decisioning, real-time trading guards, membership tiers, and an interactive dashboard with equity curves and performance analytics. In parallel, I reworked the ESP32-S3 firmware for a USB HID mouse/keyboard emulator (j-uni-hid), adding new hardware variants, dual-core and USB support, and BLE power optimization. I also built a Windows WDK input filter driver (input-driver) for low-level keyboard/mouse capture and injection. Across secondary projects, I iterated on crypto trading strategy parameterizations in freqtrade, researched price-prediction models with Mixture-of-Experts architectures, developed computer vision pipelines for poker table state recognition, maintained a Windows file-tagging utility, built an Android TTS engine with multiple Russian voice models, and worked on an on-device LLM agent for Android with sub-agent delegation and tool-calling. The work spans C#, C++, Python, Kotlin, and TypeScript, covering everything from systems programming and embedded firmware to machine learning, mobile app development, and infrastructure/CI automation.
 > **2026 Jun**
 >
-> - **Follower execution and guard system** *(summit)* — Built the follower copy-trading pipeline with transactional outbox, live SL/TP, layered risk guards, notifications, and a redesigned trader dashboard.
-> - **Minimal input automation tool** *(jolt)* — Implemented a lightweight AutoHotKey alternative with a scenario engine, stateless themes, and interception driver integration.
+> - **Backtesting and AI trading engine** *(summit)* — Built out the trader backtest engine with per-trade MFE/MAE recording, slippage and fee modeling, LLM exit decisioning, and performance optimizations like O(n) replay.
+> - **Trading platform features and fixes** *(summit)* — Added membership tiers, positional trading guards, tag-based trader profiles, equity curve dashboard, Telegram integration, and fixed UI and data-fetching bugs.
+> - **Input automation scenario engine** *(jolt)* — Built an AutoHotKey alternative with interception support, configurable conditions and rule sets, and debug logging.
+> - **CV pipeline and profile automation** *(jamminroot)* — Refined the LLM-based CV generation pipeline — added voice enforcement, repo coverage controls, and improved PDF output with skill sections.
 
 > **2026 May**
 >
-> - **HID emulation firmware v13** *(j-uni-hid)* — Released v13 firmware with fire-and-forget event injection and an 8×8 matrix variant, improving USB HID throughput.
-> - **Windows input filter driver** *(input-driver)* — Delivered a KMDF keyboard/mouse filter driver with a push-style listener API, integration tests, and relaxed SDDL for easier deployment.
-> - **File tagging Explorer extension** *(intag2)* — Fixed desktop.ini encoding to correctly render non-ASCII characters in Windows Explorer.
-> - **Android TTS engine expansion** *(j-tts-android)* — Added TeraTTS and XTTS v2 engines, pitch and intonation controls, and cleaned up licensing for commercial distribution.
+> - **USB HID firmware variants** *(j-uni-hid)* — Developed new firmware variants v13s8x8 for ESP32-S3 and v13 with expanded USB HID event emission, and added PlatformIO support.
+> - **Windows input filter driver** *(input-driver)* — Reworked the Interception-class WDK driver with push-style event delivery, hardware ID and event type filtering, and an integration test suite.
+> - **Windows file-tagging utilities** *(intag2)* — Fixed UTF-16 LE encoding for desktop.ini to render non-ASCII folder tags correctly, and added .pdf file type to the context menu.
+> - **Android TTS engine work** *(j-tts-android)* — Added question/exclamation intonation sliders, integrated F5-TTS and Piper engines, improved text normalization with RuNorm, and built mmap-based model loading.
+> - **Aim-assist tool refinement** *(MEMU3)* — Switched YOLO inference to DirectML, dropped unused classes, and reworked the bow/flick mechanism with bezier motion and closed-loop tracking.
+> - **Knowledge base firmware** *(biscuit)* — Added a knowledge base app, FB2 reader, screensaver folder, and Mesh Chat fixes to the e-ink device firmware.
 
 > **2026 Apr**
 >
-> - **Firmware fixes and new variant** *(j-uni-hid)* — Fixed a device disconnection bug and drafted a new v13s8x8 firmware variant for the matrix layout.
-> - **CI and release pipeline overhaul** *(intag2)* — Restructured CI into separate build and store-publish workflows and fixed changelog generation.
-> - **E-ink map and knowledge base** *(papyrix)* — Optimized the map renderer for Apple Silicon and built a knowledge base app with taxonomy browser for the custom e-ink reader.
+> - **Trading platform infrastructure** *(summit)* — Continued backtest engine enhancements including published track records and user filtering, plus scanner pair resolution fixes.
+> - **USB HID firmware fix** *(j-uni-hid)* — Fixed a disconnect issue in the v13 firmware variant.
+> - **E-ink device firmware apps** *(papyrix)* — Built map and knowledge base apps with tile rendering, FB2 encoding fixes, and an icon-based home screen for the custom e-reader firmware.
+> - **Proxy client enhancements** *(FlCLash)* — Added XHTTP transport support and re-exposed provider APIs via a Mihomo fork.
+> - **Aim-assist debug overlay** *(MEMU3)* — Added HP-based aim scaling, debug overlay window, and YOLO confidence threshold UI.
 
 > **2026 Mar**
 >
-> - **Crypto price prediction research** *(crypto-model-research)* — Ran hundreds of experiments with mixture-of-experts and ensemble models, achieving new best accuracy on spike regression.
-> - **On-device LLM assistant** *(ozwil-android)* — Architected a sub-agent delegation system, tool-routing pipeline, and background processing for a pocket LLM with phone-use capabilities.
-> - **Aim assist overlay rewrite** *(MEMU3)* — Replaced the rendering overlay with a D3D11 composition engine and added a YOLO-confidence-gated autofire system.
+> - **Crypto price model research** *(crypto-model-research)* — Ran hundreds of experiments with Mixture-of-Experts architectures, snapshot ensembles, and temperature scaling; achieved best combined F1 of 0.7817.
+> - **On-device LLM agent development** *(ozwil-android)* — Rewrote sub-agent architecture with session-based delegation, added Qwen 3.5 models, KV cache reuse, wake processing service, and tool-safety rails.
+> - **Trading platform AI engine** *(summit)* — Implemented LLM-based entry/exit decision modes with configurable strategy phases deep integration.
+> - **E-ink launcher app** *(blackboard-launcher)* — Built an Android launcher for e-ink devices with swipe page navigation, note-taking focus, and status bar control.
+> - **Aim-assist polish** *(MEMU3)* — Rewrote overlay to D3D11, added linger mode, autofire, and HID click emulation.
 
 > **2026 Feb**
 >
-> - **Store publishing stabilisation** *(intag2)* — Battled Partner Center API quirks by switching to PowerShell REST with exponential backoff and finalised the Microsoft Store submission pipeline.
-> - **Graph-powered code intelligence engine** *(jaxon)* — Built Jaxon, a knowledge graph indexer with tree-sitter parsers, DI registration detection, and MCP tools for AI agent integration.
+> - **Windows file-tagging release pipeline** *(intag2)* — Overhauled CI to automate builds, CHANGELOG generation, and Microsoft Store publishing — fixed multiple API issues and release workflows.
+> - **Code intelligence engine** *(jaxon)* — Expanded language support to C++, Go, Rust; added LSP integration, incremental sync, and improved dead code detection for DI frameworks.
+> - **Telegram automation node** *(n8n-nodes-telepilot-2)* — Stabilized an n8n node for Telegram automation — fixed auth race conditions, CI pipeline issues, and added album trigger support.
+> - **YOLO labeling tool** *(yolo-labeler)* — Built a fast on-host YOLO labeler with multi-select mark mode and keyboard shortcuts.
+> - **Neovim config and dotfiles** *(.dotfiles)* — Migrated to Neovim 0.11+ LSP API, added OSC 52 clipboard support, and fixed treesitter parser setup.
+> - **Trading monitor app** *(freqtrade_monitor)* — Polished a Flutter-based freqtrade monitoring app with glassy cards, winrate charts, and import/export features.
+> - **Trading bot monitor app** *(freqtrade-tg-multibot)* — Added web project with Docker support, improved daily profit calculations, and enhanced Telegram authentication.
 
 > **2026 Jan**
 >
-> - **Computer vision poker hand capture** *(poker-cv)* — Completed a pipeline for detecting hands, board cards, and blinds from online poker screenshots, achieving over 99% accuracy.
+> - **Poker computer vision pipeline** *(poker-cv)* — Achieved high-accuracy hand and board card detection — added recovery module, interpreted timeline visualization, and comprehensive testing.
+> - **USB HID updates** *(j-uni-hid)* — Added graceful COM restart handling to the firmware.
+> - **Task management app** *(tasker)* — Built an Android tasker with touch event visualization and direct launch features.
 
 > **2025**
 >
-> - **Algorithmic trading strategy development** *(freqtrade_startegies)* — Developed and backtested dozens of trading strategies (Fenix, NASOS) with hyperopt optimisation, targeting high Sharpe ratios and low drawdown.
-> - **Freqtrade Telegram monitoring bot** *(freqtrade-tg-multibot)* — Built a multi-bot Telegram interface with daily profit tracking, a web dashboard, and Docker deployment for Freqtrade.
-> - **Autonomous AI coding tooling** *(auto-claude)* — Extended the multi-session AI coding framework with squash-merge workflows, completion tracking, and Git rules configuration.
-> - **Content assistant bots** *(pAssistant)* — Created Telegram bot assistants for content summarisation, multi-target forwarding, and image deduplication.
+> - **Crypto trading strategies** *(freqtrade_startegies)* — Iterated extensively on freqtrade strategy parameterization — added, refactored, and backtested dozens of variants with optimized entry/exit signals and leverage settings.
+> - **Trading bot Telegram dashboard** *(freqtrade-tg-multibot)* — Built a C# web application for monitoring freqtrade bots via Telegram with Docker support, daily profit calculations, and authentication.
+> - **Telegram assistant bot** *(pAssistant)* — Maintained a Telegram automation tool for content curation, with webhook integration, image deduplication, and multi-target sending.
+> - **USB HID firmware evolution** *(j-uni-hid)* — Developed multiple firmware versions (v9-v12) for ESP32-S3 — added BLE+USB dual protocols, performance modes, swipe fixes, and Android support.
+> - **AI coding agent tooling** *(auto-claude)* — Extended a multi-session AI coding assistant with squash-merge, git rules system, task IDs, and completion tracking.
+> - **Trading platform foundations** *(summit)* — Began early work on the SaaS crypto trading platform — setting up the backtest engine core, trading guard system, and initial UI components.
+> - **Aim-assist tooling** *(MEMU3)* — Developed an aim-assist tool with USB-HID interaction, rate limiting, and mode support.
+> - **Telegram n8n node work** *(n8n-nodes-telepilot-2)* — Maintained an n8n node for Telegram automation — added Docker deployment, Alpine support, and auth fixes.
 
 > **2024**
 >
-> - **Early Freqtrade strategy work** *(freqtrade_strats)* — Experimented with strategy optimisation and custom indicators for algorithmic trading.
-> - **Windows Explorer tagging tool** *(intag)* — Developed a file-tagging shell extension with CLI support and UI polish.
+> - **Telegram assistant bot** *(pAssistant)* — Maintained a Telegram content automation tool — added logging, error handling, and summarization features.
+> - **Crypto trading strategies** *(freqtrade_strats)* — Developed and optimized multiple freqtrade trading strategies with hyperparameter tuning and leverage adjustments.
+> - **Windows file-tagging utility** *(intag)* — Updated the Windows Explorer file-tagging tool with CLI support, UI polish, and mutex logging.
+> - **Miscellaneous tooling** *(notes)* — Started personal notes repository.

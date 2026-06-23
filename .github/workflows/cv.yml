@@ -27,6 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
           USERNAME: ${{ github.repository_owner }}
           REPO_WEIGHTS: ${{ vars.REPO_WEIGHTS }}
           WORK_REPO_REGEX: ${{ vars.WORK_REPO_REGEX }}
